@@ -1,4 +1,4 @@
-# y
+# Smart Scale WeAPP
 
 > A Mpvue project
 
