@@ -1,4 +1,4 @@
-# Smart Scale WeAPP
+# TaskCompetition --- 一个伙伴之间良性竞争的微信小程序（前端部分）
 
 > A Mpvue project
 
@@ -19,4 +19,4 @@ npm run build --report
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-# Smart-Scale-WeAPP
+# TaskCompetition
