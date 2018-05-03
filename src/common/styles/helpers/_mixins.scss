@@ -1,0 +1,48 @@
+/* 字体设置 */
+@mixin config_font($size, $color) {
+  font-size: $size;
+  color: $color;
+}
+/* 边框设置 */
+@mixin config_border($width, $style, $color) {
+  border: {
+    width: $width;
+    style: $style;
+    color: $color;
+  }
+}
+/* 宽高设置 */
+@mixin config_width_height($width, $heigtht) {
+  width: $width;
+  height: $heigtht;
+}
+
+/*  flex相关  */
+@mixin config_flex() {
+  display: flex;
+}
+/* 横向盒子 */
+@mixin config_rowBox() {
+  @include config_flex();
+  flex-flow: row nowrap;
+}
+/* 竖向盒子 */
+@mixin config_columnBox() {
+  @include config_flex();
+  flex-flow: column nowrap;
+}
+/* 水平居中盒子 */
+@mixin config_rowBox_middle() {
+  @include config_rowBox();
+  justify-content: center;
+}
+/* 垂直居中盒子 */
+@mixin config_columnBox_middle() {
+  @include config_columnBox();
+  align-items: center;
+}
+/* 水平垂直居中盒子 */
+@mixin config_middleBox() {
+  @include config_columnBox_middle();
+  @include config_rowBox_middle();
+}

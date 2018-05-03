@@ -8,22 +8,12 @@
       </div>
     </div>
 
-    <div class="usermotto">
-      <div class="user-motto">
-        <card :text="motto"></card>
-      </div>
-    </div>
-      
-    <form class="form-container">
-      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
-    <a href="/pages/counter/counter" class="counter">去往Vuex示例页面</a>
   </div>
 </template>
 
 <script>
 import card from '@/components/card'
+import { wxLogin, getUserInfo } from '../../utils/wxUtils'
 
 export default {
   data () {
@@ -44,15 +34,11 @@ export default {
     },
     getUserInfo () {
       // 调用登录接口
-      wx.login({
-        success: () => {
-          wx.getUserInfo({
-            success: (res) => {
-              this.userInfo = res.userInfo
-            }
-          })
-        }
-      })
+      wxLogin()
+        .then(res => getUserInfo())
+        .then(res => {
+          this.userInfo = res.userInfo
+        })
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
@@ -66,7 +52,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 .userinfo {
   display: flex;
   flex-direction: column;

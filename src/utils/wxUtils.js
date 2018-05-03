@@ -64,10 +64,11 @@ const getUserInfo = () => {
   })
 }
 const wxLogin = () => {
+  console.log(123)
   return new Promise((resolve, reject) => {
     wx.login({
       success: res => resolve(res),
-      reject: err => reject(err)
+      fail: err => reject(err)
     })
   })
 }
