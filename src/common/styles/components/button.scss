@@ -1,0 +1,23 @@
+.tc-button {
+  color: black;
+  width: 5rem;
+  height: 1.2rem;
+  &-default {
+    color: blue;
+  }
+  &-success {
+    color: green;
+  }
+  &-warning {
+    color: red;
+  }
+  &-mini {
+    font-size: 0.5rem;
+  }
+  &-small {
+    font-size: 1rem;
+  }
+  &-medium {
+    font-size: 1.5rem;
+  }
+}

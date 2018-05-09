@@ -1,18 +1,18 @@
 <template>
   <div class="container" @click="clickHandle('test click', $event)">
-
     <div class="userinfo" @click="bindViewTap">
       <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
       <div class="userinfo-nickname">
         <card :text="userInfo.nickName"></card>
+        <Button @click.stop="buttonClick" type="warning" size="mini">hello</Button>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import card from '@/components/card'
+import Button from '@/components/button'
 import { wxLogin, getUserInfo } from '../../utils/wxUtils'
 
 export default {
@@ -24,13 +24,13 @@ export default {
   },
 
   components: {
-    card
+    card,
+    Button
   },
 
   methods: {
     bindViewTap () {
-      const url = '../logs/logs'
-      wx.navigateTo({ url })
+      console.log('爷爷')
     },
     getUserInfo () {
       // 调用登录接口
@@ -42,9 +42,12 @@ export default {
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
+    },
+    buttonClick (e) {
+      console.log(e)
+      console.log('爸爸')
     }
   },
-
   created () {
     // 调用应用实例的方法获取全局数据
     this.getUserInfo()
