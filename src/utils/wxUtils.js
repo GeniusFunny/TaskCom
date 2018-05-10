@@ -39,7 +39,7 @@ const modal = (title = '提示', content = '') => {
 }
 
 const getStorage = (item) => {
-  wx.getStorageSync(item)
+  return wx.getStorageSync(item)
 }
 
 const setStorage = (key, value) => {
@@ -64,7 +64,6 @@ const getUserInfo = () => {
   })
 }
 const wxLogin = () => {
-  console.log(123)
   return new Promise((resolve, reject) => {
     wx.login({
       success: res => resolve(res),

@@ -1,19 +1,16 @@
 <template>
   <div class="container" @click="clickHandle('test click', $event)">
     <div class="userinfo" @click="bindViewTap">
-      <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
       <div class="userinfo-nickname">
-        <card :text="userInfo.nickName"></card>
-        <Button @click.stop="buttonClick" type="warning" size="mini">hello</Button>
+        <card :avatar="userInfo.avatarUrl" :text="userInfo.nickName"></card>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import card from '@/components/card'
-import Button from '@/components/button'
-import { wxLogin, getUserInfo } from '../../utils/wxUtils'
+import { wxLogin, getUserInfo, setStorage } from '../../utils/wxUtils'
+import card from '../../components/card'
 
 export default {
   data () {
@@ -24,8 +21,7 @@ export default {
   },
 
   components: {
-    card,
-    Button
+    card
   },
 
   methods: {
@@ -37,7 +33,9 @@ export default {
       wxLogin()
         .then(res => getUserInfo())
         .then(res => {
+          console.log(res.userInfo)
           this.userInfo = res.userInfo
+          setStorage('wxAvatar', res.userInfo.avatarUrl)
         })
     },
     clickHandle (msg, ev) {

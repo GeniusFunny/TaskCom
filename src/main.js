@@ -31,11 +31,11 @@ export default {
         {
           'pagePath': 'pages/index/index',
           'iconPath': './static/images/index.png',
-          'text': '哈哈',
+          'text': '发现',
           'selectedIconPath': './static/images/index.png'
         },
         {
-          'pagePath': 'pages/index/index',
+          'pagePath': 'pages/personalCenter/personalCenter',
           'iconPath': './static/images/center.png',
           'text': '我的',
           'selectedIconPath': './static/images/center.png'

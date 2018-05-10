@@ -46,3 +46,10 @@
   @include config_columnBox_middle();
   @include config_rowBox_middle();
 }
+
+/*  设置头像大小、圆角等  */
+@mixin config_avatar($width, $height, $borderRadius) {
+  width: $width;
+  height: $height;
+  border-radius: $borderRadius;
+}

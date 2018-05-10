@@ -1,0 +1,17 @@
+@import '../helpers/_mixins';
+
+.tc-card {
+  @include config_columnBox_middle();
+  &-avatar {
+    @include config_avatar(128rpx, 128rpx, 50%);
+  }
+  &-infoContainer {
+    @include config_rowBox();
+  }
+  &-title {
+    @include config_font(16rpx, red);
+  }
+  &-reputation {
+    @include config_font(16rpx, red);
+  }
+}
