@@ -1,17 +1,9 @@
 <template>
-  <div class="container" @click="clickHandle('test click', $event)">
-    <div class="userinfo" @click="bindViewTap">
-      <div class="userinfo-nickname">
-        <card :avatar="userInfo.avatarUrl" :text="userInfo.nickName"></card>
-      </div>
-    </div>
-  </div>
+  <div>123</div>
 </template>
 
 <script>
 import { wxLogin, getUserInfo, setStorage } from '../../utils/wxUtils'
-import card from '../../components/card'
-
 export default {
   data () {
     return {
@@ -19,11 +11,6 @@ export default {
       userInfo: {}
     }
   },
-
-  components: {
-    card
-  },
-
   methods: {
     bindViewTap () {
       console.log('爷爷')
@@ -36,7 +23,9 @@ export default {
           console.log(res.userInfo)
           this.userInfo = res.userInfo
           setStorage('wxAvatar', res.userInfo.avatarUrl)
+          setStorage('nickname', res.userInfo.nickname)
         })
+      console.log(123)
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
@@ -47,7 +36,6 @@ export default {
     }
   },
   created () {
-    // 调用应用实例的方法获取全局数据
     this.getUserInfo()
   }
 }

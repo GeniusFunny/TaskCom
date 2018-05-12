@@ -1,0 +1,12 @@
+@import '../helpers/_mixins';
+@import '../helpers/_variables';
+
+.personalCenter {
+  height: 100vh;
+  background-color: $themeColor;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  &-menu-icon {
+    @include config_width_height(42rpx, 30rpx);
+  }
+}

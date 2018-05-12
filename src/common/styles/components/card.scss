@@ -1,17 +1,42 @@
 @import '../helpers/_mixins';
+@import '../helpers/_variables';
 
 .tc-card {
-  @include config_columnBox_middle();
+  @include config_rowBox();
+  height: 160rpx;
   &-avatar {
-    @include config_avatar(128rpx, 128rpx, 50%);
+    @include config_avatar(160rpx, 160rpx, 50%);
+    box-sizing: border-box;
+    border: solid 4rpx $normalFontColor;
   }
   &-infoContainer {
-    @include config_rowBox();
+    @include config_columnBox();
   }
-  &-title {
-    @include config_font(16rpx, red);
+  &-nickname {
+    @include config_font(36rpx, $normalFontColor);
+    line-height: 27rpx;
+    margin-left: 21rpx;
+    margin-bottom: 51rpx;
+  }
+  &-reputationGroup {
+    @include config_rowBox();
+    width: 481rpx;
+    &-firstChild {
+      margin-left: 79rpx;
+      margin-right: 186rpx;
+    }
   }
   &-reputation {
-    @include config_font(16rpx, red);
+    text-align: center;
+    &-value {
+      @include config_font(54rpx, $normalFontColor);
+      line-height: 40rpx;
+      margin-bottom: 18rpx;
+    }
+    &-name {
+      @include config_font(28rpx, #997625);
+      line-height: 26rpx;
+      font-weight: 200;
+    }
   }
 }
