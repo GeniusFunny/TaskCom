@@ -2,11 +2,15 @@
 @import '../helpers/_variables';
 
 .personalCenter {
-  height: 100vh;
+  height: 1108rpx;
   background-color: $themeColor;
   padding-left: 30rpx;
   padding-right: 30rpx;
-  &-menu-icon {
-    @include config_width_height(42rpx, 30rpx);
+  &-menu {
+    &-icon {
+      margin-bottom: 27rpx;
+      margin-top: 45rpx;
+      @include config_width_height(50rpx, 50rpx);
+    }
   }
 }

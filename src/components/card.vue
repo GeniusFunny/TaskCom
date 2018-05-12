@@ -12,7 +12,7 @@
         </div>
         <div class="tc-card-reputation">
           <div class="tc-card-reputation-value">{{contend}}</div>
-          <div class="tc-card-reputation-name">竞争</div>
+          <div class="tc-card-reputation-name">多人</div>
         </div>
       </div>
     </div>

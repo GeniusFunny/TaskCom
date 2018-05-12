@@ -1,4 +1,33 @@
-.tabBar {
-  height: 49rpx;
+@import '../helpers/_mixins';
+@import '../helpers/_variables';
+
+.tc-tabBar {
+  @include config_rowBox();
+  @include config_font(22rpx, #999999);
+  position: fixed;
+  width: 750rpx;
   background-color: #ffffff; 
+  &-icon-left {
+    margin-left: 140rpx;
+    margin-top: 9rpx;
+    img {
+      @include config_width_height(50rpx, 50rpx);
+    }
+  }
+  &-icon-center {
+    margin-left: 136rpx;
+    img {
+      @include config_width_height(98rpx, 98rpx);
+    }
+  }
+  &-icon-right {
+    margin-top: 9rpx;
+    margin-left: 136rpx;
+    img {
+       @include config_width_height(50rpx, 50rpx);
+    }
+  }
+  &-icon-active {
+    @include config_font(22rpx, #4d4d4d);
+  }
 }
