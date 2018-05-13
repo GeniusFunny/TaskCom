@@ -23,7 +23,7 @@ export default {
           console.log(res.userInfo)
           this.userInfo = res.userInfo
           setStorage('wxAvatar', res.userInfo.avatarUrl)
-          setStorage('nickname', res.userInfo.nickname)
+          setStorage('nickName', res.userInfo.nickName)
         })
       console.log(123)
     },

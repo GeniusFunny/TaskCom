@@ -2,15 +2,32 @@
 @import '../helpers/_variables';
 
 .personalCenter {
-  height: 1108rpx;
+  min-height: 100vh;
   background-color: $themeColor;
   padding-left: 30rpx;
   padding-right: 30rpx;
   &-menu {
     &-icon {
       margin-bottom: 27rpx;
-      margin-top: 45rpx;
-      @include config_width_height(50rpx, 50rpx);
+      margin-top: 35rpx;
+      @include config_width_height(60rpx, 60rpx);
+    }
+  }
+  &-task {
+    margin-top: 52rpx;
+    padding-bottom: 30rpx;
+    &-tag {
+      @include config_font(32rpx, #997625);
+      margin-bottom: 25rpx;
+      margin-left: -8rpx;
+      line-height: 31rpx;
+      vertical-align: middle;
+      img {
+        @include config_width_height(50rpx, 50rpx);
+        vertical-align: text-bottom;
+        margin-right: 5rpx;
+        margin-bottom: -3rpx;
+      }
     }
   }
 }

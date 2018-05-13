@@ -26,5 +26,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '../common/styles/components/card'
+  @import '../common/styles/components/card';
 </style>

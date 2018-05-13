@@ -6,7 +6,7 @@ app.$mount()
 
 export default {
   config: {
-    navigationBarTitleText: '首页',
+    navigationBarTitleText: '发现',
     enableDropDownRefresh: true
   }
 }

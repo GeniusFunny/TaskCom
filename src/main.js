@@ -17,6 +17,30 @@ export default {
       navigationBarBackgroundColor: '#ffc53d',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'white'
+    },
+    'tabBar': {
+      'color': '#999999',
+      'selectedColor': '#4d4d4d',
+      'list': [
+        {
+          'pagePath': 'pages/personalCenter/personalCenter',
+          'iconPath': './static/images/me1.png',
+          'text': '我的',
+          'selectedIconPath': './static/images/me2.png'
+        },
+        {
+          'pagePath': 'pages/index/index',
+          'iconPath': './static/images/add1.png',
+          'text': '新建任务',
+          'selectedIconPath': './static/images/add2.png'
+        },
+        {
+          'pagePath': 'pages/index/index',
+          'iconPath': './static/images/find1.png',
+          'text': '发现',
+          'selectedIconPath': './static/images/find2.png'
+        }
+      ]
     }
   }
 }

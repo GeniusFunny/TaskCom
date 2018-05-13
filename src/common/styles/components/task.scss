@@ -1,0 +1,36 @@
+@import '../helpers/_variables';
+@import '../helpers/_mixins';
+.tc-task {
+  @include config_width_height(690rpx, 176rpx);
+  @include config_rowBox();
+  box-sizing: border-box;
+  padding-left: 21rpx;
+  margin-bottom: 30rpx;
+  border-radius: 6rpx;
+  border-left: 8rpx solid $dailyTaskColor;
+  background-color: white;
+  &-multiPlayer {
+    border-color: $multiPlayerTaskColor;
+  }
+  &-info-1 {
+    @include config_columnBox();
+    width: 551rpx;
+    &-name {
+      @include config_font(32rpx, $normalFontColor);
+      margin-top: 31rpx;
+      margin-bottom: 30rpx;
+      line-height: 30rpx;
+    }
+    &-date, &-participator {
+      @include config_font(24rpx, $reminderFontColor);
+      margin-bottom: 10rpx;
+      line-height: 23rpx;
+    }
+  }
+  &-info-2 {
+    @include  config_font(48rpx, $normalFontColor);
+    line-height: 47rpx;
+    margin-top: 65rpx;
+    margin-right: 31rpx;
+  }
+}
