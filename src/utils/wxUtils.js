@@ -84,7 +84,17 @@ const upLoad = (filePath, formData) => {
     })
   })
 }
-
+const jumpTo = (url) => {
+  try {
+    wx.navigateTo({
+      url: url
+    })
+  } catch (e) {
+    wx.switchTab({
+      url: url
+    })
+  }
+}
 export {
   toast,  //  提示窗
   showLoading,  //  显示加载提示框
@@ -95,5 +105,6 @@ export {
   chooseImg,  //  选取图片
   wxLogin,  //  登录微信服务器
   getUserInfo, //  获取微信用户信息,
-  upLoad  // 上传
+  upLoad,  // 上传,
+  jumpTo  //  页面跳转
 }

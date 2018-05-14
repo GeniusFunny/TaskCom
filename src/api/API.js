@@ -1,7 +1,10 @@
 import ajax from './ajax'
 
-const Test = () => {
+const GetUserInfo = () => {
   return ajax('/userInfo')
+}
+const GetCurrentTask = () => {
+  return ajax('/taskList')
 }
 const UpLoad = (data) => {
   return ajax('', '', data)
@@ -12,5 +15,6 @@ const DownLoad = (data) => {
 export {
   DownLoad,
   UpLoad,
-  Test
+  GetUserInfo,
+  GetCurrentTask
 }

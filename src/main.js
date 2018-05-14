@@ -11,7 +11,12 @@ export default {
   // 这个字段走 app.json
   config: {
     // 页面前带有 ^ 符号的，会被编译成首页，其他页面可以选填，我们会自动把 webpack entry 里面的入口页面加进去
-    pages: ['^pages/personalCenter/personalCenter', 'pages/index/index'],
+    pages: [
+      '^pages/personalCenter/personalCenter',
+      'pages/index/index',
+      'pages/task/task',
+      'pages/add/add'
+    ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#ffc53d',
@@ -29,7 +34,7 @@ export default {
           'selectedIconPath': './static/images/me2.png'
         },
         {
-          'pagePath': 'pages/index/index',
+          'pagePath': 'pages/add/add',
           'iconPath': './static/images/add1.png',
           'text': '新建任务',
           'selectedIconPath': './static/images/add2.png'

@@ -3,7 +3,7 @@
     <img class="tc-card-avatar" :src="avatar" background-size="cover"/>
     <div class="tc-card-infoContainer">
       <div class="tc-card-nickname">
-        {{nickname}}
+        {{nickName}}
       </div>
       <div class="tc-card-reputationGroup">
         <div class="tc-card-reputation tc-card-reputationGroup-firstChild">
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  props: ['avatar', 'contend', 'nickname', 'daily']
+  props: ['avatar', 'contend', 'nickName', 'daily']
 }
 </script>
 

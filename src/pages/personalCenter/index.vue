@@ -1,16 +1,17 @@
 <template>
   <div class="personalCenter">
+    <side-bar :avatar="userInfo.avatar" :menu-list="menuList" :nickName="userInfo.nickName" :hidden="sideBarVisible"/>
     <div class="personalCenter-menu">
-      <img class="personalCenter-menu-icon" src="/static/images/menu.png"/>
+      <img class="personalCenter-menu-icon" src="/static/images/menu.png" @click="changeSideBarVisible"/>
     </div>
-    <card :avatar="userInfo.avatar" :contend="userInfo.contend" :nickname="userInfo.nickName" :daily="userInfo.daily"/>
+    <card :avatar="userInfo.avatar" :contend="userInfo.contend" :nickName="userInfo.nickName" :daily="userInfo.daily"/>
     <div class="personalCenter-task">
       <div class="personalCenter-task-tag">
         <img src="/static/images/task.png" />
         <span >当前任务</span>
       </div>
-      <div v-for="task in taskList" :key="task.id">
-        <task :taskName="task.taskName" :deadLine="task.deadLine" :taskNum="task.taskNum" :type="task.type" :finishedTaskNum="task.finishedTaskNum" :finishedPlayerNum="task.finishedPlayerNum"/>
+      <div>
+        <task v-for="task in taskList" :key="task.id" :taskName="task.taskName" :deadLine="task.deadLine" :taskNum="task.taskNum" :type="task.type" :finishedTaskNum="task.finishedTaskNum" :finishedPlayerNum="task.finishedPlayerNum" :id="task.id" @task="getTaskMoreInfo"/>
       </div>
     </div>
   </div>
@@ -19,18 +20,36 @@
 <script>
 import card from '../../components/card'
 import task from '../../components/task'
-import {Test} from '../../api/API'
+import sideBar from '../../components/sideBar'
+import {GetUserInfo, GetCurrentTask} from '../../api/API'
+import {setStorage, jumpTo} from '../../utils/wxUtils'
 
 export default {
   components: {
     card,
-    task
+    task,
+    sideBar
   },
 
   data () {
     return {
       userInfo: {},
-      taskList: []
+      taskList: [],
+      menuList: [
+        {
+          name: '基本资料',
+          tag: '/static/images/edit.png'
+        },
+        {
+          name: '数据展示',
+          tag: '/static/images/data.png'
+        },
+        {
+          name: '历史记录',
+          tag: '/static/images/history.png'
+        }
+      ],
+      sideBarVisible: true
     }
   },
   methods: {
@@ -40,50 +59,26 @@ export default {
       }
     },
     getUserInfo () {
-      Test()
+      GetUserInfo()
         .then(res => {
           this.parseInfo(res)
         })
     },
+    parseTaskList (data) {
+      this.taskList = data
+    },
     getTaskList () {
-      this.taskList = [
-        {
-          id: 1,
-          taskName: 'OOP上机',
-          type: 'daily',
-          deadLine: '2018-5-14 17:00',
-          taskNum: 3,
-          finishedTaskNum: 1,
-          finishedPlayerNum: 0
-        },
-        {
-          id: 2,
-          taskName: '数据库上机',
-          type: 'daily',
-          deadLine: '2018-5-14 22:00',
-          taskNum: 9,
-          finishedTaskNum: 5,
-          finishedPlayerNum: 0
-        },
-        {
-          id: 3,
-          taskName: '软件工程大作业',
-          type: 'multiPlayer',
-          deadLine: '2018-5-16 22:00',
-          taskNum: 9,
-          finishedTaskNum: 5,
-          finishedPlayerNum: 2
-        },
-        {
-          id: 4,
-          taskName: '互联网+',
-          type: 'multiPlayer',
-          deadLine: '2018-7-25 24:00',
-          taskNum: 18,
-          finishedTaskNum: 9,
-          finishedPlayerNum: 5
-        }
-      ]
+      GetCurrentTask()
+        .then(res => {
+          this.parseTaskList(res.data)
+        })
+    },
+    getTaskMoreInfo (key) {
+      setStorage('currentTaskId', parseInt(key))
+      jumpTo('../task/task')
+    },
+    changeSideBarVisible () {
+      this.sideBarVisible = !this.sideBarVisible
     }
   },
   created () {

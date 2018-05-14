@@ -22,7 +22,6 @@
     },
     methods: {
       handleClick (e) {
-        console.log('儿子')
         this.$emit('click', e)
       }
     }

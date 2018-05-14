@@ -1,9 +1,11 @@
 <template>
   <div
+    :id="id"
     class="tc-task"
     :class="[
       type === 'multiPlayer' ? 'tc-task-multiPlayer': ''
     ]"
+    @click="clickTask"
   >
     <div class="tc-task-info-1">
       <div class="tc-task-info-1-name">{{taskName}}</div>
@@ -40,8 +42,16 @@
         default: 0
       },
       type: {
-        default: String,
-        type: 'daily'
+        type: String,
+        default: 'daily'
+      },
+      id: {
+        type: Number
+      }
+    },
+    methods: {
+      clickTask (e) {
+        this.$emit('task', e.currentTarget.id)
       }
     }
   }
