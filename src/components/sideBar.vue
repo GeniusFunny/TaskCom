@@ -6,7 +6,12 @@
       hidden? '': 'active'
     ]"
   >
-    <div class="tc-sideBar">
+    <div
+      class="tc-sideBar"
+      :class="[
+        hidden? '': 'tc-sideBar-active'
+    ]"
+    >
       <div class="tc-sideBar-info">
         <img class="tc-sideBar-info-img" :src="avatar"/>
         <div class="tc-sideBar-info-name">{{nickName}}</div>
@@ -18,12 +23,6 @@
         <div class="tc-sideBar-menu-item-name">{{item.name}}</div>
       </div>
     </div>
-    <div
-      class="tc-sideBar-background"
-      :class="[
-        hidden? '': 'tc-sideBar-background-active'
-      ]"
-    ></div>
   </div>
 </template>
 

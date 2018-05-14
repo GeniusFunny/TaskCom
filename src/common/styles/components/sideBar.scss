@@ -3,16 +3,22 @@
 .tc-sideBar-container {
   @include config_width_height(100vw, 100vh);
   @include config_rowBox();
-  left: -100%;
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
+  left: -100%;
 }
 .active {
   left: 0;
-  transition: left 0.33s;
 }
 .tc-sideBar {
   @include config_width_height(352rpx, 1206rpx);
+  position: absolute;
+  left: -100%;
   background-color: #ffffff;
+  &-active {
+    left: 0;
+    transition: left 0.4s;
+  }
   &-info {
     &-img {
       @include config_width_height(144rpx, 144rpx);
@@ -43,10 +49,4 @@
       margin-right: 15rpx;
     }
   }
-}
-.tc-sideBar-background {
-  @include config_width_height(400rpx, 100vh);
-  opacity: 0.5;
-  right: -100%;
-  background-color: black;
 }
