@@ -3,13 +3,13 @@
     <div class="personalCenter-menu">
       <img class="personalCenter-menu-icon" src="/static/images/menu.png"/>
     </div>
-    <card :avatar="userInfo.avatar" :contend="userInfo.contend" :nickname="userInfo.nickname" :daily="userInfo.daily"/>
+    <card :avatar="userInfo.avatar" :contend="userInfo.contend" :nickname="userInfo.nickName" :daily="userInfo.daily"/>
     <div class="personalCenter-task">
       <div class="personalCenter-task-tag">
         <img src="/static/images/task.png" />
         <span >当前任务</span>
       </div>
-      <div v-for="task in taskList">
+      <div v-for="task in taskList" :key="task.id">
         <task :taskName="task.taskName" :deadLine="task.deadLine" :taskNum="task.taskNum" :type="task.type" :finishedTaskNum="task.finishedTaskNum" :finishedPlayerNum="task.finishedPlayerNum"/>
       </div>
     </div>
@@ -19,7 +19,8 @@
 <script>
 import card from '../../components/card'
 import task from '../../components/task'
-import {getStorage} from '../../utils/wxUtils'
+import {Test} from '../../api/API'
+
 export default {
   components: {
     card,
@@ -33,15 +34,21 @@ export default {
     }
   },
   methods: {
+    parseInfo (data) {
+      for (let key in data) {
+        this.userInfo[key] = data[key]
+      }
+    },
     getUserInfo () {
-      this.userInfo['avatar'] = getStorage('wxAvatar') || 'http://5b0988e595225.cdn.sohucs.com/images/20170911/aa2247ad3e9345809e4bc1cb3c3f30fe.jpeg'
-      this.userInfo['contend'] = 1988
-      this.userInfo['daily'] = 2433
-      this.userInfo['nickname'] = getStorage('Nickname') || 'chenchen'
+      Test()
+        .then(res => {
+          this.parseInfo(res)
+        })
     },
     getTaskList () {
       this.taskList = [
         {
+          id: 1,
           taskName: 'OOP上机',
           type: 'daily',
           deadLine: '2018-5-14 17:00',
@@ -50,6 +57,7 @@ export default {
           finishedPlayerNum: 0
         },
         {
+          id: 2,
           taskName: '数据库上机',
           type: 'daily',
           deadLine: '2018-5-14 22:00',
@@ -58,6 +66,7 @@ export default {
           finishedPlayerNum: 0
         },
         {
+          id: 3,
           taskName: '软件工程大作业',
           type: 'multiPlayer',
           deadLine: '2018-5-16 22:00',
@@ -66,6 +75,7 @@ export default {
           finishedPlayerNum: 2
         },
         {
+          id: 4,
           taskName: '互联网+',
           type: 'multiPlayer',
           deadLine: '2018-7-25 24:00',
