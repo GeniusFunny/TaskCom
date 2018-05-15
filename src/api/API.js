@@ -12,9 +12,17 @@ const UpLoad = (data) => {
 const DownLoad = (data) => {
   return ajax('', 'get', data)
 }
+const GetMoreUserInfo = () => {
+  return ajax('/moreUserInfo')
+}
+const UpdateUserInfo = () => {
+  return ajax('/moreUserInfo', 'post')
+}
 export {
   DownLoad,
   UpLoad,
+  UpdateUserInfo,
   GetUserInfo,
+  GetMoreUserInfo,
   GetCurrentTask
 }

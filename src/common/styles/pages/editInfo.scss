@@ -1,0 +1,71 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+::placeholder {
+  color: #997625;
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  color: #997625;
+}
+::-ms-input-placeholder {
+  color: #997625;
+}
+.editInfo {
+  @include config_font(32rpx, #33270c);
+  @include config_width_height(750rpx, 1334rpx);
+  position: fixed;
+  background-color: $themeColor;
+  padding: 30rpx;
+  &-module {
+    background-color: white;
+    border-radius: 6rpx;
+    padding: 30rpx 30rpx 0rpx 30rpx;
+    box-sizing: border-box;
+    &-1 {
+      @include config_width_height(690rpx, 508rpx);
+      margin-bottom: 29rpx;
+    }
+    &-2 {
+      @include config_width_height(690rpx, 200rpx);
+    }
+  }
+  &-normalItem {
+    @include config_rowBox();
+    @include config_width_height(508rpx, 100rpx);
+    box-sizing: border-box;
+    &-value {
+      @include config_font(28rpx, #997625);
+      position: absolute;
+      text-align: right;
+      right: 120rpx;
+    }
+    &-img {
+      position: absolute;
+      right: 108rpx;
+      margin-top: -8rpx;
+      @include config_rowBox();
+      img {
+        @include config_width_height(58rpx, 58rpx);
+        margin-left: 12rpx;
+      }
+    }
+  }
+
+  &-avatarItem {
+    @include config_width_height(508rpx, 144rpx);
+    @include config_rowBox();
+    margin-bottom: 50rpx;
+    align-items: center;
+    &-avatar {
+      img {
+        @include config_width_height(144rpx, 144rpx);
+        position: relative;
+        left: 422rpx;
+        border-radius: 50%;
+      }
+    }
+    &-name {
+      line-height: 30rpx;
+    }
+  }
+}

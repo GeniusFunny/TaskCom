@@ -16,7 +16,7 @@
         <img class="tc-sideBar-info-img" :src="avatar"/>
         <div class="tc-sideBar-info-name">{{nickName}}</div>
       </div>
-      <div class="tc-sideBar-menu-item" v-for="item in menuList">
+      <div class="tc-sideBar-menu-item" v-for="item in menuList" :key="item.id" :id="item.id" @click="clickMenuItem">
         <div>
           <img class="tc-sideBar-menu-item-tag" :src="item.tag"/>
         </div>
@@ -43,11 +43,18 @@
       hidden: {
         type: Boolean,
         default: false
+      },
+      id: {
+        type: String
       }
     },
     methods: {
       changeSideBarVisible () {
         this.hidden = true
+        this.$emit('changeSideBar')
+      },
+      clickMenuItem (e) {
+        this.$emit('clickMenuItem', e.currentTarget.id)
       }
     }
   }

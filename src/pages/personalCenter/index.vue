@@ -1,6 +1,6 @@
 <template>
   <div class="personalCenter">
-    <side-bar :avatar="userInfo.avatar" :menu-list="menuList" :nickName="userInfo.nickName" :hidden="sideBarVisible"/>
+    <side-bar :avatar="userInfo.avatar" :menu-list="menuList" :nickName="userInfo.nickName" :hidden="sideBarVisible" @changeSideBar="changeSideBarVisible" @clickMenuItem="clickMenuItem"/>
     <div class="personalCenter-menu">
       <img class="personalCenter-menu-icon" src="/static/images/menu.png" @click="changeSideBarVisible"/>
     </div>
@@ -37,19 +37,25 @@ export default {
       taskList: [],
       menuList: [
         {
+          id: 'edit',
           name: '基本资料',
           tag: '/static/images/edit.png'
         },
         {
+          id: 'data',
           name: '数据展示',
           tag: '/static/images/data.png'
         },
         {
+          id: 'history',
           name: '历史记录',
           tag: '/static/images/history.png'
         }
       ],
-      sideBarVisible: true
+      sideBarVisible: true,
+      menuUrl: {
+        'edit': '../editInfo/editInfo'
+      }
     }
   },
   methods: {
@@ -79,6 +85,9 @@ export default {
     },
     changeSideBarVisible () {
       this.sideBarVisible = !this.sideBarVisible
+    },
+    clickMenuItem (key) {
+      jumpTo(this.menuUrl[key])
     }
   },
   created () {

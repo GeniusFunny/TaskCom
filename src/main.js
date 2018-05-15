@@ -15,7 +15,8 @@ export default {
       '^pages/personalCenter/personalCenter',
       'pages/index/index',
       'pages/task/task',
-      'pages/add/add'
+      'pages/add/add',
+      'pages/editInfo/editInfo'
     ],
     window: {
       backgroundTextStyle: 'light',
