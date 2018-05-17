@@ -1,0 +1,6 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+.history-img {
+  @include config_width_height(128rpx, 70rpx);
+  margin-top: -10rpx;
+}

@@ -16,6 +16,9 @@
   position: fixed;
   background-color: $themeColor;
   padding: 30rpx;
+  &-container {
+    height: 1064rpx;
+  }
   &-module {
     background-color: white;
     border-radius: 6rpx;
@@ -67,5 +70,25 @@
     &-name {
       line-height: 30rpx;
     }
+  }
+}
+.editInfo-bottomButton {
+  @include config_rowBox();
+  justify-content: center;
+  align-items: center;
+  margin-left: -30rpx;
+  height: 112rpx;
+  background-color: #fff;
+  img {
+    @include config_width_height(690rpx, 88rpx);
+    display: block;
+    margin-left: -30rpx;
+  }
+  &-content {
+    @include config_font(32rpx, #33270c);
+    z-index: 999;
+    line-height: 30rpx;
+    position: absolute;
+    left: 345rpx;
   }
 }

@@ -1,63 +1,71 @@
 <template>
   <div class="editInfo">
-    <div class="editInfo-module editInfo-module-1">
-      <div class="editInfo-avatarItem">
-        <div class="editInfo-avatarItem-name">
-          头像
-        </div>
-        <div class="editInfo-avatarItem-avatar">
-          <img :src="info.avatar"/>
-        </div>
-      </div>
-      <div class="editInfo-normalItem">
-        <div>
-          性别
-        </div>
-        <div class="editInfo-normalItem-img">
-          <img :src="images.man" @click="changeSex" id="man"/>
-          <img :src="images.woman" @click="changeSex" id="woman"/>
-        </div>
-      </div>
-      <div class="editInfo-normalItem">
-        <div>
-          出生年月
-        </div>
-        <picker mode="date" :value="info.date" start="1990-01-01" end="2018-12-31" @change="bindDateChange">
-          <div class="editInfo-normalItem-value">
-            {{info.date}}
+    <div class="editInfo-container">
+      <div class="editInfo-module editInfo-module-1">
+        <div class="editInfo-avatarItem">
+          <div class="editInfo-avatarItem-name">
+            头像
           </div>
-        </picker>
-      </div>
-      <div class="editInfo-normalItem">
-        <div>
-          地区
+          <div class="editInfo-avatarItem-avatar">
+            <img :src="info.avatar"/>
+          </div>
         </div>
-        <picker class="editInfo-normalItem-value" :value="info.region" :range="infoOptions.regionData" @change="bindRegionChange">
-          {{infoOptions.regionData[info.region] || '未设置'}}
-        </picker>
+        <div class="editInfo-normalItem">
+          <div>
+            性别
+          </div>
+          <div class="editInfo-normalItem-img">
+            <img :src="images.man" @click="changeSex" id="man"/>
+            <img :src="images.woman" @click="changeSex" id="woman"/>
+          </div>
+        </div>
+        <div class="editInfo-normalItem">
+          <div>
+            出生年月
+          </div>
+          <picker mode="date" :value="info.date" start="1990-01-01" end="2018-12-31" @change="bindDateChange">
+            <div class="editInfo-normalItem-value">
+              {{info.date}}
+            </div>
+          </picker>
+        </div>
+        <div class="editInfo-normalItem">
+          <div>
+            地区
+          </div>
+          <picker class="editInfo-normalItem-value" :value="info.region" :range="infoOptions.regionData" @change="bindRegionChange">
+            {{infoOptions.regionData[info.region] || '未设置'}}
+          </picker>
+        </div>
+      </div>
+      <div class="editInfo-module editInfo-module-2">
+        <div class="editInfo-normalItem">
+          <div>
+            大学
+          </div>
+          <input class="editInfo-normalItem-value" type="text" placeholder="未设置" :value="info.university" @input="bindUniversityChange"/>
+        </div>
+        <div class="editInfo-normalItem">
+          <div>
+            年级
+          </div>
+          <picker class="editInfo-normalItem-value" :value="info.degree" :range="infoOptions.degreeData" @change="bindDegreeChange">
+            {{infoOptions.degreeData[info.degree] || '未设置'}}
+          </picker>
+        </div>
       </div>
     </div>
-    <div class="editInfo-module editInfo-module-2">
-      <div class="editInfo-normalItem">
-        <div>
-          大学
-        </div>
-        <input class="editInfo-normalItem-value" type="text" placeholder="未设置" :value="info.university" @input="bindUniversityChange"/>
-      </div>
-      <div class="editInfo-normalItem">
-        <div>
-          年级
-        </div>
-        <picker class="editInfo-normalItem-value" :value="info.degree" :range="infoOptions.degreeData" @change="bindDegreeChange">
-          {{infoOptions.degreeData[info.degree] || '未设置'}}
-        </picker>
-      </div>
+    <div class="editInfo-bottomButton" @click="bindClickSubmit">
+      <img src="/static/images/button.png" />
+      <div class="editInfo-bottomButton-content">保存</div>
     </div>
   </div>
 </template>
 
 <script>
   import {GetMoreUserInfo} from '../../api/API'
+  import {toast} from '../../utils/wxUtils'
+
   export default {
     data () {
       return {
@@ -90,6 +98,9 @@
         this.info = data
         this.getSex()
       },
+      updateInfo () {
+        console.log('更新信息')
+      },
       getSex () {
         if (this.info.sex === 'man') {
           this.images['man'] = '/static/images/man-2.png'
@@ -117,6 +128,9 @@
       },
       bindUniversityChange (e) {
         this.info.name = e.target.value
+      },
+      bindClickSubmit () {
+        toast('保存成功', '')
       }
     },
     created () {

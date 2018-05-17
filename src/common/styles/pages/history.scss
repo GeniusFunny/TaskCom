@@ -1,0 +1,10 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+
+.history {
+  background-color: $themeColor;
+  min-height: 100vh;
+  &-task {
+    padding: 30rpx 0rpx 30rpx 30rpx;
+  }
+}

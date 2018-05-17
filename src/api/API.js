@@ -18,10 +18,14 @@ const GetMoreUserInfo = () => {
 const UpdateUserInfo = () => {
   return ajax('/moreUserInfo', 'post')
 }
+const GetHistory = () => {
+  return ajax('/historyTask')
+}
 export {
   DownLoad,
   UpLoad,
   UpdateUserInfo,
+  GetHistory,
   GetUserInfo,
   GetMoreUserInfo,
   GetCurrentTask

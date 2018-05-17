@@ -21,7 +21,7 @@ const taskList = Mock.mock({
       ],
       'taskNum|5-8': 0,
       'finishedTaskNum|1-6': 0,
-      'finishedPlayer|0-3': 0,
+      'finishedPlayerNum|0-3': 0,
       'deadLine|+1': [
         Mock.Random.date('yyyy-MM-dd H:mm'),
         Mock.Random.date('yyyy-MM-dd H:mm'),
@@ -49,10 +49,36 @@ const moreUserInfo = Mock.mock({
   }
 })
 
+const historyTask = Mock.mock({
+  'data|3-10': [
+    {
+      'taskName|+1': [
+        '软件工程大作业',
+        '数据库实验3',
+        'OOP实验2'
+      ],
+      'id|1-100': 0,
+      'type|1': [
+        'daily',
+        'multiPlayer'
+      ],
+      'finishedPlayerNum|0-3': 0,
+      'deadLine|+1': [
+        Mock.Random.date('yyyy-MM-dd H:mm'),
+        Mock.Random.date('yyyy-MM-dd H:mm'),
+        Mock.Random.date('yyyy-MM-dd H:mm')
+      ],
+      'hasFinished|1': [
+        true, false
+      ]
+    }
+  ]
+})
 const templatesMap = {
   '/userInfo': userInfo,
   '/taskList': taskList,
-  '/moreUserInfo': moreUserInfo
+  '/moreUserInfo': moreUserInfo,
+  '/historyTask': historyTask
 }
 
 export default templatesMap

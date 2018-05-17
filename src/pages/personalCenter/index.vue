@@ -54,7 +54,8 @@ export default {
       ],
       sideBarVisible: true,
       menuUrl: {
-        'edit': '../editInfo/editInfo'
+        'edit': '../editInfo/editInfo',
+        'history': '../history/history'
       }
     }
   },
