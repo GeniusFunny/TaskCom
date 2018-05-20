@@ -74,9 +74,10 @@
     methods: {
       changeTaskType (type) {
         this.info.type = type
+        console.log('事件A')
       },
       addSubTask (e) {
-        console.log(e.target)
+        console.log('事件B')
         this.info.taskList.push({
           id: this.info.taskList.length + 1,
           value: ''
@@ -114,6 +115,7 @@
         console.log(this.taskInfo)
       },
       createTask () {
+        console.log('自定义事件ButtonClick的处理函数在这里, 事件C')
         if (this.checkTaskName() && this.checkTaskInfo()) {
           this.getTaskInfo().submitTask()
         } else {
