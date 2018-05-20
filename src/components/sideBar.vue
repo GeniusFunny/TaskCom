@@ -3,13 +3,13 @@
     class="tc-sideBar-container"
     @click="changeSideBarVisible"
     :class="[
-      hidden? '': 'active'
+      hidden !== undefined && !hidden? 'active': ''
     ]"
   >
     <div
       class="tc-sideBar"
       :class="[
-        hidden? '': 'tc-sideBar-active'
+        hidden !== undefined && !hidden? 'tc-sideBar-active': ''
     ]"
     >
       <div class="tc-sideBar-info">
@@ -41,7 +41,8 @@
         default: 'Task'
       },
       hidden: {
-        type: Boolean
+        type: Boolean,
+        default: true
       },
       id: {
         type: String
