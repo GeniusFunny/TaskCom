@@ -1,23 +1,18 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+
 .tc-button {
-  color: black;
-  width: 5rem;
-  height: 1.2rem;
-  &-default {
-    color: blue;
+  @include config_width_height(750rpx, 112rpx);
+  @include config_rowBox_middle();
+  bottom: 0;
+  align-items: center;
+  background-color: #ffffff;
+  img {
+    @include config_width_height(690rpx, 88rpx);
   }
-  &-success {
-    color: green;
-  }
-  &-warning {
-    color: red;
-  }
-  &-mini {
-    font-size: 0.5rem;
-  }
-  &-small {
-    font-size: 1rem;
-  }
-  &-medium {
-    font-size: 1.5rem;
+  &-info {
+    @include config_font(32rpx, $problemFontColor);
+    position: absolute;
+    left: 325rpx;
   }
 }

@@ -17,7 +17,7 @@
     margin-top: 52rpx;
     padding-bottom: 30rpx;
     &-tag {
-      @include config_font(32rpx, #997625);
+      @include config_font(32rpx, $reminderFontColor);
       margin-bottom: 25rpx;
       margin-left: -8rpx;
       line-height: 31rpx;

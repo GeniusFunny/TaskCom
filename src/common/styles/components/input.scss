@@ -1,0 +1,29 @@
+@import '../helpers/_mixins';
+@import '../helpers/_variables';
+
+.tc-input {
+  @include config_width_height(690rpx, 128rpx);
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 21rpx;
+  @include config_rowBox();
+  align-items: center;
+  background-color: #ffffff;
+  label {
+    @include config_font(32rpx, $problemFontColor);
+    padding-left: 31rpx;
+  }
+  input {
+    @include config_font(32rpx, $reminderFontColor);
+    padding-right: 31rpx;
+    text-align: right;
+    position: absolute;
+    right: 31rpx;
+  }
+  picker {
+    @include config_font(32rpx, $reminderFontColor);
+    padding-right: 31rpx;
+    position: absolute;
+    right: 31rpx;
+  }
+}

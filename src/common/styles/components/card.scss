@@ -34,7 +34,7 @@
       margin-bottom: 18rpx;
     }
     &-name {
-      @include config_font(28rpx, #997625);
+      @include config_font(28rpx, $reminderFontColor);
       line-height: 26rpx;
       font-weight: 200;
     }

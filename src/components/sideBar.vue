@@ -41,8 +41,7 @@
         default: 'Task'
       },
       hidden: {
-        type: Boolean,
-        default: false
+        type: Boolean
       },
       id: {
         type: String

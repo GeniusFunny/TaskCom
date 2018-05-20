@@ -1,0 +1,20 @@
+@import '../helpers/_mixins';
+@import '../helpers/_variables';
+.tc-tab {
+  @include config_rowBox();
+  justify-content: center;
+  &-item {
+    @include config_width_height(192rpx, 72rpx);
+    @include config_font(32rpx, $problemFontColor);
+    @include config_border(4rpx, solid, $themeColor);
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 36rpx;
+    line-height: 30rpx;
+    padding-top: 18rpx;
+  }
+  &-item-active {
+    background-color: #ffd470;
+    border-color: $problemFontColor;
+  }
+}

@@ -1,28 +1,18 @@
 <template>
-  <button
-    class="tc-button"
-    @click.stop="handleClick"
-    :class="[
-      type? 'tc-button-' + type: '',
-      size? 'tc-button-' + size: ''
-    ]"
-  >
-    <span class="tc-button-content"><slot></slot></span>
-  </button>
+  <div class="tc-button" @click="handleClick" id="button">
+    <img src="/static/images/button.png"/>
+    <div class="tc-button-info">
+      <slot @click="handleClick"></slot>
+    </div>
+  </div>
 </template>
 
 <script>
   export default {
-    props: {
-      type: {
-        type: String,
-        default: 'default'
-      },
-      size: String
-    },
     methods: {
       handleClick (e) {
-        this.$emit('click', e)
+        console.log(e.target)
+        this.$emit('buttonClick', e)
       }
     }
   }

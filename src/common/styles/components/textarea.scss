@@ -1,0 +1,22 @@
+@import '../helpers/_mixins';
+@import '../helpers/_variables';
+
+.tc-textarea {
+  @include config_width_height(690rpx, 216rpx);
+  @include config_columnBox();
+  background-color: #ffffff;
+  margin-left: 30rpx;
+  margin-top: 21rpx;
+  label {
+    @include config_font(32rpx, $problemFontColor);
+    line-height: 30rpx;
+    margin-top: 30rpx;
+    margin-bottom: 36rpx;
+    margin-left: 30rpx;
+  }
+  textarea {
+    @include config_font(28rpx, $reminderFontColor);
+    @include config_width_height(615rpx, 76rpx);
+    margin-left: 45rpx;
+  }
+}

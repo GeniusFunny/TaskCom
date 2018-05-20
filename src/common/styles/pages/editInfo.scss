@@ -1,19 +1,19 @@
 @import "../helpers/_mixins";
 @import "../helpers/_variables";
 ::placeholder {
-  color: #997625;
+  color: $reminderFontColor;
   opacity: 1;
 }
 :-ms-input-placeholder {
-  color: #997625;
+  color: $reminderFontColor;
 }
 ::-ms-input-placeholder {
-  color: #997625;
+  color: $reminderFontColor;
 }
 .editInfo {
-  @include config_font(32rpx, #33270c);
-  @include config_width_height(750rpx, 1334rpx);
-  position: fixed;
+  @include config_font(32rpx, $problemFontColor);
+  box-sizing: border-box;
+  width: 750rpx;
   background-color: $themeColor;
   padding: 30rpx;
   &-container {
@@ -37,7 +37,7 @@
     @include config_width_height(508rpx, 100rpx);
     box-sizing: border-box;
     &-value {
-      @include config_font(28rpx, #997625);
+      @include config_font(28rpx, $reminderFontColor);
       position: absolute;
       text-align: right;
       right: 120rpx;
@@ -74,18 +74,19 @@
 }
 .editInfo-bottomButton {
   @include config_rowBox();
+  @include config_width_height(750rpx, 112rpx);
+  position: absolute;
+  bottom: 0rpx;
   justify-content: center;
   align-items: center;
-  margin-left: -30rpx;
-  height: 112rpx;
   background-color: #fff;
+  margin-left: -30rpx;
   img {
     @include config_width_height(690rpx, 88rpx);
     display: block;
-    margin-left: -30rpx;
   }
   &-content {
-    @include config_font(32rpx, #33270c);
+    @include config_font(32rpx, $problemFontColor);
     z-index: 999;
     line-height: 30rpx;
     position: absolute;

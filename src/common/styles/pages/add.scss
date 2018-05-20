@@ -1,0 +1,39 @@
+@import '../helpers/_mixins';
+@import '../helpers/_variables';
+
+.add {
+  width: 750rpx;
+  min-height: 1000rpx;
+  padding-bottom: 100rpx;
+  background-color: $themeColor;
+  &-addTaskItem {
+    @include config_width_height(690rpx, 128rpx);
+    @include config_rowBox();
+    box-sizing: border-box;
+    border-radius: 6rpx;
+    justify-content: center;
+    background-color: #ffd470;
+    margin-top: 21rpx;
+    margin-left: 30rpx;
+    img {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      @include config_width_height(72rpx, 72rpx);
+    }
+  }
+  &-addTaskItem-info {
+    position: absolute;
+    margin-top: 13rpx;
+    right: 30rpx;
+    @include config_font(24rpx, $reminderFontColor);
+    line-height: 24rpx;
+    &-tag {
+      @include config_width_height(26rpx, 28rpx);
+      margin-bottom: -5rpx;
+    }
+  }
+  &-info-margin {
+    margin-bottom: 97rpx;
+  }
+}
