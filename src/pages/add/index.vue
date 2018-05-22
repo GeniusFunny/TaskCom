@@ -28,6 +28,7 @@
   import tcTextarea from '../../components/textarea'
   import tcButton from '../../components/button'
   import {toast} from '../../utils/wxUtils'
+  import {CreateNewTask} from '../../api/API'
 
   export default {
     data () {
@@ -122,6 +123,28 @@
           toast('格式错误')
         }
       }
+    },
+    beforeMount () {
+      let data = {
+        title: '睡觉',
+        startTime: 1526876554508,
+        endTime: 1527206400000,
+        type: 1,
+        isPublic: true,
+        maxPeople: 8,
+        items: [
+          {
+            content: '回笼觉'
+          },
+          {
+            content: '午觉'
+          },
+          {
+            content: '晚觉'
+          }
+        ]
+      }
+      CreateNewTask(data)
     }
   }
 </script>

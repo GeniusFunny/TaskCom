@@ -1,9 +1,12 @@
 <template>
-  <div>123</div>
+  <div>
+    <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo">授权</button>
+  </div>
 </template>
 
 <script>
-import { wxLogin, getUserInfo, setStorage } from '../../utils/wxUtils'
+import { wxLogin, setStorage, jumpTo } from '../../utils/wxUtils'
+import { Login } from '../../api/API'
 export default {
   data () {
     return {
@@ -12,31 +15,24 @@ export default {
     }
   },
   methods: {
-    bindViewTap () {
-      console.log('爷爷')
-    },
-    getUserInfo () {
-      // 调用登录接口
+    bindGetUserInfo (e) {
+      let info = JSON.parse(e.mp.detail.rawData)
+      console.log(info)
+      setStorage('nickName', info.nickName)
+      setStorage('avatar', info.avatarUrl)
       wxLogin()
-        .then(res => getUserInfo())
         .then(res => {
-          console.log(res.userInfo)
-          this.userInfo = res.userInfo
-          setStorage('wxAvatar', res.userInfo.avatarUrl)
-          setStorage('nickName', res.userInfo.nickName)
+          return Login(res.code)
         })
-      console.log(123)
-    },
-    clickHandle (msg, ev) {
-      console.log('clickHandle:', msg, ev)
-    },
-    buttonClick (e) {
-      console.log(e)
-      console.log('爸爸')
+        .then(res => {
+          if (res.data.isNew) {
+            jumpTo('../editInfo/editInfo')
+          } else {
+            console.log(123)
+            jumpTo('../personalCenter/personalCenter')
+          }
+        })
     }
-  },
-  created () {
-    this.getUserInfo()
   }
 }
 </script>

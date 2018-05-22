@@ -15,17 +15,17 @@
             性别
           </div>
           <div class="editInfo-normalItem-img">
-            <img :src="images.man" @click="changeSex" id="man"/>
-            <img :src="images.woman" @click="changeSex" id="woman"/>
+            <img :src="images.man" @click="changeGender" id="man"/>
+            <img :src="images.woman" @click="changeGender" id="woman"/>
           </div>
         </div>
         <div class="editInfo-normalItem">
           <div>
             出生年月
           </div>
-          <picker mode="date" :value="info.date" start="1990-01-01" end="2018-12-31" @change="bindDateChange">
+          <picker mode="date" :value="info.birthday" start="1990-01-01" end="2018-12-31" @change="bindBirthdayChange">
             <div class="editInfo-normalItem-value">
-              {{info.date}}
+              {{info.birthday}}
             </div>
           </picker>
         </div>
@@ -33,9 +33,7 @@
           <div>
             地区
           </div>
-          <picker class="editInfo-normalItem-value" :value="info.region" :range="infoOptions.regionData" @change="bindRegionChange">
-            {{infoOptions.regionData[info.region] || '未设置'}}
-          </picker>
+          <input class="editInfo-normalItem-value" type="text" placeholder="未设置" :value="info.location" @input="bindLocationChange"/>
         </div>
       </div>
       <div class="editInfo-module editInfo-module-2">
@@ -43,14 +41,14 @@
           <div>
             大学
           </div>
-          <input class="editInfo-normalItem-value" type="text" placeholder="未设置" :value="info.university" @input="bindUniversityChange"/>
+          <input class="editInfo-normalItem-value" type="text" placeholder="未设置" :value="info.collage" @input="bindCollageChange"/>
         </div>
         <div class="editInfo-normalItem">
           <div>
             年级
           </div>
-          <picker class="editInfo-normalItem-value" :value="info.degree" :range="infoOptions.degreeData" @change="bindDegreeChange">
-            {{infoOptions.degreeData[info.degree] || '未设置'}}
+          <picker class="editInfo-normalItem-value" :value="info.grade" :range="infoOptions.gradeData" @change="bindGradeChange">
+            {{infoOptions.gradeData[info.grade] || '未设置'}}
           </picker>
         </div>
       </div>
@@ -63,77 +61,94 @@
 </template>
 
 <script>
-  import {GetMoreUserInfo} from '../../api/API'
-  import {toast} from '../../utils/wxUtils'
+  import {GetUserInfo, UpdateUserInfo} from '../../api/API'
+  import {getStorage, toast} from '../../utils/wxUtils'
+  import {unix2utc, utc2unix} from '../../utils/utils'
 
   export default {
     data () {
       return {
         info: {
-          sex: 'man',
-          date: '未设置',
-          region: '未设置',
-          degree: '未设置',
-          university: ''
+          gender: 0,
+          birthday: '未设置',
+          location: '未设置',
+          grade: '未设置',
+          collage: '未设置'
         },
         images: {
           man: '/static/images/man-1.png',
           woman: '/static/images/woman-1.png'
         },
         infoOptions: {
-          regionData: ['晋西北', '东三省'],
-          degreeData: ['大一', '大二', '大三', '大四', '研一', '研二']
+          gradeData: ['大一', '大二', '大三', '大四', '研一', '研二', '研三']
         }
       }
     },
     methods: {
       getInfo () {
-        GetMoreUserInfo()
+        GetUserInfo()
           .then(res => {
-            this.parseInfo(res.data)
+            this.parseInfo(res.data.info)
           })
       },
       parseInfo (data) {
-        console.log(data)
-        this.info = data
-        this.getSex()
+        this.info = {
+          gender: data.gender || 0,
+          grade: data.grade || 0,
+          birthday: unix2utc(data.birthday) || '2018-12-31',
+          location: data.location || '陕西西安',
+          collage: data.collage || '西安电子科技大学',
+          avatar: getStorage('avatar')
+        }
+        this.getGender()
       },
-      updateInfo () {
-        console.log('更新信息')
-      },
-      getSex () {
-        if (this.info.sex === 'man') {
+      getGender () {
+        if (this.info.gender === 1) {
           this.images['man'] = '/static/images/man-2.png'
         } else {
           this.images['woman'] = '/static/images/woman-2.png'
         }
       },
-      changeSex (e) {
+      changeGender (e) {
         if (e.target.id === 'man') {
           this.images['man'] = '/static/images/man-2.png'
           this.images['woman'] = '/static/images/woman-1.png'
+          this.info.gender = 1
         } else {
           this.images['man'] = '/static/images/man-1.png'
           this.images['woman'] = '/static/images/woman-2.png'
+          this.info.gender = 0
         }
       },
-      bindDateChange (e) {
-        this.info.date = e.target.value
+      bindBirthdayChange (e) {
+        this.info.birthday = e.target.value
       },
-      bindRegionChange (e) {
-        this.info.region = e.target.value
+      bindLocationChange (e) {
+        this.info.location = e.target.value
       },
-      bindDegreeChange (e) {
-        this.info.degree = e.target.value
+      bindGradeChange (e) {
+        this.info.grade = e.target.value
       },
-      bindUniversityChange (e) {
-        this.info.name = e.target.value
+      bindCollageChange (e) {
+        this.info.collage = e.target.value
       },
       bindClickSubmit () {
-        toast('保存成功', '')
+        let data = {
+          username: getStorage('nickName'),
+          avatar: getStorage('avatar'),
+          location: this.info.location,
+          birthday: utc2unix(this.info.birthday),
+          grade: this.info.grade,
+          gender: this.info.gender,
+          collage: this.info.collage
+        }
+        UpdateUserInfo(data)
+          .then(res => {
+            toast('保存成功')
+          })
       }
     },
-    created () {
+    beforeMount () {
       this.getInfo()
     }
   }

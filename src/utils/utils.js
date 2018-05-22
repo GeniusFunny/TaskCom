@@ -23,8 +23,21 @@ function debounce (fn, delay) {
     }, delay)
   }
 }
-
+function unix2utc (time) {
+  let date = new Date(time)
+  return date.getFullYear() + '-' + (parseInt(date.getMonth()) + 1) + '-' + date.getDate()
+}
+function utc2unix (time) {
+  let date = new Date(time)
+  return date.getTime()
+}
+function normalizeTime (time) {
+  return time.split('.')[0]
+}
 export {
   throttle,
-  debounce
+  debounce,
+  normalizeTime,
+  unix2utc,
+  utc2unix
 }

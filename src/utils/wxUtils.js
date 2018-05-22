@@ -85,15 +85,16 @@ const upLoad = (filePath, formData) => {
   })
 }
 const jumpTo = (url) => {
-  try {
-    wx.navigateTo({
-      url: url
-    })
-  } catch (e) {
-    wx.switchTab({
-      url: url
-    })
-  }
+  wx.navigateTo({
+    url: url,
+    fail: err => {
+      console.log(err)
+      wx.switchTab({
+        url: url,
+        fail: err => console.log(err)
+      })
+    }
+  })
 }
 export {
   toast,  //  提示窗

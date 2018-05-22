@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-button" @click="handleClick" id="button">
+  <div class="tc-button" id="button" @click="handleClick">
     <img src="/static/images/button.png"/>
     <div class="tc-button-info">
       <slot></slot>

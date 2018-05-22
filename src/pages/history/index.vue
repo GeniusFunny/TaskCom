@@ -14,7 +14,8 @@
   export default {
     data () {
       return {
-        taskList: []
+        taskList: [],
+        page: 1
       }
     },
     components: {
@@ -22,16 +23,21 @@
     },
     methods: {
       getHistory () {
-        GetHistory()
+        GetHistory(this.page)
           .then(res => {
-            this.taskList = res.data
+            this.page++
+            this.taskList.concat(res.data)
           })
       },
       getTaskMoreInfo (key) {
         console.log(key)
       }
     },
-    created () {
+    onReachBottom () {
+      console.log('上拉加载')
+      this.getHistory()
+    },
+    beforeMount () {
       this.getHistory()
     }
   }

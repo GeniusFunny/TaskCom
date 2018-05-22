@@ -1,17 +1,17 @@
 <template>
   <div class="personalCenter">
-    <side-bar :avatar="userInfo.avatar" :menu-list="menuList" :nickName="userInfo.nickName" :hidden="sideBarVisible" @changeSideBar="changeSideBarVisible" @clickMenuItem="clickMenuItem"/>
+    <side-bar :avatar="userInfo.avatar" :menu-list="menuList" :nickName="userInfo.username" :hidden="sideBarVisible" @changeSideBar="changeSideBarVisible" @clickMenuItem="clickMenuItem"/>
     <div class="personalCenter-menu">
       <img class="personalCenter-menu-icon" src="/static/images/menu.png" @click="changeSideBarVisible"/>
     </div>
-    <card :avatar="userInfo.avatar" :contend="userInfo.contend" :nickName="userInfo.nickName" :daily="userInfo.daily"/>
+    <card :avatar="userInfo.avatar" :contend="userInfo.contend" :nickName="userInfo.username" :daily="userInfo.daily"/>
     <div class="personalCenter-task">
       <div class="personalCenter-task-tag">
         <img src="/static/images/task.png" />
         <span >当前任务</span>
       </div>
       <div>
-        <task v-for="task in taskList" :key="task.id" :taskName="task.taskName" :deadLine="task.deadLine" :taskNum="task.taskNum" :type="task.type" :finishedTaskNum="task.finishedTaskNum" :finishedPlayerNum="task.finishedPlayerNum" :id="task.id" @task="getTaskMoreInfo"/>
+        <task v-for="task in taskList" :key="task.id" :taskName="task.title" :deadLine="task.endTime" :taskNum="task.totalTask" :type="task.type" :finishedTaskNum="task.finishedTask" :finishedPlayerNum="task.finishedPeople" :id="task.groupId" @task="getTaskMoreInfo"/>
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@
 import card from '../../components/card'
 import task from '../../components/task'
 import sideBar from '../../components/sideBar'
-import {GetUserInfo, GetCurrentTask} from '../../api/API'
+import {GetUserInfo, GetCurrentTask, GetScore} from '../../api/API'
 import {setStorage, jumpTo} from '../../utils/wxUtils'
 
 export default {
@@ -65,10 +65,20 @@ export default {
         this.userInfo[key] = data[key]
       }
     },
+    parseScore (data) {
+      this.userInfo.daily = data.personScore || 0
+      this.userInfo.contend = data.peopleScore || 0
+    },
+    getScore () {
+      GetScore()
+        .then(res => {
+          this.parseScore(res.data.score)
+        })
+    },
     getUserInfo () {
       GetUserInfo()
         .then(res => {
-          this.parseInfo(res)
+          this.parseInfo(res.data.info)
         })
     },
     parseTaskList (data) {
@@ -77,7 +87,7 @@ export default {
     getTaskList () {
       GetCurrentTask()
         .then(res => {
-          this.parseTaskList(res.data)
+          this.parseTaskList(res.data.groups)
         })
     },
     getTaskMoreInfo (key) {
@@ -91,8 +101,9 @@ export default {
       jumpTo(this.menuUrl[key])
     }
   },
-  created () {
+  beforeMount () {
     this.getUserInfo()
+    this.getScore()
     this.getTaskList()
   }
 }

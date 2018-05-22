@@ -40,11 +40,11 @@
       @include config_font(28rpx, $reminderFontColor);
       position: absolute;
       text-align: right;
-      right: 120rpx;
+      right: 60rpx;
     }
     &-img {
       position: absolute;
-      right: 108rpx;
+      right: 50rpx;
       margin-top: -8rpx;
       @include config_rowBox();
       img {
