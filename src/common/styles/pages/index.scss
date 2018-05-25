@@ -1,0 +1,12 @@
+@import "../helpers/_variables";
+@import "../helpers/_mixins";
+
+.index {
+  @include config_columnBox_middle();
+  justify-content: center;
+  background-color: $themeColor;
+  min-height: 100vh;
+  button {
+    transform: translateY(-50%);
+  }
+}

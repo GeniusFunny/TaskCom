@@ -32,7 +32,7 @@ function utc2unix (time) {
   return date.getTime()
 }
 function normalizeTime (time) {
-  return time.split('.')[0]
+  return time.split('.')[0].slice(0, 16)
 }
 export {
   throttle,

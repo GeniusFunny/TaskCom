@@ -62,7 +62,7 @@
 
 <script>
   import {GetUserInfo, UpdateUserInfo} from '../../api/API'
-  import {getStorage, toast} from '../../utils/wxUtils'
+  import {getStorage, toast, jumpTo} from '../../utils/wxUtils'
   import {unix2utc, utc2unix} from '../../utils/utils'
 
   export default {
@@ -145,6 +145,13 @@
         UpdateUserInfo(data)
           .then(res => {
             toast('保存成功')
+            setTimeout(() => {
+              jumpTo('../personalCenter/personalCenter')
+            }, 1500)
+          })
+          .catch(err => {
+            console.log(err)
+            toast('网络错误, 请稍后重试', 'none')
           })
       }
     },

@@ -22,7 +22,8 @@ import card from '../../components/card'
 import task from '../../components/task'
 import sideBar from '../../components/sideBar'
 import {GetUserInfo, GetCurrentTask, GetScore} from '../../api/API'
-import {setStorage, jumpTo} from '../../utils/wxUtils'
+import {setStorage, jumpTo, showLoading, hideLoading, toast} from '../../utils/wxUtils'
+import {normalizeTime} from '../../utils/utils'
 
 export default {
   components: {
@@ -69,19 +70,11 @@ export default {
       this.userInfo.daily = data.personScore || 0
       this.userInfo.contend = data.peopleScore || 0
     },
-    getScore () {
-      GetScore()
-        .then(res => {
-          this.parseScore(res.data.score)
-        })
-    },
-    getUserInfo () {
-      GetUserInfo()
-        .then(res => {
-          this.parseInfo(res.data.info)
-        })
-    },
     parseTaskList (data) {
+      data.forEach(item => {
+        item.endTime = normalizeTime(item.endTime)
+        item.type = item.type === 0 ? 'multiPlayer' : 'daily'
+      })
       this.taskList = data
     },
     getTaskList () {
@@ -102,9 +95,42 @@ export default {
     }
   },
   beforeMount () {
-    this.getUserInfo()
-    this.getScore()
-    this.getTaskList()
+    showLoading()
+    GetUserInfo()
+      .then(res => {
+        this.parseInfo(res.data.info)
+        return GetScore()
+      })
+      .then(res => {
+        this.parseScore(res.data.score)
+        return GetCurrentTask()
+      })
+      .then(res => {
+        this.parseTaskList(res.data.groups)
+        hideLoading()
+      })
+      .catch(err => {
+        hideLoading()
+        toast(err)
+      })
+  },
+  onPullDownRefresh () {
+    showLoading()
+    GetScore()
+      .then(res => {
+        this.parseScore(res.data.score)
+        return GetCurrentTask()
+      })
+      .then(res => {
+        this.parseTaskList(res.data.groups)
+        hideLoading()
+        wx.stopPullDownRefresh()
+      })
+      .catch(err => {
+        hideLoading()
+        wx.stopPullDownRefresh()
+        toast(err)
+      })
   }
 }
 </script>

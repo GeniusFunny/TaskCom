@@ -127,11 +127,11 @@
     beforeMount () {
       let data = {
         title: '睡觉',
-        startTime: 1526876554508,
-        endTime: 1527206400000,
+        startTime: 1527210352454,
+        endTime: 1527235152454,
         type: 1,
         isPublic: true,
-        maxPeople: 8,
+        maxPeople: 6,
         items: [
           {
             content: '回笼觉'

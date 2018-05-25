@@ -16,6 +16,7 @@ export default {
       '^pages/index/index',
       'pages/task/task',
       'pages/add/add',
+      'pages/find/find',
       'pages/editInfo/editInfo',
       'pages/history/history'
     ],
@@ -43,7 +44,7 @@ export default {
           'selectedIconPath': './static/images/add2.png'
         },
         {
-          'pagePath': 'pages/index/index',
+          'pagePath': 'pages/find/find',
           'iconPath': './static/images/find1.png',
           'text': '发现',
           'selectedIconPath': './static/images/find2.png'

@@ -1,10 +1,10 @@
 const FILEURL = ''  //  文件服务器地址
 
-const toast = (title = '提示', content = '', duration = 1500, mask = false) => {
+const toast = (title = '提示', icon = 'success', duration = 1500, mask = false) => {
   return new Promise((resolve, reject) => {
     wx.showToast({
       title: title,
-      content: content,
+      icon: icon,
       duration: duration,
       mask: mask,
       success: res => resolve(res),
@@ -24,7 +24,7 @@ const showLoading = (title = '加载中', mask = false) => {
 }
 
 const hideLoading = () => {
-  wx.hidden()
+  wx.hideLoading()
 }
 
 const modal = (title = '提示', content = '') => {
@@ -50,14 +50,6 @@ const chooseImg = (count = 9) => {
   return new Promise((resolve, reject) => {
     wx.chooseImage({
       count: count,
-      success: res => resolve(res),
-      fail: err => reject(err)
-    })
-  })
-}
-const getUserInfo = () => {
-  return new Promise((resolve, reject) => {
-    wx.getUserInfo({
       success: res => resolve(res),
       fail: err => reject(err)
     })
@@ -105,7 +97,6 @@ export {
   setStorage, //  设置缓存（同步）
   chooseImg,  //  选取图片
   wxLogin,  //  登录微信服务器
-  getUserInfo, //  获取微信用户信息,
   upLoad,  // 上传,
   jumpTo  //  页面跳转
 }

@@ -1,0 +1,7 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+
+.find {
+  min-height: 100vh;
+  background-color: $themeColor;
+}

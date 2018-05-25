@@ -6,7 +6,7 @@ app.$mount()
 
 export default {
   config: {
-    navigationBarTitleText: '发现',
-    enableDropDownRefresh: true
+    navigationBarTitleText: 'TaskCom',
+    enableDropDownRefresh: false
   }
 }
