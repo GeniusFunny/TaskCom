@@ -55,7 +55,7 @@
       },
       getTaskMoreInfo (key) {
         setStorage('currentTaskId', parseInt(key))
-        jumpTo('../task/task')
+        jumpTo(`../task/task`)
       }
     },
     onReachBottom () {

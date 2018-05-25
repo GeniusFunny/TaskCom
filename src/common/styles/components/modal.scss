@@ -33,11 +33,19 @@
         @include config_width_height(270rpx, 88rpx);
         @include config_columnBox_middle();
         justify-content: center;
-        box-sizing: border-box;
         text-align: center;
       }
-      &-item:first-child {
+      &-item-font {
+        box-sizing: border-box;
+        @include config_font(32rpx, #ffd470);
+        background-color: #ffffff;
+      }
+      &-item:after {
+        border: none;
+      }
+      &-item-font:first-child {
         border-right: 2rpx solid #e6e6e6;
+        border-radius: 0rpx;
       }
     }
   }

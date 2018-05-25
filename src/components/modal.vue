@@ -3,8 +3,8 @@
     <div class="tc-modal-body">
       <div class="tc-modal-body-content">创建成功！</div>
       <div class="tc-modal-body-options">
-        <div class="tc-modal-body-options-item" id="shareToContacts">分享到联系人</div>
-        <div class="tc-modal-body-options-item">关闭</div>
+        <button class="tc-modal-body-options-item tc-modal-body-options-item-font" open-type="share" id="share">分享到微信</button>
+        <button class="tc-modal-body-options-item tc-modal-body-options-item-font">关闭</button>
       </div>
     </div>
   </div>

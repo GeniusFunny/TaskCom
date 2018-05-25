@@ -26,6 +26,7 @@ export default {
           return Login(res.code)
         })
         .then(res => {
+          setStorage('test', true)
           if (res.data.isNew) {
             jumpTo('../editInfo/editInfo')
           } else {

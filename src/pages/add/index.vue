@@ -92,7 +92,8 @@
           }
         },
         taskInfo: {},
-        hidden: true
+        hidden: false,
+        groupId: 66366
       }
     },
     components: {
@@ -148,6 +149,7 @@
         CreateNewTask(this.taskInfo)
           .then(res => {
             this.hidden = false
+            this.groupId = res.data.grouId
           })
       },
       createTask () {
@@ -158,7 +160,7 @@
         }
       },
       shareTask (key) {
-        if (key === 'close') {
+        if (key !== 'share') {
           jumpTo('../personalCenter/personalCenter')
         }
       },
@@ -202,6 +204,15 @@
       },
       changePlayerNum (value) {
         this.info.players.value = value
+      },
+      shareToContacts (key) {
+        console.log(key)
+      }
+    },
+    onShareAppMessage (options) {
+      return {
+        title: '一起来挑战吧',
+        path: `/pages/task/task?groupId=${this.groupId}&share=true`
       }
     },
     beforeMount () {
