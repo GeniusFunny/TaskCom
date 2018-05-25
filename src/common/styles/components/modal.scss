@@ -1,0 +1,44 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+
+.tc-modal {
+  @include config_width_height(100vw, 100vh);
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  &-body {
+    @include config_width_height(540rpx, 256rpx);
+    @include config_columnBox_middle();
+    position: absolute;
+    top: 417rpx;
+    left: 105rpx;
+    box-sizing: border-box;
+    border-radius: 20rpx;
+    background-color: #ffffff;
+    &-content {
+      @include config_font(36rpx, #333333);
+      @include config_columnBox_middle();
+      height: 167rpx;
+      align-items: center;
+      justify-content: center;
+    }
+    &-options {
+      @include config_rowBox();
+      @include config_font(32rpx, #ffd470);
+      @include config_width_height(540rpx, 88rpx);
+      box-sizing: border-box;
+      border-top: 2rpx solid #e6e6e6;
+      &-item {
+        @include config_width_height(270rpx, 88rpx);
+        @include config_columnBox_middle();
+        justify-content: center;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      &-item:first-child {
+        border-right: 2rpx solid #e6e6e6;
+      }
+    }
+  }
+}

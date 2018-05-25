@@ -3,8 +3,8 @@
     <div class="add">
       <tab :type="info.type" @changeTaskType="changeTaskType"/>
       <div>
-        <tcInput :info="info.taskName" />
-        <tcTextarea v-for="(item, index) in info.taskList" :info="item" :key="item.id" :index="index"/>
+        <tcInput :info="info.taskName" @changeTaskName="changeTaskName"/>
+        <tcTextarea v-for="(item, index) in info.taskList" :info="item" :key="item.id" :index="index" @changeTaskItemContent="changeTaskItemContent"/>
         <div class="add-addTaskItem">
           <img src="/static/images/addButton.png" @click="addSubTask" id="img"/>
         </div>
@@ -12,22 +12,32 @@
           添加任务项，获得多倍积分<img class="add-addTaskItem-info-tag" src="/static/images/jifen.png"/>
         </div>
         <div class="add-info-margin"></div>
-        <tcInput :info="info.days" />
+        <tcInput :info="info.startTime" @changeStartTime="changeStartTime"/>
+        <tcInput :info="info.endTime" @changeEndTime="changeEndTime"/>
       </div>
       <div v-if="info.type === 'multiplayer'">
-        <tcInput :info="info.players" />
+        <tcInput :info="info.players" @changePlayerNum="changePlayerNum"/>
+        <tcInput :info="info.public" @changeIsPublic="changeIsPublic"/>
       </div>
     </div>
-    <TcButton @buttonClick="createTask">创建任务</TcButton>
+    <div class="tc-button" id="button" @click="createTask">
+      <img src="/static/images/button.png"/>
+      <div class="tc-button-info">
+        创建任务
+      </div>
+    </div>
+    <modal @shareTask="shareTask" :hidden="hidden"/>
   </div>
 </template>
 
 <script>
   import tab from '../../components/tab'
+  import modal from '../../components/modal'
   import tcInput from '../../components/input'
   import tcTextarea from '../../components/textarea'
   import tcButton from '../../components/button'
-  import {toast} from '../../utils/wxUtils'
+  import {toast, jumpTo} from '../../utils/wxUtils'
+  import {unix2utc, utc2unix} from '../../utils/utils'
   import {CreateNewTask} from '../../api/API'
 
   export default {
@@ -38,18 +48,27 @@
           taskName: {
             name: '任务名称',
             type: 'input',
-            value: '王小二'
+            value: ''
           },
-          days: {
-            name: '任务坚持天数',
-            type: 'picker',
-            value: 2,
-            data: [
-              1, 2, 3, 4, 5, 6, 7
-            ]
+          startTime: {
+            id: 'startTime',
+            name: '任务开始时间',
+            type: 'date',
+            value: '',
+            start: '',
+            end: ''
+          },
+          endTime: {
+            id: 'endTime',
+            name: '任务结束时间',
+            type: 'date',
+            value: '',
+            start: '',
+            end: ''
           },
           players: {
-            name: '参与人数',
+            id: 'players',
+            name: '最大参与人数',
             type: 'picker',
             value: 2,
             data: [
@@ -59,33 +78,42 @@
           taskList: [
             {
               id: 1,
-              value: '打麻将'
+              value: ''
             }
-          ]
+          ],
+          public: {
+            id: 'isPublic',
+            name: '是否公开',
+            type: 'picker',
+            value: 1,
+            data: [
+              '否', '是'
+            ]
+          }
         },
-        taskInfo: {}
+        taskInfo: {},
+        hidden: true
       }
     },
     components: {
       tab,
       tcInput,
       tcTextarea,
-      tcButton
+      tcButton,
+      modal
     },
     methods: {
       changeTaskType (type) {
         this.info.type = type
-        console.log('事件A')
       },
       addSubTask (e) {
-        console.log('事件B')
         this.info.taskList.push({
           id: this.info.taskList.length + 1,
           value: ''
         })
       },
       checkTaskName () {
-        return this.info.name.length > 0
+        return this.info.taskName.value.length > 0
       },
       checkTaskInfo () {
         return this.info.taskList.every(item => {
@@ -95,60 +123,94 @@
       getTaskInfo () {
         try {
           this.taskInfo = {
-            name: this.info.taskName.name,
-            days: this.info.days.data[this.info.days.value],
-            taskList: this.info.taskList
+            title: this.info.taskName.value,
+            startTime: utc2unix(this.info.startTime.value),
+            endTime: utc2unix(this.info.endTime.value),
+            isPublic: !!this.info.public,
+            maxPeople: this.info.players.data[this.info.players.value],
+            items: this.info.taskList.map(item => {
+              return {
+                content: item.value
+              }
+            }),
+            type: 1
           }
           if (this.info.type === 'multiplayer') {
-            this.taskInfo.players = this.info.players.data[this.days.value]
+            this.taskInfo.maxPeople = this.info.players.data[this.info.players.value]
+            this.taskInfo.type = 0
           }
         } catch (e) {
-          throw new Error('you空值')
+          throw new Error('有空值')
         }
         return this
       },
       submitTask () {
-        if (this.info.type === 'daily') {
-          toast('提交单人任务')
-        } else {
-          toast('提交多人任务')
-        }
-        console.log(this.taskInfo)
+        CreateNewTask(this.taskInfo)
+          .then(res => {
+            this.hidden = false
+          })
       },
       createTask () {
-        console.log('自定义事件ButtonClick的处理函数在这里, 事件C')
         if (this.checkTaskName() && this.checkTaskInfo()) {
           this.getTaskInfo().submitTask()
         } else {
-          toast('格式错误')
+          toast('请填写相关信息', 'none')
         }
+      },
+      shareTask (key) {
+        if (key === 'close') {
+          jumpTo('../personalCenter/personalCenter')
+        }
+      },
+      initDate () {
+        this.info.startTime.value = unix2utc(Date.now())
+        this.info.startTime.start = unix2utc(Date.now())
+        this.info.startTime.end = unix2utc(Date.now() + 3600 * 1000 * 24 * 90)
+
+        this.info.value = unix2utc(Date.now())
+        this.info.endTime.value = unix2utc(Date.now())
+      },
+      changeStartTime (value) {
+        this.info.startTime.value = value
+        this.info.endTime.value = value
+        this.info.endTime.start = value
+        this.info.endTime.end = unix2utc(utc2unix(value) + 3600 * 1000 * 24 * 90)
+      },
+      changeEndTime (value) {
+        this.info.endTime.value = value
+      },
+      changeTaskName (value) {
+        this.info.taskName.value = value
+      },
+      changeTaskItemContent (key, value) {
+        let index = this.findTask(key)
+        if (index !== -1) {
+          this.info.taskList[index].value = value
+        }
+      },
+      findTask (key) {
+        let itemIndex = -1
+        this.info.taskList.forEach((item, index) => {
+          if (item.id === parseInt(key)) {
+            itemIndex = index
+          }
+        })
+        return itemIndex
+      },
+      changeIsPublic (value) {
+        this.info.public.value = value
+      },
+      changePlayerNum (value) {
+        this.info.players.value = value
       }
     },
     beforeMount () {
-      let data = {
-        title: '睡觉',
-        startTime: 1527210352454,
-        endTime: 1527235152454,
-        type: 1,
-        isPublic: true,
-        maxPeople: 6,
-        items: [
-          {
-            content: '回笼觉'
-          },
-          {
-            content: '午觉'
-          },
-          {
-            content: '晚觉'
-          }
-        ]
-      }
-      CreateNewTask(data)
+      this.initDate()
     }
   }
 </script>
 
 <style lang="scss">
   @import '../../common/styles/pages/add';
+  @import '../../common/styles/components/button';
 </style>

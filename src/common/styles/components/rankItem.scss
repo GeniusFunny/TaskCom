@@ -1,0 +1,31 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+
+.tc-rankItem-top3 {
+  @include config_rowBox();
+  @include config_width_height(690rpx, 176rpx);
+  box-sizing: border-box;
+  margin-top: 20rpx;
+  background-color: #ffffff;
+  border-radius: 6rpx;
+  padding-right: 34rpx;
+  padding-left: 34rpx;
+  align-items: center;
+  &-name {
+    @include config_font(32rpx, $problemFontColor);
+  }
+  &-score {
+    @include config_font(48rpx, $problemFontColor);
+    position: absolute;
+    right: 64rpx;
+  }
+  &-avatar {
+    @include config_width_height(120rpx, 120rpx);
+    margin-right: 15rpx;
+    border-radius: 50%;
+  }
+  &-tag {
+    @include config_width_height(48rpx, 54rpx);
+    margin-right: 28rpx;
+  }
+}

@@ -4,4 +4,40 @@
 .find {
   min-height: 100vh;
   background-color: $themeColor;
+  padding: 30rpx;
+  padding-top: 0;
+  border-radius: 6rpx;
+  box-sizing: border-box;
+  &-restRank {
+    margin-top: 40rpx;
+    background-color: #ffffff;
+    padding-bottom: 40rpx;
+    border-radius: 6rpx;
+    &-item {
+      @include config_rowBox();
+      @include config_width_height(690rpx, 100rpx);
+      box-sizing: border-box;
+      align-items: center;
+      padding-top: 17rpx;
+      padding-left: 40rpx;
+      padding-right: 34rpx;
+      &-avatar {
+        @include config_width_height(64rpx, 64rpx);
+        border-radius: 50%;
+        margin-right: 19rpx;
+      }
+      &-name {
+        @include config_font(28rpx, $problemFontColor);
+      }
+      &-position {
+        @include config_font(32rpx, $problemFontColor);
+        margin-right: 50rpx;
+      }
+      &-score {
+        position: absolute;
+        right: 64rpx;
+        @include config_font(32rpx, $problemFontColor);
+      }
+    }
+  }
 }

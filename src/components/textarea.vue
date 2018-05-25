@@ -1,7 +1,7 @@
 <template>
   <div class="tc-textarea">
     <label>任务{{index + 1}}</label>
-    <textarea :value="info.value" placeholder="30字以内" maxlength="30"> </textarea>
+    <textarea :value="info.value" placeholder="30字以内" maxlength="30" :id="info.id" @blur="changeTextarea"> </textarea>
   </div>
 </template>
 
@@ -13,6 +13,11 @@
       },
       index: {
         type: Number
+      }
+    },
+    methods: {
+      changeTextarea (e) {
+        this.$emit('changeTaskItemContent', e.target.id, e.target.value)
       }
     }
   }

@@ -12,6 +12,7 @@
   import { GetHistory } from '../../api/API'
   import history from '../../components/history'
   import {normalizeTime} from '../../utils/utils'
+  import {showLoading, hideLoading, toast, setStorage, jumpTo} from '../../utils/wxUtils'
 
   export default {
     data () {
@@ -26,13 +27,19 @@
     methods: {
       getHistory () {
         if (typeof this.pageSum === 'undefined' || this.page <= this.pageSum) {
+          showLoading()
           GetHistory(this.page)
             .then(res => {
+              hideLoading()
               this.page++
               this.pageSum = res.data.pageSum
               this.parseHistory(res.data.groups).forEach(item => {
                 this.taskList.push(item)
               })
+            })
+            .catch(err => {
+              hideLoading()
+              toast(err)
             })
         }
       },
@@ -47,11 +54,11 @@
         })
       },
       getTaskMoreInfo (key) {
-        console.log(key)
+        setStorage('currentTaskId', parseInt(key))
+        jumpTo('../task/task')
       }
     },
     onReachBottom () {
-      console.log('上拉加载')
       this.getHistory()
     },
     beforeMount () {
