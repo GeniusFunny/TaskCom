@@ -29,6 +29,9 @@ const GetHistory = (id) => {
 const GetRank = (page) => {
   return ajax('/user/rank', 'get_restful', {id: page})
 }
+const GetTaskInfo = (id) => {
+  return ajax('/task/group', 'get_restful', {id: id})
+}
 export {
   DownLoad,
   UpLoad,
@@ -39,5 +42,6 @@ export {
   GetUserInfo,
   GetCurrentTask,
   CreateNewTask,
-  GetRank
+  GetRank,
+  GetTaskInfo
 }

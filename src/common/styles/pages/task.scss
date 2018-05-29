@@ -1,0 +1,8 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+
+.task {
+  background-color: $themeColor;
+  padding: 30rpx;
+  min-height: 100vh;
+}

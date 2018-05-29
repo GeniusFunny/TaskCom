@@ -1,0 +1,36 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+
+.tc-taskList {
+  width: 690rpx;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 6rpx;
+  margin-bottom: 29rpx;
+  &-tag {
+    img {
+      @include config_width_height(136rpx, 49rpx);
+      margin-top: 8rpx;
+      margin-left: -8rpx;
+    }
+  }
+  &-body {
+    @include config_columnBox();
+    padding-left: 36rpx;
+    padding-top: 35rpx;
+    padding-bottom: 29rpx;
+    &-item {
+      @include config_rowBox();
+      margin-bottom: 25rpx;
+      &-tag {
+        @include config_width_height(48rpx, 48rpx);
+        margin-right: 28rpx;
+        margin-top: -10rpx;
+      }
+      &-value {
+        @include config_font(28rpx, $problemFontColor);
+        line-height: 26rpx;
+      }
+    }
+  }
+}

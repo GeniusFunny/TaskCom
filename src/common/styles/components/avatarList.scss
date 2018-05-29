@@ -1,0 +1,31 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+
+.tc-avatarList {
+  @include config_width_height(690rpx, 210rpx);
+  @include config_columnBox();
+  border-radius: 6rpx;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  padding-top: 18rpx;
+  &-title {
+    @include config_font(28rpx, $problemFontColor);
+    margin-bottom: 31rpx;
+    padding-left: 30rpx;
+  }
+  &-body {
+    overflow: scroll;
+    @include config_rowBox();
+    &-item {
+      @include config_columnBox_middle();
+      margin-left: 31rpx;
+      img {
+        @include config_width_height(88rpx, 88rpx);
+        border-radius: 50%;
+      }
+      &-name {
+        @include config_font(23rpx, $problemFontColor);
+      }
+    }
+  }
+}

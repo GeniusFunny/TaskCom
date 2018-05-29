@@ -1,0 +1,18 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+
+.tc-infoItem {
+  @include config_width_height(690rpx, 128rpx);
+  @include config_rowBox();
+  @include config_font(32rpx, $problemFontColor);
+  margin-bottom: 30rpx;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 6rpx;
+  background-color: #ffffff;
+  padding-left: 32rpx;
+  &-value {
+    position: absolute;
+    right: 62rpx;
+  }
+}

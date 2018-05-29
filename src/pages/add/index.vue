@@ -92,7 +92,7 @@
           }
         },
         taskInfo: {},
-        hidden: false,
+        hidden: true,
         groupId: 66366
       }
     },
