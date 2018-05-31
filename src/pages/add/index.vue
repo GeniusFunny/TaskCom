@@ -36,7 +36,7 @@
   import tcInput from '../../components/input'
   import tcTextarea from '../../components/textarea'
   import tcButton from '../../components/button'
-  import {toast, jumpTo} from '../../utils/wxUtils'
+  import {toast, jumpTo, showLoading, hideLoading} from '../../utils/wxUtils'
   import {unix2utc, utc2unix} from '../../utils/utils'
   import {CreateNewTask} from '../../api/API'
 
@@ -44,7 +44,7 @@
     data () {
       return {
         info: {
-          type: 'multiplayer',
+          type: 'daily',
           taskName: {
             name: '任务名称',
             type: 'input',
@@ -117,6 +117,9 @@
         return this.info.taskName.value.length > 0
       },
       checkTaskInfo () {
+        if (this.info.taskList.length === 0) {
+          return false
+        }
         return this.info.taskList.every(item => {
           return item.value.length > 0
         })
@@ -145,6 +148,12 @@
         }
         return this
       },
+      clearTask () {
+        let data = this.info
+        this.taskInfo = {}
+        data.taskName.value = ''
+        data.taskList = []
+      },
       submitTask () {
         CreateNewTask(this.taskInfo)
           .then(res => {
@@ -161,6 +170,8 @@
       },
       shareTask (key) {
         if (key !== 'share') {
+          this.clearTask()
+          this.hidden = true
           jumpTo('../personalCenter/personalCenter')
         }
       },
@@ -170,12 +181,12 @@
         this.info.startTime.end = unix2utc(Date.now() + 3600 * 1000 * 24 * 90)
 
         this.info.value = unix2utc(Date.now())
-        this.info.endTime.value = unix2utc(Date.now())
+        this.info.endTime.value = unix2utc(Date.now() + 3600 * 1000 * 24)
       },
       changeStartTime (value) {
         this.info.startTime.value = value
-        this.info.endTime.value = value
-        this.info.endTime.start = value
+        this.info.endTime.value = unix2utc(utc2unix(value) + 3600 * 1000 * 24)
+        this.info.endTime.start = unix2utc(utc2unix(value) + 3600 * 1000 * 24)
         this.info.endTime.end = unix2utc(utc2unix(value) + 3600 * 1000 * 24 * 90)
       },
       changeEndTime (value) {
@@ -215,8 +226,14 @@
         path: `/pages/task/task?groupId=${this.groupId}&share=true`
       }
     },
-    beforeMount () {
+    onReady () {
       this.initDate()
+    },
+    onShow () {
+      showLoading()
+      setTimeout(() => {
+        hideLoading()
+      }, 1000)
     }
   }
 </script>

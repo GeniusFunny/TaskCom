@@ -1,10 +1,10 @@
 <template>
   <div class="tc-avatarList">
-    <div class="tc-avatarList-title">参与人员</div>
+    <div class="tc-avatarList-title">其他参与人员</div>
     <div class="tc-avatarList-body">
       <div class="tc-avatarList-body-item" v-for="(item, index) in avatarList" :key="index">
         <img  :src="item.avatar"/>
-        <div class="tc-avatarList-body-item-name">{{item.name}}</div>
+        <div class="tc-avatarList-body-item-name">{{item.username}}</div>
       </div>
     </div>
   </div>
@@ -18,39 +18,15 @@
         default: [
           {
             avatar: '/static/images/avatar.jpeg',
-            name: 'aaa'
+            username: 'aaa'
           },
           {
             avatar: '/static/images/avatar.jpeg',
-            name: 'aaa'
+            username: 'aaa'
           },
           {
             avatar: '/static/images/avatar.jpeg',
-            name: 'aaa'
-          },
-          {
-            avatar: '/static/images/avatar.jpeg',
-            name: 'aaa'
-          },
-          {
-            avatar: '/static/images/avatar.jpeg',
-            name: 'aaa'
-          },
-          {
-            avatar: '/static/images/avatar.jpeg',
-            name: 'aaa'
-          },
-          {
-            avatar: '/static/images/avatar.jpeg',
-            name: 'aaa'
-          },
-          {
-            avatar: '/static/images/avatar.jpeg',
-            name: 'aaa'
-          },
-          {
-            avatar: '/static/images/avatar.jpeg',
-            name: 'aaa'
+            username: 'aaa'
           }
         ]
       }

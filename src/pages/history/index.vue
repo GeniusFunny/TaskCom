@@ -61,6 +61,12 @@
     onReachBottom () {
       this.getHistory()
     },
+    onPullDownRefresh () {
+      this.getHistory()
+      setTimeout(() => {
+        wx.stopPullDownRefresh()
+      }, 1000)
+    },
     beforeMount () {
       this.getHistory()
     }

@@ -32,7 +32,13 @@ const modal = (title = '提示', content = '') => {
     wx.showModal({
       title: title,
       content: content,
-      success: res => resolve(res),
+      success: res => {
+        if (res.confirm) {
+          resolve(res)
+        } else {
+          reject()
+        }
+      },
       fail: err => reject(err)
     })
   })

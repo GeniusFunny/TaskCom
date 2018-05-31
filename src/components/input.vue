@@ -1,7 +1,7 @@
 <template>
   <div class="tc-input">
     <label>{{info.name}}</label>
-    <input v-if="info.type === 'input'" :value="info.value"  placeholder="请输入" @blur="changeInput"/>
+    <input v-if="info.type === 'input'" :value="info.value"  placeholder="请输入" @input="changeInput"/>
     <picker v-if="info.type === 'picker'" :value="info.value" :range="info.data" :id="info.id" @change="changeValue">
      {{info.data[info.value]}}
     </picker>

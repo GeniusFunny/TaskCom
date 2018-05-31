@@ -23,7 +23,7 @@ import task from '../../components/task'
 import sideBar from '../../components/sideBar'
 import {GetUserInfo, GetCurrentTask, GetScore} from '../../api/API'
 import {setStorage, jumpTo, showLoading, hideLoading, toast} from '../../utils/wxUtils'
-import {normalizeTime} from '../../utils/utils'
+import {normalizeTimeHours} from '../../utils/utils'
 
 export default {
   components: {
@@ -72,7 +72,7 @@ export default {
     },
     parseTaskList (data) {
       data.forEach(item => {
-        item.endTime = normalizeTime(item.endTime)
+        item.endTime = normalizeTimeHours(item.endTime)
         item.type = item.type === 0 ? 'multiPlayer' : 'daily'
       })
       this.taskList = data
@@ -115,7 +115,6 @@ export default {
       })
   },
   onPullDownRefresh () {
-    showLoading()
     GetScore()
       .then(res => {
         this.parseScore(res.data.score)
@@ -123,11 +122,9 @@ export default {
       })
       .then(res => {
         this.parseTaskList(res.data.groups)
-        hideLoading()
         wx.stopPullDownRefresh()
       })
       .catch(err => {
-        hideLoading()
         wx.stopPullDownRefresh()
         toast(err)
       })

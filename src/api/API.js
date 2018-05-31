@@ -32,6 +32,9 @@ const GetRank = (page) => {
 const GetTaskInfo = (id) => {
   return ajax('/task/group', 'get_restful', {id: id})
 }
+const FinishTaskItem = (data) => {
+  return ajax('/task/item', 'post', data)
+}
 export {
   DownLoad,
   UpLoad,
@@ -43,5 +46,6 @@ export {
   GetCurrentTask,
   CreateNewTask,
   GetRank,
-  GetTaskInfo
+  GetTaskInfo,
+  FinishTaskItem
 }

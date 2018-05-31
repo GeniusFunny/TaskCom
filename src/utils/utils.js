@@ -34,10 +34,14 @@ function utc2unix (time) {
 function normalizeTime (time) {
   return time.split('T')[0]
 }
+function normalizeTimeHours (time) {
+  return time.split('.')[0].replace(/T/, ' ').slice(0, -3)
+}
 export {
   throttle,
   debounce,
   normalizeTime,
+  normalizeTimeHours,
   unix2utc,
   utc2unix
 }
