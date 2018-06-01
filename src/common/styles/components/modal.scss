@@ -45,7 +45,8 @@
       }
       &-item-font:first-child {
         border-right: 2rpx solid #e6e6e6;
-        border-radius: 0rpx;
+        border-bottom-right-radius: 0rpx;
+        border-top-right-radius: 0rpx;
       }
     }
   }

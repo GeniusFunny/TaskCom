@@ -1,6 +1,6 @@
 import ajax from './ajax'
 const Login = (code) => {
-  return ajax('/user/login', 'post', {code: code})
+  return ajax('/user/login', 'post', JSON.stringify({code: code}))
 }
 const GetUserInfo = () => {
   return ajax('/user/info')

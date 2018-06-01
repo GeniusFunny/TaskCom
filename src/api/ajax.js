@@ -1,7 +1,7 @@
 import Route from './mock/route'
 import {getStorage, setStorage} from '../utils/wxUtils'
 const BASEURL = 'http://hotpot.zhengsj.top'
-const DEGUG = false
+const DEBUG = false
 const methodsMap = {
   GET: (url, methods, data) => {
     return {
@@ -34,7 +34,7 @@ const configRequest = (url, methods, data) => {
   return methodsMap[methods.toUpperCase()](url, methods.toUpperCase(), data)
 }
 const ajax = (url, methods = 'GET', data = {}, headers = {'Content-Type': 'application/json'}) => {
-  if (!DEGUG) {
+  if (!DEBUG) {
     return new Promise((resolve, reject) => {
       const obj = configRequest(url, methods, data)
       if (getStorage('token')) {

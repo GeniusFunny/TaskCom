@@ -110,7 +110,7 @@
           }
         },
         taskInfo: {},
-        hidden: true,
+        hidden: false,
         groupId: 66366
       }
     },
@@ -143,12 +143,12 @@
         })
       },
       getTaskInfo () {
-        console.log(this.info.endDate.value + ' ' + this.info.startTime.value + ':00')
+        console.log(this.info.endDate.value + 'T' + this.info.startTime.value + ':00')
         try {
           this.taskInfo = {
             title: this.info.taskName.value,
-            startTime: cst2unix(this.info.startDate.value + ' ' + this.info.startTime.value + ':00'),
-            endTime: cst2unix(this.info.endDate.value + ' ' + this.info.endTime.value + ':00'),
+            startTime: cst2unix(this.info.startDate.value + 'T' + this.info.startTime.value + ':00'),
+            endTime: cst2unix(this.info.endDate.value + 'T' + this.info.endTime.value + ':00'),
             isPublic: !!this.info.public,
             maxPeople: this.info.players.data[this.info.players.value],
             items: this.info.taskList.map(item => {

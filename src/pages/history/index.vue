@@ -12,7 +12,7 @@
   import { GetHistory } from '../../api/API'
   import history from '../../components/history'
   import {unix2cst} from '../../utils/utils'
-  import {showLoading, hideLoading, toast, setStorage, jumpTo} from '../../utils/wxUtils'
+  import {showLoading, hideLoading, setStorage, jumpTo} from '../../utils/wxUtils'
 
   export default {
     data () {
@@ -39,19 +39,22 @@
             })
             .catch(err => {
               hideLoading()
-              toast(err)
+              console.log(err)
             })
         }
       },
       parseHistory (data) {
-        return data.map(item => {
-          return {
-            ...item,
-            hasFinished: !(item.unfinishedDay > 0),
-            endTime: unix2cst(item.endTime),
-            type: item.type === 1 ? 'daily' : 'multiPlayer'
-          }
-        })
+        console.log(data)
+        console.log(data[0])
+        console.log(unix2cst(data[0].endTime))
+        let source = data.map(item => ({
+          ...item,
+          hasFinished: !(item.unfinishedDay > 0),
+          endTime: unix2cst(item.endTime),
+          type: item.type === 1 ? 'daily' : 'multiPlayer'
+        }))
+        console.log(source)
+        return source
       },
       getTaskMoreInfo (key) {
         setStorage('currentTaskId', parseInt(key))
@@ -68,7 +71,7 @@
         wx.stopPullDownRefresh()
       }, 1000)
     },
-    beforeMount () {
+    onLoad () {
       this.getHistory()
     }
   }

@@ -22,7 +22,7 @@ import card from '../../components/card'
 import task from '../../components/task'
 import sideBar from '../../components/sideBar'
 import {GetUserInfo, GetCurrentTask, GetScore} from '../../api/API'
-import {setStorage, jumpTo, showLoading, hideLoading, toast} from '../../utils/wxUtils'
+import {setStorage, jumpTo, showLoading, hideLoading} from '../../utils/wxUtils'
 import {unix2cst} from '../../utils/utils'
 
 export default {
@@ -113,7 +113,7 @@ export default {
       })
       .catch(err => {
         hideLoading()
-        toast(err)
+        console.log(err)
       })
   },
   onPullDownRefresh () {
@@ -128,7 +128,7 @@ export default {
       })
       .catch(err => {
         wx.stopPullDownRefresh()
-        toast(err)
+        console.log(err)
       })
   }
 }

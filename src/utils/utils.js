@@ -24,9 +24,18 @@ function debounce (fn, delay) {
   }
 }
 function unix2cst (time) {
-  return (new Date((new Date(time)).getTime() + 8 * 3600 * 1000)).toJSON().replace(/T/, ' ').split('.')[0].slice(0, -3)
+  let date
+  try {
+    date = (new Date((new Date(time)).getTime() + 8 * 3600 * 1000)).toJSON().replace(/T/, ' ').split('.')[0].slice(0, -3)
+  } catch (e) {
+    date = (new Date((new Date(time.split('.')[0])).getTime() + 8 * 3600 * 1000)).toJSON().replace(/T/, ' ').split('.')[0].slice(0, -3)
+  }
+  return date
 }
 function cst2unix (time) {
+  console.log(time)
+  console.log(new Date(time))
+  console.log((new Date(time)).getTime())
   return (new Date(time)).getTime()
 }
 function normalizeTime (time) {
