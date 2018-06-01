@@ -7,20 +7,22 @@
 </template>
 
 <script>
-  import {wxLogin, setStorage, jumpTo, toast} from '../../utils/wxUtils'
+  import {wxLogin, setStorage, jumpTo, toast, showLoading, hideLoading} from '../../utils/wxUtils'
   import { Login } from '../../api/API'
   export default {
     methods: {
       bindGetUserInfo (e) {
+        showLoading()
         let info = JSON.parse(e.mp.detail.rawData)
         setStorage('nickName', info.nickName)
         setStorage('avatar', info.avatarUrl)
         wxLogin()
           .then(res => {
+            console.log(res)
             return Login(res.code)
           })
           .then(res => {
-            setStorage('test', true)
+            hideLoading()
             if (res.data.isNew) {
               jumpTo('../editInfo/editInfo')
             } else {
@@ -28,8 +30,9 @@
             }
           })
           .catch(err => {
-            toast('网络错误', 'none')
+            hideLoading()
             console.error(err)
+            toast('网络错误', 'none')
           })
       }
     }

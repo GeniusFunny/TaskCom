@@ -23,7 +23,7 @@ import task from '../../components/task'
 import sideBar from '../../components/sideBar'
 import {GetUserInfo, GetCurrentTask, GetScore} from '../../api/API'
 import {setStorage, jumpTo, showLoading, hideLoading, toast} from '../../utils/wxUtils'
-import {normalizeTimeHours} from '../../utils/utils'
+import {unix2cst} from '../../utils/utils'
 
 export default {
   components: {
@@ -43,20 +43,21 @@ export default {
           tag: '/static/images/edit.png'
         },
         {
-          id: 'data',
-          name: '数据展示',
+          id: 'future',
+          name: '未来的任务',
           tag: '/static/images/data.png'
         },
         {
           id: 'history',
-          name: '历史记录',
+          name: '任务历史记录',
           tag: '/static/images/history.png'
         }
       ],
       sideBarVisible: true,
       menuUrl: {
         'edit': '../editInfo/editInfo',
-        'history': '../history/history'
+        'history': '../history/history',
+        'future': '../future/future'
       }
     }
   },
@@ -72,7 +73,7 @@ export default {
     },
     parseTaskList (data) {
       data.forEach(item => {
-        item.endTime = normalizeTimeHours(item.endTime)
+        item.endTime = unix2cst(item.endTime)
         item.type = item.type === 0 ? 'multiPlayer' : 'daily'
       })
       this.taskList = data
@@ -84,6 +85,7 @@ export default {
         })
     },
     getTaskMoreInfo (key) {
+      setStorage('state', 'now')
       setStorage('currentTaskId', parseInt(key))
       jumpTo('../task/task')
     },

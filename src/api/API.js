@@ -35,6 +35,12 @@ const GetTaskInfo = (id) => {
 const FinishTaskItem = (data) => {
   return ajax('/task/item', 'post', data)
 }
+const GetFutureTaskList = () => {
+  return ajax('/task/not-start', 'get')
+}
+const GetSimpleTaskInfo = (id) => {
+  return ajax('/task/detail/simple', 'get_restful', {id: id})
+}
 export {
   DownLoad,
   UpLoad,
@@ -47,5 +53,7 @@ export {
   CreateNewTask,
   GetRank,
   GetTaskInfo,
-  FinishTaskItem
+  FinishTaskItem,
+  GetFutureTaskList,
+  GetSimpleTaskInfo
 }

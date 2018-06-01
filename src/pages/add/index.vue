@@ -39,7 +39,7 @@
   import tcTextarea from '../../components/textarea'
   import tcButton from '../../components/button'
   import {toast, jumpTo, showLoading, hideLoading} from '../../utils/wxUtils'
-  import {unix2utc, utc2unix} from '../../utils/utils'
+  import {unix2cst, cst2unix} from '../../utils/utils'
   import {CreateNewTask} from '../../api/API'
 
   export default {
@@ -143,12 +143,12 @@
         })
       },
       getTaskInfo () {
-        console.log(this.info.endDate.value + 'T' + this.info.startTime.value + ':00')
+        console.log(this.info.endDate.value + ' ' + this.info.startTime.value + ':00')
         try {
           this.taskInfo = {
             title: this.info.taskName.value,
-            startTime: utc2unix(this.info.startDate.value + 'T' + this.info.startTime.value + ':00'),
-            endTime: utc2unix(this.info.endDate.value + 'T' + this.info.endTime.value + ':00'),
+            startTime: cst2unix(this.info.startDate.value + ' ' + this.info.startTime.value + ':00'),
+            endTime: cst2unix(this.info.endDate.value + ' ' + this.info.endTime.value + ':00'),
             isPublic: !!this.info.public,
             maxPeople: this.info.players.data[this.info.players.value],
             items: this.info.taskList.map(item => {
@@ -178,9 +178,8 @@
         console.log(this.taskInfo)
         CreateNewTask(this.taskInfo)
           .then(res => {
-            console.log('提交任务成功')
             this.hidden = false
-            this.groupId = res.data.grouId
+            this.groupId = res.data.groupId
           })
           .catch(err => {
             toast('提交任务失败，请设置时间', 'none')
@@ -203,18 +202,18 @@
       },
       initDate () {
         this.info.startDate.value = '请设置'
-        this.info.startDate.start = unix2utc(Date.now())
-        this.info.startDate.end = unix2utc(Date.now() + 3600 * 1000 * 24 * 90)
+        this.info.startDate.start = unix2cst(Date.now())
+        this.info.startDate.end = unix2cst(Date.now() + 3600 * 1000 * 24 * 90)
 
-        this.info.endDate.start = unix2utc(Date.now())
+        this.info.endDate.start = unix2cst(Date.now())
         this.info.endDate.value = '请设置'
-        this.info.endDate.end = unix2utc(Date.now() + 3600 * 1000 * 24 * 90)
+        this.info.endDate.end = unix2cst(Date.now() + 3600 * 1000 * 24 * 90)
       },
       changeStartDate (value) {
         this.info.startDate.value = value
         this.info.endDate.value = value
         this.info.endDate.start = value
-        this.info.endDate.end = unix2utc(utc2unix(value) + 3600 * 1000 * 24 * 90)
+        this.info.endDate.end = unix2cst(cst2unix(value) + 3600 * 1000 * 24 * 90)
       },
       changeEndDate (value) {
         this.info.endDate.value = value
@@ -224,8 +223,6 @@
         this.info.endTime.value = '请设置'
         this.info.startTime.end = '22:59'
         this.info.endTime.end = '22:59'
-        // this.info.startTime.start = (new Date(Date.now())).getHours() + ':' + (new Date(Date.now())).getMinutes()
-        // this.info.endTime.start = this.info.startTime.start
       },
       changeStartTime (value) {
         this.info.startTime.value = value
@@ -264,7 +261,7 @@
     onShareAppMessage (options) {
       return {
         title: '一起来挑战吧',
-        path: `/pages/task/task?groupId=${this.groupId}&share=true`
+        path: `/pages/simpleTask/simpleTask?groupId=${this.groupId}&share=true`
       }
     },
     beforeMount () {

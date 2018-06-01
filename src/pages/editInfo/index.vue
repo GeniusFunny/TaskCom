@@ -63,7 +63,7 @@
 <script>
   import {GetUserInfo, UpdateUserInfo} from '../../api/API'
   import {getStorage, toast, jumpTo} from '../../utils/wxUtils'
-  import {normalizeTime, utc2unix} from '../../utils/utils'
+  import {normalizeTime, cst2unix} from '../../utils/utils'
 
   export default {
     data () {
@@ -142,7 +142,7 @@
           username: getStorage('nickName'),
           avatar: getStorage('avatar'),
           location: this.info.location,
-          birthday: utc2unix(this.info.birthday),
+          birthday: cst2unix(this.info.birthday),
           grade: this.info.grade,
           gender: this.info.gender,
           collage: this.info.collage

@@ -23,25 +23,19 @@ function debounce (fn, delay) {
     }, delay)
   }
 }
-function unix2utc (time) {
-  let date = new Date(time)
-  return date.getFullYear() + '-' + (parseInt(date.getMonth()) + 1) + '-' + date.getDate()
+function unix2cst (time) {
+  return (new Date(time)).toLocaleString('zh', {hour12: false})
 }
-function utc2unix (time) {
-  let date = new Date(time)
-  return date.getTime()
+function cst2unix (time) {
+  return (new Date(time)).getTime()
 }
 function normalizeTime (time) {
   return time.split('T')[0]
-}
-function normalizeTimeHours (time) {
-  return time.split('.')[0].replace(/T/, ' ').slice(0, -3)
 }
 export {
   throttle,
   debounce,
   normalizeTime,
-  normalizeTimeHours,
-  unix2utc,
-  utc2unix
+  unix2cst,
+  cst2unix
 }

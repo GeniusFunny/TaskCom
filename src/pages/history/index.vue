@@ -11,7 +11,7 @@
 <script>
   import { GetHistory } from '../../api/API'
   import history from '../../components/history'
-  import {normalizeTimeHours} from '../../utils/utils'
+  import {unix2cst} from '../../utils/utils'
   import {showLoading, hideLoading, toast, setStorage, jumpTo} from '../../utils/wxUtils'
 
   export default {
@@ -48,14 +48,15 @@
           return {
             ...item,
             hasFinished: !(item.unfinishedDay > 0),
-            endTime: normalizeTimeHours(item.endTime),
+            endTime: unix2cst(item.endTime),
             type: item.type === 1 ? 'daily' : 'multiPlayer'
           }
         })
       },
       getTaskMoreInfo (key) {
         setStorage('currentTaskId', parseInt(key))
-        jumpTo(`../task/task`)
+        setStorage('state', 'history')
+        jumpTo(`../simpleTask/simpleTask`)
       }
     },
     onReachBottom () {

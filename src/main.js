@@ -18,7 +18,9 @@ export default {
       'pages/add/add',
       'pages/find/find',
       'pages/editInfo/editInfo',
-      'pages/history/history'
+      'pages/history/history',
+      'pages/future/future',
+      'pages/simpleTask/simpleTask'
     ],
     window: {
       backgroundTextStyle: 'light',

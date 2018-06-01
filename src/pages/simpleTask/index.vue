@@ -2,18 +2,17 @@
   <div class="task">
     <infoItem :name="info.title.name" :value="info.title.value"/>
     <infoItem :name="info.date.name" :value="info.date.value"/>
-    <taskList type="finished" :taskList="info.finishedTaskList"/>
-    <taskList type="unfinished" :taskList="info.unfinishedTaskList" @changeTaskState="subTaskClick"/>
+    <taskList :taskList="info.TaskList"/>
     <avatarList v-if="info.isPublic" :avatarList="info.avatarList"/>
   </div>
 </template>
 
 <script>
-  import {showLoading, getStorage, hideLoading, modal} from '../../utils/wxUtils'
-  import {GetTaskInfo, FinishTaskItem} from '../../api/API'
+  import {showLoading, getStorage, hideLoading} from '../../utils/wxUtils'
+  import {GetSimpleTaskInfo} from '../../api/API'
   import {unix2cst} from '../../utils/utils'
   import infoItem from '../../components/infoitem'
-  import taskList from '../../components/taskList'
+  import taskList from '../../components/simpleTaskList'
   import avatarList from '../../components/avatarList'
 
   export default {
@@ -42,34 +41,14 @@
       avatarList
     },
     methods: {
-      subTaskClick (key) {
-        if (getStorage('state') === 'now') {
-          this.subTaskSubmit(key)
-        }
-      },
-      subTaskSubmit (key) {
-        modal('是否将当前任务标记为完成')
-          .then(res => {
-            this.subTaskChange(key)
-          })
-      },
-      subTaskChange (key) {
-        showLoading()
-        FinishTaskItem({groupId: this.info.groupId, itemId: key})
-          .then(() => {
-            hideLoading()
-            this.loadTaskList()
-          })
-      },
       loadTaskList () {
         showLoading()
-        GetTaskInfo(this.info.groupId)
+        GetSimpleTaskInfo(this.info.groupId)
           .then(res => {
             hideLoading()
-            this.info.unfinishedTaskList = res.data.unfinished
             this.info.date.value = unix2cst(res.data.summary.endTime)
             this.info.title.value = res.data.summary.title
-            this.info.finishedTaskList = res.data.finished
+            this.info.TaskList = res.data.items
             this.info.isPublic = false
             if (typeof res.data.members !== 'undefined') {
               this.info.isPublic = true
@@ -84,7 +63,6 @@
     },
     beforeMount () {
       this.info.groupId = getStorage('currentTaskId') || 0
-      console.log(this.$root.$mp.query)
       if (this.$root.$mp.query.hasOwnProperty('share')) {
         this.share = true
         this.info.groupId = this.$root.$mp.query.groupId
