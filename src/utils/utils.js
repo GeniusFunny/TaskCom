@@ -24,7 +24,7 @@ function debounce (fn, delay) {
   }
 }
 function unix2cst (time) {
-  return (new Date(time)).toLocaleString('zh', {hour12: false})
+  return (new Date((new Date(time)).getTime() + 8 * 3600 * 1000)).toJSON().replace(/T/, ' ').split('.')[0].slice(0, -3)
 }
 function cst2unix (time) {
   return (new Date(time)).getTime()
