@@ -29,7 +29,7 @@
   &-reputation {
     text-align: center;
     &-value {
-      @include config_font(54rpx, $normalFontColor);
+      @include config_font(45rpx, $normalFontColor);
       line-height: 40rpx;
       margin-bottom: 18rpx;
     }

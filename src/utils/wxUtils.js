@@ -83,16 +83,16 @@ const upLoad = (filePath, formData) => {
   })
 }
 const jumpTo = (url) => {
-  wx.navigateTo({
-    url: url,
-    fail: err => {
-      console.log(err)
-      wx.switchTab({
-        url: url,
-        fail: err => console.log(err)
-      })
-    }
-  })
+  let state = url.indexOf('personalCenter') !== -1 || url.indexOf('add') !== -1 || url.indexOf('find') !== -1
+  if (state) {
+    wx.switchTab({
+      url: url
+    })
+  } else {
+    wx.navigateTo({
+      url: url
+    })
+  }
 }
 export {
   toast,  //  提示窗

@@ -12,7 +12,9 @@
   padding-left: 34rpx;
   align-items: center;
   &-name {
+    width: 240rpx;
     @include config_font(32rpx, $problemFontColor);
+    margin-right: 10rpx;
   }
   &-score {
     @include config_font(48rpx, $problemFontColor);

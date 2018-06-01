@@ -11,7 +11,7 @@
 <script>
   import { GetHistory } from '../../api/API'
   import history from '../../components/history'
-  import {normalizeTime} from '../../utils/utils'
+  import {normalizeTimeHours} from '../../utils/utils'
   import {showLoading, hideLoading, toast, setStorage, jumpTo} from '../../utils/wxUtils'
 
   export default {
@@ -48,7 +48,7 @@
           return {
             ...item,
             hasFinished: !(item.unfinishedDay > 0),
-            endTime: normalizeTime(item.endTime),
+            endTime: normalizeTimeHours(item.endTime),
             type: item.type === 1 ? 'daily' : 'multiPlayer'
           }
         })

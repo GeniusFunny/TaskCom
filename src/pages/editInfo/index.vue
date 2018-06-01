@@ -63,7 +63,7 @@
 <script>
   import {GetUserInfo, UpdateUserInfo} from '../../api/API'
   import {getStorage, toast, jumpTo} from '../../utils/wxUtils'
-  import {unix2utc, utc2unix} from '../../utils/utils'
+  import {normalizeTime, utc2unix} from '../../utils/utils'
 
   export default {
     data () {
@@ -88,14 +88,19 @@
       getInfo () {
         GetUserInfo()
           .then(res => {
+            console.log(res)
             this.parseInfo(res.data.info)
+          })
+          .catch(err => {
+            toast('暂时无法获取个人信息', 'none')
+            console.error(err)
           })
       },
       parseInfo (data) {
         this.info = {
           gender: data.gender || 0,
           grade: data.grade || 0,
-          birthday: unix2utc(data.birthday) || '2018-12-31',
+          birthday: normalizeTime(data.birthday) || '2018-12-31',
           location: data.location || '陕西西安',
           collage: data.collage || '西安电子科技大学',
           avatar: getStorage('avatar')

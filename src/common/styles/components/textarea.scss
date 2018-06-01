@@ -4,6 +4,8 @@
 .tc-textarea {
   @include config_width_height(690rpx, 216rpx);
   @include config_columnBox();
+  box-sizing: border-box;
+  border-radius: 6rpx;
   background-color: #ffffff;
   margin-left: 30rpx;
   margin-top: 21rpx;

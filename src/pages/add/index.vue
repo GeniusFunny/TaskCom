@@ -12,6 +12,8 @@
           添加任务项，获得多倍积分<img class="add-addTaskItem-info-tag" src="/static/images/jifen.png"/>
         </div>
         <div class="add-info-margin"></div>
+        <tcInput :info="info.startDate" @changeStartDate="changeStartDate"/>
+        <tcInput :info="info.endDate" @changeEndDate="changeEndDate"/>
         <tcInput :info="info.startTime" @changeStartTime="changeStartTime"/>
         <tcInput :info="info.endTime" @changeEndTime="changeEndTime"/>
       </div>
@@ -50,18 +52,34 @@
             type: 'input',
             value: ''
           },
+          startDate: {
+            id: 'startDate',
+            name: '任务开始日期',
+            type: 'date',
+            value: '',
+            start: '',
+            end: ''
+          },
+          endDate: {
+            id: 'endDate',
+            name: '任务结束日期',
+            type: 'date',
+            value: '',
+            start: '',
+            end: ''
+          },
           startTime: {
             id: 'startTime',
-            name: '任务开始时间',
-            type: 'date',
+            name: '每日开始时间',
+            type: 'time',
             value: '',
             start: '',
             end: ''
           },
           endTime: {
             id: 'endTime',
-            name: '任务结束时间',
-            type: 'date',
+            name: '每日结束时间',
+            type: 'time',
             value: '',
             start: '',
             end: ''
@@ -125,11 +143,12 @@
         })
       },
       getTaskInfo () {
+        console.log(this.info.endDate.value + 'T' + this.info.startTime.value + ':00')
         try {
           this.taskInfo = {
             title: this.info.taskName.value,
-            startTime: utc2unix(this.info.startTime.value),
-            endTime: utc2unix(this.info.endTime.value),
+            startTime: utc2unix(this.info.startDate.value + 'T' + this.info.startTime.value + ':00'),
+            endTime: utc2unix(this.info.endDate.value + 'T' + this.info.endTime.value + ':00'),
             isPublic: !!this.info.public,
             maxPeople: this.info.players.data[this.info.players.value],
             items: this.info.taskList.map(item => {
@@ -155,10 +174,17 @@
         data.taskList = []
       },
       submitTask () {
+        console.log('提交任务')
+        console.log(this.taskInfo)
         CreateNewTask(this.taskInfo)
           .then(res => {
+            console.log('提交任务成功')
             this.hidden = false
             this.groupId = res.data.grouId
+          })
+          .catch(err => {
+            toast('提交任务失败，请设置时间', 'none')
+            console.error(err)
           })
       },
       createTask () {
@@ -176,18 +202,33 @@
         }
       },
       initDate () {
-        this.info.startTime.value = unix2utc(Date.now())
-        this.info.startTime.start = unix2utc(Date.now())
-        this.info.startTime.end = unix2utc(Date.now() + 3600 * 1000 * 24 * 90)
+        this.info.startDate.value = '请设置'
+        this.info.startDate.start = unix2utc(Date.now())
+        this.info.startDate.end = unix2utc(Date.now() + 3600 * 1000 * 24 * 90)
 
-        this.info.value = unix2utc(Date.now())
-        this.info.endTime.value = unix2utc(Date.now() + 3600 * 1000 * 24)
+        this.info.endDate.start = unix2utc(Date.now())
+        this.info.endDate.value = '请设置'
+        this.info.endDate.end = unix2utc(Date.now() + 3600 * 1000 * 24 * 90)
+      },
+      changeStartDate (value) {
+        this.info.startDate.value = value
+        this.info.endDate.value = value
+        this.info.endDate.start = value
+        this.info.endDate.end = unix2utc(utc2unix(value) + 3600 * 1000 * 24 * 90)
+      },
+      changeEndDate (value) {
+        this.info.endDate.value = value
+      },
+      initTime () {
+        this.info.startTime.value = '请设置'
+        this.info.endTime.value = '请设置'
+        this.info.startTime.end = '22:59'
+        this.info.endTime.end = '22:59'
+        // this.info.startTime.start = (new Date(Date.now())).getHours() + ':' + (new Date(Date.now())).getMinutes()
+        // this.info.endTime.start = this.info.startTime.start
       },
       changeStartTime (value) {
         this.info.startTime.value = value
-        this.info.endTime.value = unix2utc(utc2unix(value) + 3600 * 1000 * 24)
-        this.info.endTime.start = unix2utc(utc2unix(value) + 3600 * 1000 * 24)
-        this.info.endTime.end = unix2utc(utc2unix(value) + 3600 * 1000 * 24 * 90)
       },
       changeEndTime (value) {
         this.info.endTime.value = value
@@ -226,8 +267,9 @@
         path: `/pages/task/task?groupId=${this.groupId}&share=true`
       }
     },
-    onReady () {
+    beforeMount () {
       this.initDate()
+      this.initTime()
     },
     onShow () {
       showLoading()
