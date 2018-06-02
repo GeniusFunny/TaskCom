@@ -96,7 +96,7 @@ export default {
       jumpTo(this.menuUrl[key])
     }
   },
-  beforeMount () {
+  onLoad () {
     showLoading()
     GetUserInfo()
       .then(res => {

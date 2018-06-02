@@ -1,35 +1,39 @@
 <template>
   <div class="index">
+    <img src="/static/images/cover.png"/>
     <div>
-      <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo">授权</button>
+      <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo">
+        <img src="/static/images/button.png"/>
+        <div>授权进入</div>
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-  import {wxLogin, setStorage, jumpTo, showLoading, hideLoading} from '../../utils/wxUtils'
+  import {wxLogin, setStorage, jumpTo, toast} from '../../utils/wxUtils'
   import { Login } from '../../api/API'
   export default {
     methods: {
       bindGetUserInfo (e) {
-        showLoading()
         let info = JSON.parse(e.mp.detail.rawData)
         setStorage('nickName', info.nickName)
         setStorage('avatar', info.avatarUrl)
+        toast('登录ing')
         wxLogin()
           .then(res => {
             return Login(res.code)
           })
           .then(res => {
-            hideLoading()
-            if (res.data.isNew) {
-              jumpTo('../editInfo/editInfo')
-            } else {
-              jumpTo('../personalCenter/personalCenter')
-            }
+            setTimeout(() => {
+              if (res.data.isNew) {
+                jumpTo('../editInfo/editInfo')
+              } else {
+                jumpTo('../personalCenter/personalCenter')
+              }
+            }, 1000)
           })
           .catch(err => {
-            hideLoading()
             console.error(err)
           })
       }
