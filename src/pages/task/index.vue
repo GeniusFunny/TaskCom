@@ -11,7 +11,7 @@
 <script>
   import {showLoading, getStorage, hideLoading, modal} from '../../utils/wxUtils'
   import {GetTaskInfo, FinishTaskItem} from '../../api/API'
-  import {unix2cst} from '../../utils/utils'
+  import {normalizeTimeHours} from '../../utils/utils'
   import infoItem from '../../components/infoitem'
   import taskList from '../../components/taskList'
   import avatarList from '../../components/avatarList'
@@ -67,13 +67,16 @@
           .then(res => {
             hideLoading()
             this.info.unfinishedTaskList = res.data.unfinished
-            this.info.date.value = unix2cst(res.data.summary.endTime)
+            this.info.date.value = normalizeTimeHours(res.data.summary.endTime)
             this.info.title.value = res.data.summary.title
             this.info.finishedTaskList = res.data.finished
             this.info.isPublic = false
             if (typeof res.data.members !== 'undefined') {
               this.info.isPublic = true
-              this.avatarList = res.data.members
+              this.info.avatarList = res.data.members.map(item => ({
+                ...item,
+                username: item.username.length > 3 ? item.username.slice(0, 3) + '...' : item.username
+              }))
             }
           })
           .catch(err => {
@@ -84,7 +87,6 @@
     },
     beforeMount () {
       this.info.groupId = getStorage('currentTaskId') || 0
-      console.log(this.$root.$mp.query)
       if (this.$root.$mp.query.hasOwnProperty('share')) {
         this.share = true
         this.info.groupId = this.$root.$mp.query.groupId

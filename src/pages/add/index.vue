@@ -110,7 +110,7 @@
           }
         },
         taskInfo: {},
-        hidden: false,
+        hidden: true,
         groupId: 66366
       }
     },
@@ -143,7 +143,6 @@
         })
       },
       getTaskInfo () {
-        console.log(this.info.endDate.value + 'T' + this.info.startTime.value + ':00')
         try {
           this.taskInfo = {
             title: this.info.taskName.value,
@@ -172,14 +171,22 @@
         this.taskInfo = {}
         data.taskName.value = ''
         data.taskList = []
+        this.initDate()
+        this.initTime()
       },
       submitTask () {
-        console.log('提交任务')
-        console.log(this.taskInfo)
         CreateNewTask(this.taskInfo)
           .then(res => {
-            this.hidden = false
-            this.groupId = res.data.groupId
+            if (this.taskInfo.type === 0) {
+              this.hidden = false
+              this.groupId = res.data.groupId
+            } else {
+              toast('创建成功')
+              setTimeout(() => {
+                this.clearTask()
+                jumpTo('../personalCenter/personalCenter')
+              }, 1000)
+            }
           })
           .catch(err => {
             toast('提交任务失败，请设置时间', 'none')
@@ -226,6 +233,7 @@
       },
       changeStartTime (value) {
         this.info.startTime.value = value
+        this.info.endTime.start = value
       },
       changeEndTime (value) {
         this.info.endTime.value = value

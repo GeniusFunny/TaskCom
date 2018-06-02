@@ -19,7 +19,7 @@
 <script>
   import { GetFutureTaskList } from '../../api/API'
   import future from '../../components/future'
-  import {unix2cst} from '../../utils/utils'
+  import {normalizeTimeHours} from '../../utils/utils'
   import {setStorage, jumpTo} from '../../utils/wxUtils'
 
   export default {
@@ -41,7 +41,7 @@
       parseTaskList (data) {
         return data.map(item => ({
           ...item,
-          startTime: unix2cst(item.startTime),
+          startTime: normalizeTimeHours(item.startTime),
           type: item.type === 1 ? 'daily' : 'multiPlayer'
         }))
       },

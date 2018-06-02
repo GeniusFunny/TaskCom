@@ -41,6 +41,9 @@ const GetFutureTaskList = () => {
 const GetSimpleTaskInfo = (id) => {
   return ajax('/task/detail/simple', 'get_restful', {id: id})
 }
+const JoinTaskGroup = (id) => {
+  return ajax('/task/group/join', 'post', {groupId: id})
+}
 export {
   DownLoad,
   UpLoad,
@@ -55,5 +58,6 @@ export {
   GetTaskInfo,
   FinishTaskItem,
   GetFutureTaskList,
-  GetSimpleTaskInfo
+  GetSimpleTaskInfo,
+  JoinTaskGroup
 }

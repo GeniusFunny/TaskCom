@@ -12,6 +12,12 @@
         </div>
         <div class="editInfo-normalItem">
           <div>
+            昵称
+          </div>
+          <input class="editInfo-normalItem-value" type="text" placeholder="未设置" :value="info.username" @input="bindUsernameChange"/>
+        </div>
+        <div class="editInfo-normalItem">
+          <div>
             性别
           </div>
           <div class="editInfo-normalItem-img">
@@ -73,7 +79,8 @@
           birthday: '未设置',
           location: '未设置',
           grade: '未设置',
-          collage: '未设置'
+          collage: '未设置',
+          username: '未设置'
         },
         images: {
           man: '/static/images/man-1.png',
@@ -88,7 +95,6 @@
       getInfo () {
         GetUserInfo()
           .then(res => {
-            console.log(res)
             this.parseInfo(res.data.info)
           })
           .catch(err => {
@@ -103,7 +109,8 @@
           birthday: normalizeTime(data.birthday) || '2018-12-31',
           location: data.location || '陕西西安',
           collage: data.collage || '西安电子科技大学',
-          avatar: getStorage('avatar')
+          avatar: getStorage('avatar'),
+          username: data.username
         }
         this.getGender()
       },
@@ -128,6 +135,9 @@
       bindBirthdayChange (e) {
         this.info.birthday = e.target.value
       },
+      bindUsernameChange (e) {
+        this.info.username = e.target.value
+      },
       bindLocationChange (e) {
         this.info.location = e.target.value
       },
@@ -139,7 +149,7 @@
       },
       bindClickSubmit () {
         let data = {
-          username: getStorage('nickName'),
+          username: this.info.username,
           avatar: getStorage('avatar'),
           location: this.info.location,
           birthday: cst2unix(this.info.birthday),
@@ -156,7 +166,7 @@
           })
           .catch(err => {
             console.log(err)
-            toast('网络错误, 请稍后重试', 'none')
+            toast('用不要使用非法字符', 'none')
           })
       }
     },

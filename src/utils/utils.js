@@ -25,26 +25,24 @@ function debounce (fn, delay) {
 }
 function unix2cst (time) {
   let date
-  try {
-    date = (new Date((new Date(time)).getTime() + 8 * 3600 * 1000)).toJSON().replace(/T/, ' ').split('.')[0].slice(0, -3)
-  } catch (e) {
-    date = (new Date((new Date(time.split('.')[0])).getTime() + 8 * 3600 * 1000)).toJSON().replace(/T/, ' ').split('.')[0].slice(0, -3)
-  }
+  date = (new Date(time)).toJSON().replace(/T/, ' ').split('.')[0].slice(0, -3)
   return date
 }
 function cst2unix (time) {
-  console.log(time)
-  console.log(new Date(time))
-  console.log((new Date(time)).getTime())
   return (new Date(time)).getTime()
 }
 function normalizeTime (time) {
   return time.split('T')[0]
+}
+function normalizeTimeHours (time) {
+  console.log(time)
+  return time.split('.')[0].replace(/T/, ' ').slice(0, -3)
 }
 export {
   throttle,
   debounce,
   normalizeTime,
   unix2cst,
-  cst2unix
+  cst2unix,
+  normalizeTimeHours
 }

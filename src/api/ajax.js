@@ -1,6 +1,6 @@
 import Route from './mock/route'
 import {getStorage, setStorage} from '../utils/wxUtils'
-const BASEURL = 'http://hotpot.zhengsj.top'
+const BASEURL = 'https://hotpot.zhengsj.top'
 const DEBUG = false
 const methodsMap = {
   GET: (url, methods, data) => {
