@@ -59,10 +59,12 @@
         }
       },
       subTaskSubmit (key) {
-        modal('是否将当前任务标记为完成')
-          .then(res => {
-            this.subTaskChange(key)
-          })
+        if (this.info.currentUser === getStorage('userId')) {
+          modal('是否将当前任务标记为完成')
+            .then(res => {
+              this.subTaskChange(key)
+            })
+        }
       },
       subTaskChange (key) {
         showLoading()

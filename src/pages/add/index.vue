@@ -88,9 +88,9 @@
             id: 'players',
             name: '最大参与人数',
             type: 'picker',
-            value: 2,
+            value: 4,
             data: [
-              2, 3, 4, 5, 6, 7, 8
+              2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
             ]
           },
           taskList: [],
@@ -144,7 +144,7 @@
             title: this.info.taskName.value,
             startTime: cst2unix(this.info.startDate.value + 'T' + this.info.startTime.value + ':00'),
             endTime: cst2unix(this.info.endDate.value + 'T' + this.info.endTime.value + ':00'),
-            isPublic: !!this.info.public,
+            isPublic: !!this.info.isPublic,
             maxPeople: this.info.players.data[this.info.players.value],
             items: this.info.taskList.map(item => {
               return {
@@ -265,9 +265,6 @@
       },
       changePlayerNum (value) {
         this.info.players.value = value
-      },
-      shareToContacts (key) {
-        console.log(key)
       }
     },
     onShareAppMessage (options) {

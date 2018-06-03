@@ -28,7 +28,7 @@
         @include config_font(23rpx, $problemFontColor);
       }
       &-active {
-        border: 4rpx dotted #ffc53d;
+        border: 16rpx double #ffc53d;
       }
     }
   }

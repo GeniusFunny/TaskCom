@@ -38,7 +38,6 @@ function normalizeTime (time) {
   return time.split('T')[0]
 }
 function normalizeTimeHours (time) {
-  console.log(time)
   return time.split('.')[0].replace(/T/, ' ').slice(0, -3)
 }
 const parseToken = (token) => {

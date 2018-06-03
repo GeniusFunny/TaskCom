@@ -1,6 +1,6 @@
 <template>
   <div class="tc-avatarList" @click="avatarClick">
-    <div class="tc-avatarList-title">其他参与人员</div>
+    <div class="tc-avatarList-title">参与人员</div>
     <div class="tc-avatarList-body">
       <div class="tc-avatarList-body-item"
         v-for="(item, index) in avatarList"
