@@ -2,15 +2,20 @@
   <div class="task">
     <infoItem :name="info.title.name" :value="info.title.value"/>
     <infoItem :name="info.date.name" :value="info.date.value"/>
+    <infoItem :name="info.time.name" :value="info.time.value"/>
     <taskList type="finished" :taskList="info.finishedTaskList"/>
     <taskList type="unfinished" :taskList="info.unfinishedTaskList" @changeTaskState="subTaskClick"/>
-    <avatarList v-if="info.isPublic" :avatarList="info.avatarList"/>
+    <avatarList
+      v-if="info.isPublic"
+      :avatarList="info.avatarList"
+      @changeUserTaskInfo="changeCurrentUserTaskInfo"
+    />
   </div>
 </template>
 
 <script>
   import {showLoading, getStorage, hideLoading, modal} from '../../utils/wxUtils'
-  import {GetTaskInfo, FinishTaskItem} from '../../api/API'
+  import {GetTaskInfo, FinishTaskItem, GetOthersTaskInfo} from '../../api/API'
   import {normalizeTimeHours} from '../../utils/utils'
   import infoItem from '../../components/infoitem'
   import taskList from '../../components/taskList'
@@ -27,7 +32,11 @@
             value: ''
           },
           date: {
-            name: '截止日期',
+            name: '任务周期',
+            value: ''
+          },
+          time: {
+            name: '时间段',
             value: ''
           },
           unfinishedTaskList: [],
@@ -66,8 +75,11 @@
         GetTaskInfo(this.info.groupId)
           .then(res => {
             hideLoading()
+            let endTime = normalizeTimeHours(res.data.summary.endTime).split(' ')
+            let startTime = normalizeTimeHours(res.data.summary.startTime).split(' ')
             this.info.unfinishedTaskList = res.data.unfinished
-            this.info.date.value = normalizeTimeHours(res.data.summary.endTime)
+            this.info.date.value = startTime[0] + ' ~ ' + endTime[0]
+            this.info.time.value = startTime[1] + ' ~ ' + endTime[1]
             this.info.title.value = res.data.summary.title
             this.info.finishedTaskList = res.data.finished
             this.info.isPublic = false
@@ -81,6 +93,15 @@
           })
           .catch(err => {
             console.log(err)
+            hideLoading()
+          })
+      },
+      changeCurrentUserTaskInfo (key) {
+        showLoading()
+        GetOthersTaskInfo([this.info.groupId, key])
+          .then(res => {
+            this.info.finishedTaskList = res.data.finished
+            this.info.unfinishedTaskList = res.data.unfinished
             hideLoading()
           })
       }

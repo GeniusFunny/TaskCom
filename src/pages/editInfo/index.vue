@@ -14,7 +14,7 @@
           <div>
             昵称
           </div>
-          <input class="editInfo-normalItem-value" type="text" placeholder="未设置" :value="info.username" @input="bindUsernameChange"/>
+          <input class="editInfo-normalItem-value" type="text" placeholder="未设置" :value="info.username" maxlength="14" @input="bindUsernameChange"/>
         </div>
         <div class="editInfo-normalItem">
           <div>

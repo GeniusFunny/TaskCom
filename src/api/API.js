@@ -44,6 +44,12 @@ const GetSimpleTaskInfo = (id) => {
 const JoinTaskGroup = (id) => {
   return ajax('/task/group/join', 'post', {groupId: id})
 }
+const GetOthersTaskInfo = (ids) => {
+  return ajax('/task/group', 'get_restful2', ids)
+}
+const GetTaskVillage = (id) => {
+  return ajax('/task/village', 'get_restful', {id: id})
+}
 export {
   DownLoad,
   UpLoad,
@@ -59,5 +65,7 @@ export {
   FinishTaskItem,
   GetFutureTaskList,
   GetSimpleTaskInfo,
-  JoinTaskGroup
+  JoinTaskGroup,
+  GetOthersTaskInfo,
+  GetTaskVillage
 }

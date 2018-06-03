@@ -1,32 +1,36 @@
 import Route from './mock/route'
 import {getStorage, setStorage} from '../utils/wxUtils'
+import {parseToken} from '../utils/utils'
+
 const BASEURL = 'https://hotpot.zhengsj.top'
 const DEBUG = false
 const methodsMap = {
-  GET: (url, methods, data) => {
+  GET: (url, methods, data) => ({
+    url: `${BASEURL}${url}`,
+    method: methods
+  }),
+  GET_RESTFUL: (url, methods, data) => ({
+    url: `${BASEURL}${url}/${data.id}`,
+    method: 'GET'
+  }),
+  POST: (url, methods, data) => ({
+    url: `${BASEURL}${url}`,
+    method: methods,
+    data: data
+  }),
+  PUT: (url, methods, data) => ({
+    url: `${BASEURL}${url}`,
+    method: methods,
+    data: data
+  }),
+  GET_RESTFUL2: (url, methods, data) => {
+    let str = ''
+    data.forEach(item => {
+      str += `/${item}`
+    })
     return {
-      url: `${BASEURL}${url}`,
-      method: methods
-    }
-  },
-  GET_RESTFUL: (url, methods, data) => {
-    return {
-      url: `${BASEURL}${url}/${data.id}`,
-      method: 'GET'
-    }
-  },
-  POST: (url, methods, data) => {
-    return {
-      url: `${BASEURL}${url}`,
-      method: methods,
-      data: data
-    }
-  },
-  PUT: (url, methods, data) => {
-    return {
-      url: `${BASEURL}${url}`,
-      method: methods,
-      data: data
+      url: `${BASEURL}${url}${str}`,
+      methods: 'GET'
     }
   }
 }
@@ -46,6 +50,7 @@ const ajax = (url, methods = 'GET', data = {}, headers = {'Content-Type': 'appli
         success: (res) => {
           if (typeof res.data !== 'undefined' && typeof res.data.data !== 'undefined' && res.data.data.token) {
             setStorage('token', res.data.data.token)
+            parseToken(res.data.data.token)
           }
           if (typeof res.data !== 'undefined' && res.data.status === 0) {
             resolve(res.data)

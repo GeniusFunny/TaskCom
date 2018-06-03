@@ -1,11 +1,11 @@
 <template>
   <div class="task">
     <infoItem :name="info.title.name" :value="info.title.value"/>
-    <infoItem :name="info.startTime.name" :value="info.startTime.value"/>
-    <infoItem :name="info.endTime.name" :value="info.endTime.value"/>
+    <infoItem :name="info.date.name" :value="info.date.value"/>
+    <infoItem :name="info.time.name" :value="info.time.value"/>
     <taskList :taskList="info.TaskList"/>
     <avatarList v-if="info.isPublic" :avatarList="info.avatarList"/>
-    <div v-if="info.share" class="tc-button" style="margin-left: -30rpx; position: fixed; bottom: 0" @click="joinTaskGroup">
+    <div v-if="info.share" class="tc-button" style="margin-left: -30rpx; margin-top: 30rpx; position: relative; top: 250rpx;" @click="joinTaskGroup">
       <img src="/static/images/button.png"/>
       <div class="tc-button-info">
         加入
@@ -32,12 +32,12 @@
             name: '任务名称',
             value: ''
           },
-          startTime: {
-            name: '开始时间',
+          date: {
+            name: '任务周期',
             value: ''
           },
-          endTime: {
-            name: '截止时间',
+          time: {
+            name: '时间段',
             value: ''
           },
           unfinishedTaskList: [],
@@ -58,8 +58,10 @@
         GetSimpleTaskInfo(this.info.groupId)
           .then(res => {
             hideLoading()
-            this.info.endTime.value = normalizeTimeHours(res.data.summary.endTime)
-            this.info.startTime.value = normalizeTimeHours(res.data.summary.startTime)
+            let endTime = normalizeTimeHours(res.data.summary.endTime).split(' ')
+            let startTime = normalizeTimeHours(res.data.summary.startTime).split(' ')
+            this.info.date.value = startTime[0] + ' ~ ' + endTime[0]
+            this.info.time.value = startTime[1] + ' ~ ' + endTime[1]
             this.info.title.value = res.data.summary.title
             this.info.TaskList = res.data.items
             this.info.isPublic = false
@@ -81,9 +83,6 @@
           .then(res => {
             console.log(res)
             toast('加入当前任务组')
-            setTimeout(() => {
-              jumpTo('../index/index')
-            }, 1000)
           })
           .catch(err => {
             try {
@@ -95,11 +94,12 @@
               } else if (code === 3) {
                 toast('你已在当前任务组', 'none')
               }
-              setTimeout(() => {
-                jumpTo('../index/index')
-              }, 1500)
+              if (!this.$root.$mp.query.hasOwnProperty('inApp')) {
+                setTimeout(() => {
+                  jumpTo('../index/index')
+                }, 1500)
+              }
             } catch (e) {
-              console.log(e)
               modal('您尚未注册，是否前往注册？')
                 .then(res => {
                   jumpTo('../index/index')
@@ -108,7 +108,7 @@
           })
       }
     },
-    beforeMount () {
+    onLoad () {
       this.info.groupId = getStorage('currentTaskId') || 0
       if (this.$root.$mp.query.hasOwnProperty('share')) {
         this.info.share = true

@@ -4,12 +4,12 @@
       <tab :type="info.type" @changeTaskType="changeTaskType"/>
       <div>
         <tcInput :info="info.taskName" @changeTaskName="changeTaskName"/>
-        <tcTextarea v-for="(item, index) in info.taskList" :info="item" :key="item.id" :index="index" @changeTaskItemContent="changeTaskItemContent"/>
+        <tcTextarea v-for="(item, index) in info.taskList" :info="item" :key="item.id" :index="index" @changeTaskItemContent="changeTaskItemContent" @deleteTaskItem="deleteTaskItem"/>
         <div class="add-addTaskItem">
           <img src="/static/images/addButton.png" @click="addSubTask" id="img"/>
         </div>
         <div class="add-addTaskItem-info">
-          添加任务项，获得多倍积分<img class="add-addTaskItem-info-tag" src="/static/images/jifen.png"/>
+          添加任务项，获得多倍积分, 完成后次日到账<img class="add-addTaskItem-info-tag" src="/static/images/jifen.png"/>
         </div>
         <div class="add-info-margin"></div>
         <tcInput :info="info.startDate" @changeStartDate="changeStartDate"/>
@@ -28,17 +28,17 @@
         创建任务
       </div>
     </div>
-    <modal @shareTask="shareTask" :hidden="hidden"/>
+    <Modal @shareTask="shareTask" :hidden="hidden"/>
   </div>
 </template>
 
 <script>
   import tab from '../../components/tab'
-  import modal from '../../components/modal'
+  import Modal from '../../components/modal'
   import tcInput from '../../components/input'
   import tcTextarea from '../../components/textarea'
   import tcButton from '../../components/button'
-  import {toast, jumpTo, showLoading, hideLoading} from '../../utils/wxUtils'
+  import {toast, jumpTo, showLoading, hideLoading, modal} from '../../utils/wxUtils'
   import {unix2cst, cst2unix} from '../../utils/utils'
   import {CreateNewTask} from '../../api/API'
 
@@ -93,12 +93,7 @@
               2, 3, 4, 5, 6, 7, 8
             ]
           },
-          taskList: [
-            {
-              id: 1,
-              value: ''
-            }
-          ],
+          taskList: [],
           public: {
             id: 'isPublic',
             name: '是否公开',
@@ -111,7 +106,8 @@
         },
         taskInfo: {},
         hidden: true,
-        groupId: 66366
+        groupId: 66366,
+        itemId: 1
       }
     },
     components: {
@@ -119,7 +115,7 @@
       tcInput,
       tcTextarea,
       tcButton,
-      modal
+      Modal
     },
     methods: {
       changeTaskType (type) {
@@ -127,7 +123,7 @@
       },
       addSubTask (e) {
         this.info.taskList.push({
-          id: this.info.taskList.length + 1,
+          id: this.itemId++,
           value: ''
         })
       },
@@ -195,7 +191,10 @@
       },
       createTask () {
         if (this.checkTaskName() && this.checkTaskInfo()) {
-          this.getTaskInfo().submitTask()
+          modal('是否立即提交？')
+            .then(res => {
+              this.getTaskInfo().submitTask()
+            })
         } else {
           toast('请填写相关信息', 'none')
         }
@@ -228,18 +227,23 @@
       initTime () {
         this.info.startTime.value = '请设置'
         this.info.endTime.value = '请设置'
-        this.info.startTime.end = '22:59'
-        this.info.endTime.end = '22:59'
       },
       changeStartTime (value) {
         this.info.startTime.value = value
         this.info.endTime.start = value
+        if (this.info.startTime.value !== '请设置' && this.info.endTime.value < this.info.startTime.value) {
+          this.info.endTime.value = value
+        }
       },
       changeEndTime (value) {
         this.info.endTime.value = value
+        this.info.startTime.end = value
       },
       changeTaskName (value) {
         this.info.taskName.value = value
+      },
+      deleteTaskItem (key) {
+        this.info.taskList = this.info.taskList.filter(item => item.id !== key)
       },
       changeTaskItemContent (key, value) {
         let index = this.findTask(key)

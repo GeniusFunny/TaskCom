@@ -1,3 +1,6 @@
+import { b64utoutf8 } from 'jsrsasign'
+import {setStorage} from './wxUtils'
+
 /*  函数节流  */
 function throttle (fn, delay) {
   let prev = Date.now()
@@ -38,11 +41,18 @@ function normalizeTimeHours (time) {
   console.log(time)
   return time.split('.')[0].replace(/T/, ' ').slice(0, -3)
 }
+const parseToken = (token) => {
+  // 小程序不支持atob，所有引入了jsrsasign库的 b64utoutf8
+  let info = JSON.parse(b64utoutf8(token.split('.')[1]))
+  setStorage('exp', info.exp * 1000)
+  setStorage('userId', info.userId)
+}
 export {
   throttle,
   debounce,
   normalizeTime,
   unix2cst,
   cst2unix,
-  normalizeTimeHours
+  normalizeTimeHours,
+  parseToken
 }

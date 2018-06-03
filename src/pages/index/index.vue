@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import {wxLogin, setStorage, jumpTo, toast} from '../../utils/wxUtils'
+  import {wxLogin, setStorage, jumpTo, showLoading, hideLoading} from '../../utils/wxUtils'
   import { Login } from '../../api/API'
   export default {
     methods: {
@@ -19,19 +19,20 @@
         let info = JSON.parse(e.mp.detail.rawData)
         setStorage('nickName', info.nickName)
         setStorage('avatar', info.avatarUrl)
-        toast('登录ing')
+        showLoading()
         wxLogin()
           .then(res => {
             return Login(res.code)
           })
           .then(res => {
+            hideLoading()
             setTimeout(() => {
               if (res.data.isNew) {
                 jumpTo('../editInfo/editInfo')
               } else {
                 jumpTo('../personalCenter/personalCenter')
               }
-            }, 1000)
+            }, 500)
           })
           .catch(err => {
             console.error(err)

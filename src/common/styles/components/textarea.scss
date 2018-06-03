@@ -21,4 +21,10 @@
     @include config_width_height(615rpx, 76rpx);
     margin-left: 45rpx;
   }
+  img {
+    @include config_width_height(50rpx, 56rpx);
+    position: relative;
+    right: -665rpx;
+    top: -185rpx;
+  }
 }

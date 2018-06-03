@@ -40,4 +40,62 @@
       }
     }
   }
+  &-village {
+    margin-top: 33rpx;
+    &-item {
+      margin-bottom: 33rpx;
+      &-tag {
+        @include config_font(24rpx, $problemFontColor);
+        margin-left: 30rpx;
+        img {
+          @include config_width_height(80rpx, 80rpx);
+          border-radius: 50%;
+          margin-bottom: -30rpx;
+          margin-right: 10rpx;
+        }
+      }
+      &-content {
+        @include config_width_height(690rpx, 176rpx);
+        box-sizing: border-box;
+        border-radius: 6rpx;
+        padding-top: 45rpx;
+        padding-left: 31rpx;
+        padding-right: 31rpx;
+        background-color: #ffffff;
+        &-title {
+          @include config_font(32rpx, $problemFontColor);
+          line-height: 31rpx;
+          margin-bottom: 23rpx;
+        }
+        &-time {
+          @include config_font(24rpx, $reminderFontColor);
+          line-height: 19rpx;
+        }
+        &-members {
+          &-count {
+            @include config_width_height(56rpx, 56rpx);
+            margin-left: 10rpx;
+            display: inline-block;
+            border-radius: 50%;
+            background-color: rgba(255, 192, 63, 0.2);
+            float: right;
+            div {
+              @include config_columnBox();
+              justify-content: center;
+              align-items: center;
+              @include config_font(24rpx, #ffc53d);
+              padding-top: 19rpx;
+              line-height: 19rpx;
+            }
+          }
+          img {
+            @include config_width_height(56rpx, 56rpx);
+            border-radius: 50%;
+            float: right;
+            margin-left: 10rpx;
+          }
+        }
+      }
+    }
+  }
 }

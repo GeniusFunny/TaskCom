@@ -3,9 +3,9 @@
     <div
       class="tc-tab-item"
       :class="[
-        type === 'taskCircle' ? 'tc-tab-item-active' : ''
+        type === 'village' ? 'tc-tab-item-active' : ''
       ]"
-      id="taskCircle"
+      id="village"
     >任务村</div>
     <div
       class="tc-tab-item"
@@ -19,20 +19,14 @@
 
 <script>
   export default {
-    data () {
-      return {
-        data: {}
-      }
-    },
     props: {
       type: {
         type: String,
-        default: 'taskCircle'
+        default: 'village'
       }
     },
     methods: {
       tabClick (e) {
-        console.log(e.target.id)
         this.$emit('changeTab', e.target.id)
       }
     }

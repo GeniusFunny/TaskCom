@@ -1,9 +1,12 @@
 <template>
-  <div class="tc-avatarList">
+  <div class="tc-avatarList" @click="avatarClick">
     <div class="tc-avatarList-title">其他参与人员</div>
     <div class="tc-avatarList-body">
-      <div class="tc-avatarList-body-item" v-for="(item, index) in avatarList" :key="index">
-        <img  :src="item.avatar"/>
+      <div class="tc-avatarList-body-item"
+        v-for="(item, index) in avatarList"
+        :key="index"
+      >
+        <img  :src="item.avatar" :id="item.userId"/>
         <div class="tc-avatarList-body-item-name">{{item.username}}</div>
       </div>
     </div>
@@ -29,6 +32,13 @@
             username: 'aaa'
           }
         ]
+      }
+    },
+    methods: {
+      avatarClick (e) {
+        if (e.target.id) {
+          this.$emit('changeUserTaskInfo', e.target.id)
+        }
       }
     }
   }

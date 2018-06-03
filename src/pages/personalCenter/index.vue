@@ -73,7 +73,7 @@ export default {
     },
     parseTaskList (data) {
       data.forEach(item => {
-        item.endTime = normalizeTimeHours(item.endTime)
+        item.endTime = normalizeTimeHours(item.endTime).split(' ')[1]
         item.type = item.type === 0 ? 'multiPlayer' : 'daily'
       })
       this.taskList = data
