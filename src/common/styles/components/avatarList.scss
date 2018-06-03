@@ -20,11 +20,15 @@
       @include config_columnBox_middle();
       margin-left: 31rpx;
       img {
+        box-sizing: border-box;
         @include config_width_height(88rpx, 88rpx);
         border-radius: 50%;
       }
       &-name {
         @include config_font(23rpx, $problemFontColor);
+      }
+      &-active {
+        border: 4rpx dotted #ffc53d;
       }
     }
   }

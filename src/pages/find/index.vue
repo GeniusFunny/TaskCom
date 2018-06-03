@@ -28,10 +28,10 @@
           <div class="find-village-item-content-members">
             <div v-if="item.members.length > 3" class="find-village-item-content-members-count">
               <div>
-                {{item.members.length - 3}}
+                +{{item.members.length - 3}}
               </div>
             </div>
-            <img v-for="(item2, index2) in item.members" :src="item2.avatar" :key="index2" />
+            <img v-for="(item2, index2) in item.members" :src="item2.avatar" :key="index2" v-if="index2 <= 2"/>
           </div>
         </div>
       </div>

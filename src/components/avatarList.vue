@@ -6,7 +6,11 @@
         v-for="(item, index) in avatarList"
         :key="index"
       >
-        <img  :src="item.avatar" :id="item.userId"/>
+        <img
+          :src="item.avatar"
+          :id="item.userId"
+          :class="[currentUser === item.userId? 'tc-avatarList-body-item-active' : '']"
+        />
         <div class="tc-avatarList-body-item-name">{{item.username}}</div>
       </div>
     </div>
@@ -16,6 +20,9 @@
 <script>
   export default {
     props: {
+      currentUser: {
+        type: Number
+      },
       avatarList: {
         type: Array,
         default: [
@@ -37,7 +44,7 @@
     methods: {
       avatarClick (e) {
         if (e.target.id) {
-          this.$emit('changeUserTaskInfo', e.target.id)
+          this.$emit('changeUserTaskInfo', parseInt(e.target.id))
         }
       }
     }

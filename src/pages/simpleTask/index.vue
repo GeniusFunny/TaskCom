@@ -1,11 +1,13 @@
 <template>
-  <div class="task">
-    <infoItem :name="info.title.name" :value="info.title.value"/>
-    <infoItem :name="info.date.name" :value="info.date.value"/>
-    <infoItem :name="info.time.name" :value="info.time.value"/>
-    <taskList :taskList="info.TaskList"/>
-    <avatarList v-if="info.isPublic" :avatarList="info.avatarList"/>
-    <div v-if="info.share" class="tc-button" style="margin-left: -30rpx; margin-top: 30rpx; position: relative; top: 250rpx;" @click="joinTaskGroup">
+  <div>
+    <div class="task" style="min-height: 87vh">
+      <infoItem :name="info.title.name" :value="info.title.value"/>
+      <infoItem :name="info.date.name" :value="info.date.value"/>
+      <infoItem :name="info.time.name" :value="info.time.value"/>
+      <taskList :taskList="info.TaskList"/>
+      <avatarList v-if="info.isPublic" :avatarList="info.avatarList"/>
+    </div>
+    <div v-if="info.share !== undefined && info.share" class="tc-button" @click="joinTaskGroup">
       <img src="/static/images/button.png"/>
       <div class="tc-button-info">
         加入
@@ -109,12 +111,17 @@
       }
     },
     onLoad () {
+      this.info.share = false
       this.info.groupId = getStorage('currentTaskId') || 0
       if (this.$root.$mp.query.hasOwnProperty('share')) {
         this.info.share = true
         this.info.groupId = this.$root.$mp.query.groupId
       }
       this.loadTaskList()
+    },
+    onUnload () {
+      console.log('卸载')
+      this.info.share = false
     }
   }
 </script>

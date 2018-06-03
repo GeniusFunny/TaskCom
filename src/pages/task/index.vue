@@ -9,6 +9,7 @@
       v-if="info.isPublic"
       :avatarList="info.avatarList"
       @changeUserTaskInfo="changeCurrentUserTaskInfo"
+      :currentUser="info.currentUser"
     />
   </div>
 </template>
@@ -41,7 +42,8 @@
           },
           unfinishedTaskList: [],
           finishedTaskList: [],
-          avatarList: []
+          avatarList: [],
+          currentUser: getStorage('userId') || 0
         }
       }
     },
@@ -100,6 +102,7 @@
         showLoading()
         GetOthersTaskInfo([this.info.groupId, key])
           .then(res => {
+            this.info.currentUser = key
             this.info.finishedTaskList = res.data.finished
             this.info.unfinishedTaskList = res.data.unfinished
             hideLoading()
@@ -113,6 +116,9 @@
         this.info.groupId = this.$root.$mp.query.groupId
       }
       this.loadTaskList()
+    },
+    onUnload () {
+      this.info.currentUser = getStorage('userId')
     }
   }
 </script>
