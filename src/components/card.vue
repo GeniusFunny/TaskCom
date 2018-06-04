@@ -7,11 +7,11 @@
       </div>
       <div class="tc-card-reputationGroup">
         <div class="tc-card-reputation tc-card-reputationGroup-firstChild">
-          <div class="tc-card-reputation-value">{{daily}}</div>
+          <div class="tc-card-reputation-value" @click="scoreClick" id="1">{{daily}}</div>
           <div class="tc-card-reputation-name">个人</div>
         </div>
         <div class="tc-card-reputation">
-          <div class="tc-card-reputation-value">{{contend}}</div>
+          <div class="tc-card-reputation-value" @click="scoreClick" id="0">{{contend}}</div>
           <div class="tc-card-reputation-name">多人</div>
         </div>
       </div>
@@ -21,7 +21,12 @@
 
 <script>
 export default {
-  props: ['avatar', 'contend', 'nickName', 'daily']
+  props: ['avatar', 'contend', 'nickName', 'daily'],
+  methods: {
+    scoreClick (e) {
+      this.$emit('getMoreScoreInfo', e.target.id)
+    }
+  }
 }
 </script>
 

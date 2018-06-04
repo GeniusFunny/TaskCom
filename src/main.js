@@ -20,7 +20,8 @@ export default {
       'pages/editInfo/editInfo',
       'pages/history/history',
       'pages/future/future',
-      'pages/simpleTask/simpleTask'
+      'pages/simpleTask/simpleTask',
+      'pages/scoreHistory/scoreHistory'
     ],
     window: {
       backgroundTextStyle: 'light',

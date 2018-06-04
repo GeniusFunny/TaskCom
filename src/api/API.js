@@ -50,6 +50,9 @@ const GetOthersTaskInfo = (ids) => {
 const GetTaskVillage = () => {
   return ajax('/task/village', 'get')
 }
+const GetScoreHistory = (ids) => {
+  return ajax('/user/score/history', 'get_restful2', ids)
+}
 export {
   DownLoad,
   UpLoad,
@@ -67,5 +70,6 @@ export {
   GetSimpleTaskInfo,
   JoinTaskGroup,
   GetOthersTaskInfo,
-  GetTaskVillage
+  GetTaskVillage,
+  GetScoreHistory
 }

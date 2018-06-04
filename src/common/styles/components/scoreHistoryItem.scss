@@ -1,0 +1,38 @@
+@import '../helpers/_mixins';
+@import "../helpers/_variables";
+
+.tc-historyScore-item {
+  background-color: #ffffff;
+  margin-bottom: 23rpx;
+  @include config_width_height(690rpx, 128rpx);
+  @include config_rowBox();
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 6rpx;
+  padding:24rpx 30rpx 16rpx 30rpx;
+  &-tag {
+    margin-right: 38rpx;
+    img {
+      @include config_width_height(88rpx, 88rpx);
+      border-radius: 50%;
+    }
+  }
+  &-content {
+    @include config_columnBox();
+    &-title {
+      @include config_font(28rpx, $problemFontColor);
+      line-height: 30rpx;
+      margin-bottom: 10rpx;
+    }
+    &-time {
+      @include config_font(24rpx, $reminderFontColor);
+      line-height: 18rpx;
+    }
+  }
+  &-score {
+    position: absolute;
+    margin-top: -8rpx;
+    right: 60rpx;
+    @include config_font(36rpx, $problemFontColor);
+  }
+}

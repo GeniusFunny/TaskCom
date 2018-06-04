@@ -1,0 +1,8 @@
+@import "../helpers/_variables";
+@import "../helpers/_mixins";
+
+.scoreHistory {
+  min-height: 100vh;
+  background-color: $themeColor;
+  padding: 30rpx;
+}

@@ -4,7 +4,7 @@
     <div class="personalCenter-menu">
       <img class="personalCenter-menu-icon" src="/static/images/menu.png" @click="changeSideBarVisible"/>
     </div>
-    <card :avatar="userInfo.avatar" :contend="userInfo.contend" :nickName="userInfo.username" :daily="userInfo.daily"/>
+    <card :avatar="userInfo.avatar" :contend="userInfo.contend" :nickName="userInfo.username" :daily="userInfo.daily" @getMoreScoreInfo="getMoreScoreInfo"/>
     <div class="personalCenter-task">
       <div class="personalCenter-task-tag">
         <img src="/static/images/task.png" />
@@ -94,6 +94,9 @@ export default {
     },
     clickMenuItem (key) {
       jumpTo(this.menuUrl[key])
+    },
+    getMoreScoreInfo (key) {
+      jumpTo(`../scoreHistory/scoreHistory?type=${key}`)
     }
   },
   onLoad () {
