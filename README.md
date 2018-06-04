@@ -1,5 +1,5 @@
 # TaskCompetition
-![](https://img.shields.io/badge/mpvue-framework-brightgreen.svg)   ![](https://img.shields.io/badge/eslint-standard-green.svg)   ![Bitbucket Pipelines branch](https://img.shields.io/bitbucket/pipelines/atlassian/adf-builder-javascript/task/SECO-2168.svg)
+![](https://img.shields.io/badge/mpvue-framework-brightgreen.svg)   ![](https://img.shields.io/badge/eslint-standard-green.svg)
 
 > 一个伙伴之间相互监督任务的轻平台
 
@@ -25,7 +25,7 @@
 
 ```
 ## 开发进展
-当前为0.3.3版
+当前为0.5.1版
 
 - [x] 项目搭建
 - [x] 登录注册模块
@@ -64,6 +64,6 @@ $ npm run build --report
 ```
 
 ## 体验
-[![gh_86f2f6598eb3_860.jpg](https://i.loli.net/2018/06/04/5b14cd56823cf.jpg)](微信搜索小程序TaskCom)
+![gh_86f2f6598eb3_860.jpg](https://i.loli.net/2018/06/04/5b14e6af4c572.jpg)
 
 
