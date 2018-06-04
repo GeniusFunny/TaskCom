@@ -134,6 +134,16 @@ export default {
         wx.stopPullDownRefresh()
         console.log(err)
       })
+  },
+  onShow () {
+    GetUserInfo()
+      .then(res => {
+        this.userInfo.username = res.data.info.username
+        return GetCurrentTask()
+      })
+      .then(res => {
+        this.parseTaskList(res.data.groups)
+      })
   }
 }
 </script>

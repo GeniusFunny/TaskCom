@@ -17,10 +17,8 @@
       :hidden="info.type !== 'village'"
       class="find-village"
       @click="getTaskMoreInfo"
-      @touchstart="touchEventStart"
-      @touchmove="touchEventMove"
-      @touchend="touchEventEnd"
     >
+      <div style="text-align: center; font-size: 18rpx; color: #997625;">每次下拉都有不同的体验</div>
       <div v-for="(item, index) in villageTaskList" class="find-village-item" :key="index">
         <div class="find-village-item-tag">
           <img :src="item.sponsorAvatar"/>
@@ -138,17 +136,17 @@
       }
       setTimeout(() => {
         wx.stopPullDownRefresh()
-      }, 1500)
+      }, 700)
     },
     onReachBottom () {
       if (this.info.type === 'rank') {
         if (this.rankPage <= this.rankPageSum && this.rankPage < 10) {
-          showLoading('加载更多的小伙伴')
+          showLoading('加载更多伙伴')
           GetRank(this.rankPage)
             .then(res => {
               setTimeout(() => {
                 hideLoading()
-              }, 1000)
+              }, 700)
               this.rankPage++
               this.rankPageSum = res.data.pageSum
               this.rankList.rest = this.rankList.rest.concat(res.data.rank)

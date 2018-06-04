@@ -2,6 +2,9 @@
   <div class="history">
     <div class="history-task">
       <div>
+        <div v-if="taskList.length === 0" style="color: #997625; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 28rpx;">
+          小主，这里是空的。
+        </div>
         <future
           v-for="(item, index) in taskList"
           :key="index"
@@ -57,7 +60,7 @@
         wx.stopPullDownRefresh()
       }, 1000)
     },
-    beforeMount () {
+    onLoad () {
       this.getFutureTaskList()
     }
   }

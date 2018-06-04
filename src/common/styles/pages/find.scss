@@ -42,9 +42,9 @@
     }
   }
   &-village {
-    margin-top: 33rpx;
+    margin-top: 13rpx;
     &-item {
-      margin-bottom: 33rpx;
+      margin-bottom: 15rpx;
       &-tag {
         @include config_font(24rpx, $problemFontColor);
         margin-left: 30rpx;

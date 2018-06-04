@@ -10,7 +10,7 @@
     <div v-if="info.share !== undefined && info.share" class="tc-button" @click="joinTaskGroup">
       <img src="/static/images/button.png"/>
       <div class="tc-button-info">
-        加入
+        {{buttonContent || '加入'}}
       </div>
     </div>
     <div v-if="!info.share" class="tc-button" @click="clickShare" style="background-color: #ffc53d; min-height: 13vh;">
@@ -53,7 +53,8 @@
           avatarList: []
         },
         hidden: true,
-        share: false
+        share: false,
+        buttonContent: '加入'
       }
     },
     components: {
@@ -80,6 +81,9 @@
                 ...item,
                 username: item.username.length > 3 ? item.username.slice(0, 3) + '...' : item.username
               }))
+              if (this.info.avatarList.findIndex(item => item.userId === getStorage('userId')) !== -1) {
+                this.buttonContent = '已加入'
+              }
             }
           })
           .catch(err => {
@@ -91,6 +95,9 @@
           })
       },
       joinTaskGroup () {
+        if (this.buttonContent === '已加入') {
+          return 0
+        }
         JoinTaskGroup(this.info.groupId)
           .then(res => {
             this.loadTaskList()
@@ -129,8 +136,8 @@
       this.loadTaskList()
     },
     onUnload () {
-      console.log('卸载')
       this.info.share = false
+      this.buttonContent = '加入'
     }
   }
 </script>

@@ -2,6 +2,7 @@
   <div class="history">
     <div class="history-task">
       <div>
+        <div v-if="taskList.length === 0" style="color: #997625; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">小主，这里是空的。</div>
         <history v-for="task in taskList" :key="task.groupId" :taskName="task.title" :deadLine="task.endTime" :type="task.type"  :finishedPlayerNum="task.finishedPeople" :hasFinished="task.hasFinished" :id="task.groupId" @task="getTaskMoreInfo"/>
       </div>
     </div>
