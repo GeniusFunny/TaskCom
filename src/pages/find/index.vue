@@ -1,8 +1,9 @@
 <template>
   <div class="find">
     <tab :type="info.type" @changeTab="changeTab"/>
-
-    <rankItem v-if="info.type === 'rank'" v-for="(item, index) in rankList.top3" :username="item.username" :score="item.peopleScore" :position="index + 1" :avatar="item.avatar" :key="index" />
+    <div :hidden="info.type !== undefined && info.type === 'village'">
+      <rankItem v-for="(item, index) in rankList.top3" :username="item.username" :score="item.peopleScore" :position="index + 1" :avatar="item.avatar" :key="index" />
+    </div>
 
     <div :hidden="info.type !== undefined && info.type === 'village'" class="find-restRank">
       <div v-for="(item, index) in rankList.rest" class="find-restRank-item" :key="index">
@@ -12,11 +13,21 @@
         <div class="find-restRank-item-score">{{item.peopleScore}}</div>
       </div>
     </div>
-    <div :hidden="info.type !== 'village'" class="find-village" @click="getTaskMoreInfo">
+    <div
+      :hidden="info.type !== 'village'"
+      class="find-village"
+      @click="getTaskMoreInfo"
+      @touchstart="touchEventStart"
+      @touchmove="touchEventMove"
+      @touchend="touchEventEnd"
+    >
       <div v-for="(item, index) in villageTaskList" class="find-village-item" :key="index">
         <div class="find-village-item-tag">
           <img :src="item.sponsorAvatar"/>
           <span>{{item.sponsorName}}</span>
+          <div style="position: absolute; right: 30rpx; margin-top: -32rpx">
+            @{{item.sponsorCollage}}
+          </div>
         </div>
         <div class="find-village-item-content" :id="item.groupId">
           <div class="find-village-item-content-title" :id="item.groupId">
@@ -52,10 +63,16 @@
           rest: []
         },
         villageTaskList: [],
-        page: 1,
-        pageTotal: 1,
         info: {
           type: 'village'
+        },
+        rankPage: 1,
+        rankPageSum: 1,
+        touch: {
+          touchDot: 0,
+          time: 0,
+          interval: 0,
+          refresh: false
         }
       }
     },
@@ -67,9 +84,11 @@
       changeTab (key) {
         this.info.type = key
       },
-      getRank () {
-        GetRank(1)
+      getRank (page = 1) {
+        GetRank(page)
           .then(res => {
+            this.rankPageSum = res.data.pageSum
+            this.rankPage++
             this.rankList.top3 = res.data.rank.slice(0, 3)
             if (res.data.rank.length >= 3) {
               this.rankList.rest = res.data.rank.slice(3, res.data.rank.length)
@@ -77,59 +96,74 @@
           })
       },
       getVillageTask () {
-        if (this.page <= this.pageTotal) {
-          GetTaskVillage(this.page)
-            .then(res => {
-              let data = res.data.items.map(item => ({
-                ...item,
-                time: item.startTime.split('T')[0] + ' ~ ' + item.endTime.split('T')[0]
-              }))
-              try {
-                this.villageTaskList = this.villageTaskList.concat(data)
-              } catch (e) {
-                console.log(e)
-              }
-              this.pageTotal = res.data.count
-            })
-        }
+        GetTaskVillage()
+          .then(res => {
+            this.villageTaskList = res.data.items.map(item => ({
+              ...item,
+              time: item.startTime.split('T')[0] + ' ~ ' + item.endTime.split('T')[0]
+            }))
+          })
       },
       getTaskMoreInfo (e) {
         if (e.target.id) {
           jumpTo(`../simpleTask/simpleTask?groupId=${e.target.id}&share=true&inApp=true`)
         }
+      },
+      touchEventStart (e) {
+        this.touch.touchDot = e.pageX
+        console.log('滑动开始', e.pageX)
+      },
+      touchEventMove (e) {
+        console.log(this.touch.touchDot - e.pageX)
+        if (Math.abs(this.touch.touchDot - e.pageX) > 120 && !this.touch.refresh) {
+          showLoading('更新任务村ing')
+          this.touch.refresh = true
+          this.getVillageTask()
+          setTimeout(() => {
+            hideLoading()
+          }, 1000)
+        }
+      },
+      touchEventEnd (e) {
+        console.log('滑动结束')
+        this.touch.refresh = false
       }
     },
     onPullDownRefresh () {
       if (this.info.type === 'rank') {
-        this.getRank()
+        this.rankPage = 1
+        this.getRank(1)
       } else {
-        this.page = 1
-        this.pageTotal = 1
-        this.villageTaskList = []
         this.getVillageTask()
       }
       setTimeout(() => {
         wx.stopPullDownRefresh()
-      }, 3000)
+      }, 1500)
     },
     onReachBottom () {
-      if (this.info.type === 'village') {
-        if (++this.page <= this.pageTotal) {
-          showLoading()
-          this.getVillageTask()
-          setTimeout(() => {
-            hideLoading()
-          }, 1500)
+      if (this.info.type === 'rank') {
+        if (this.rankPage <= this.rankPageSum && this.rankPage < 10) {
+          showLoading('加载更多的小伙伴')
+          GetRank(this.rankPage)
+            .then(res => {
+              setTimeout(() => {
+                hideLoading()
+              }, 1000)
+              this.rankPage++
+              this.rankPageSum = res.data.pageSum
+              this.rankList.rest = this.rankList.rest.concat(res.data.rank)
+            })
         }
       }
     },
     beforeMount () {
       showLoading()
-      this.getRank()
+      this.touch.refresh = false
+      this.getRank(1)
       this.getVillageTask()
       setTimeout(() => {
         hideLoading()
-      }, 3000)
+      }, 1500)
     }
   }
 </script>

@@ -1,31 +1,69 @@
-# TaskCompetition --- 一个伙伴之间相互监督任务的轻平台
+# TaskCompetition
+![](https://img.shields.io/badge/mpvue-framework-brightgreen.svg)   ![](https://img.shields.io/badge/eslint-standard-green.svg)   ![Bitbucket Pipelines branch](https://img.shields.io/bitbucket/pipelines/atlassian/adf-builder-javascript/task/SECO-2168.svg)
 
-> 采用Mpvue开发框架构建的一个微信小程序
+> 一个伙伴之间相互监督任务的轻平台
 
-## 本地运行步骤
+# 目录
+
+* [项目结构图](#项目结构图)
+* [开发进展](#开发进展)
+* [安装](#安装)
+* [体验](#体验)
+
+## 项目结构图
+```md
+|── README.md
+├── src
+│   ├── main.js // 源代码的编译入口文件
+│   ├── common // Sass目录、引入的js库（暂无）
+│   ├── utils // 工具函数
+│   ├── components // 组件
+│   ├── api // ajax模块及后端接口
+│   ├── components // 组件
+│   └── pages // 页面
+--- mock // mock服务
+
+```
+## 开发进展
+当前为0.3.3版
+
+- [x] 项目搭建
+- [x] 登录注册模块
+- [x] 个人中心模块
+- [x] 发现模块
+- [x] 新建任务模块
+- [x] 分享功能
+- [ ] 打分功能
+
+## 安装
 ### 克隆
 ```bash
-git clone https://github.com/GeniusFunny/TaskCompetition.git
+$ git clone https://github.com/GeniusFunny/TaskCom.git
+```
+### 进入文件目录
+
+```
+$ cd TaskCom
 ```
 ### 运行
 
+> 在微信开发者工具打开项目时，请选中项目内的`/dist`目录。因为`dist`目录里才是微信能识别的`wxml`和`wxss`。
+
 ``` bash
 # install dependencies
-npm install
+$ npm install
 
 # serve with hot reload at localhost:8080
-npm run dev
+$ npm run dev
 
 # build for production with minification
-npm run build
+$ npm run build
 
 # build for production and view the bundle analyzer report
-npm run build --report
+$ npm run build --report
 ```
-## 成为体验用户（当前为0.2.3 内测版）
-1.  微信搜索TaskCom
-2.  扫描二维码
-![E93DF1002CBC066B9770B8B88CC5E139.jpg](https://i.loli.net/2018/06/03/5b13d2265b725.jpg)
-3.  ✨ 欢迎star
+
+## 体验
+[![gh_86f2f6598eb3_860.jpg](https://i.loli.net/2018/06/04/5b14cd56823cf.jpg)](微信搜索小程序TaskCom)
 
 

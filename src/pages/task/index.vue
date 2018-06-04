@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import {showLoading, getStorage, hideLoading, modal} from '../../utils/wxUtils'
+  import {showLoading, getStorage, hideLoading, modal, toast} from '../../utils/wxUtils'
   import {GetTaskInfo, FinishTaskItem, GetOthersTaskInfo} from '../../api/API'
   import {normalizeTimeHours} from '../../utils/utils'
   import infoItem from '../../components/infoitem'
@@ -72,6 +72,12 @@
           .then(() => {
             hideLoading()
             this.loadTaskList()
+          })
+          .catch(() => {
+            hideLoading()
+            setTimeout(() => {
+              toast('已经过了截止时间: )', 'none')
+            }, 1000)
           })
       },
       loadTaskList () {

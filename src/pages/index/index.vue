@@ -1,8 +1,8 @@
 <template>
   <div class="index">
     <img src="/static/images/cover.png"/>
-    <div style="z-index: 2000; position: absolute; bottom: -130rpx; text-align: right; color: #2e2e2e; font-size: 24rpx;">
-      &emsp;powered by 为之工作室 © 2018
+    <div style="z-index: 2000; position: absolute; bottom: -130rpx; right: 30rpx; color: #2e2e2e; font-size: 24rpx;">
+      &emsp;powered by 火锅底料小组 © 2018
     </div>
     <div>
       <button open-type="getUserInfo" @getuserinfo="bindGetUserInfo">

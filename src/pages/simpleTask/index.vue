@@ -13,6 +13,12 @@
         加入
       </div>
     </div>
+    <div v-if="!info.share" class="tc-button" @click="clickShare" style="background-color: #ffc53d; min-height: 13vh;">
+      <!--<img src="/static/images/button.png"/>-->
+      <div class="tc-button-info">
+        <!--分享-->
+      </div>
+    </div>
   </div>
 </template>
 
@@ -46,6 +52,7 @@
           finishedTaskList: [],
           avatarList: []
         },
+        hidden: true,
         share: false
       }
     },
@@ -78,23 +85,25 @@
           .catch(err => {
             console.log(err)
             hideLoading()
+            setTimeout(() => {
+              toast('网络状况差，请重试')
+            }, 1000)
           })
       },
       joinTaskGroup () {
         JoinTaskGroup(this.info.groupId)
           .then(res => {
-            console.log(res)
-            toast('加入当前任务组')
+            this.loadTaskList()
           })
           .catch(err => {
             try {
               let code = err.data.code
               if (code === 1) {
-                toast('人数已满', 'none')
+                toast('人数已满: )', 'none')
               } else if (code === 2) {
-                toast('任务组已经结束', 'none')
+                toast('任务组已经结束: )', 'none')
               } else if (code === 3) {
-                toast('你已在当前任务组', 'none')
+                toast('你已在当前任务组: )', 'none')
               }
               if (!this.$root.$mp.query.hasOwnProperty('inApp')) {
                 setTimeout(() => {
