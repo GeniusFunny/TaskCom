@@ -64,6 +64,4 @@ $ npm run build --report
 ```
 
 ## 体验
-[![gh_86f2f6598eb3_860.jpg](https://i.loli.net/2018/06/04/5b14cd56823cf.jpg)](微信搜索小程序TaskCom)
-
-
+![gh_86f2f6598eb3_860.jpg](https://i.loli.net/2018/06/04/5b14e6af4c572.jpg)[搜索小程序：TaskCom]
