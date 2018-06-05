@@ -8,27 +8,19 @@
       <avatarList v-if="info.isPublic" :avatarList="info.avatarList"/>
     </div>
     <div v-if="info.share !== undefined && info.share" class="tc-button" @click="joinTaskGroup">
-      <img src="/static/images/button.png"/>
-      <div class="tc-button-info">
-        {{buttonContent || '加入'}}
-      </div>
-    </div>
-    <div v-if="!info.share" class="tc-button" @click="clickShare" style="background-color: #ffc53d; min-height: 13vh;">
-      <!--<img src="/static/images/button.png"/>-->
-      <div class="tc-button-info">
-        <!--分享-->
-      </div>
+      <formButton :button-content="buttonContent" @getFormId="getFormId"/>
     </div>
   </div>
 </template>
 
 <script>
   import {showLoading, getStorage, hideLoading, toast, modal, jumpTo} from '../../utils/wxUtils'
-  import {GetSimpleTaskInfo, JoinTaskGroup} from '../../api/API'
+  import {GetSimpleTaskInfo, JoinTaskGroup, SubmitForm} from '../../api/API'
   import {normalizeTimeHours} from '../../utils/utils'
   import infoItem from '../../components/infoitem'
   import taskList from '../../components/simpleTaskList'
   import avatarList from '../../components/avatarList'
+  import formButton from '../../components/formButton'
 
   export default {
     data () {
@@ -54,13 +46,17 @@
         },
         hidden: true,
         share: false,
-        buttonContent: '加入'
+        buttonContent: '加入',
+        formId: '',
+        hasJoined: false,
+        fromShareAndHasJoined: false
       }
     },
     components: {
       infoItem,
       taskList,
-      avatarList
+      avatarList,
+      formButton
     },
     methods: {
       loadTaskList () {
@@ -82,7 +78,11 @@
                 username: item.username.length > 3 ? item.username.slice(0, 3) + '...' : item.username
               }))
               if (this.info.avatarList.findIndex(item => item.userId === getStorage('userId')) !== -1) {
+                this.hasJoined = true
                 this.buttonContent = '已加入'
+              }
+              if (this.fromShareAndHasJoined) {
+                this.buttonContent = '返回个人中心'
               }
             }
           })
@@ -90,16 +90,26 @@
             console.log(err)
             hideLoading()
             setTimeout(() => {
-              toast('网络状况差，请重试')
+              toast('网络状况差', 'none')
             }, 1000)
           })
       },
       joinTaskGroup () {
         if (this.buttonContent === '已加入') {
           return 0
+        } else if (this.fromShareAndHasJoined) {
+          jumpTo('../personalCenter/personalCenter')
+          return 0
         }
         JoinTaskGroup(this.info.groupId)
           .then(res => {
+            SubmitForm({groupId: this.info.groupId, fromId: this.formId})
+              .then(res => {
+                console.log(res)
+              })
+              .catch(() => {
+                toast('消息通知失败', 'none')
+              })
             this.loadTaskList()
           })
           .catch(err => {
@@ -115,7 +125,7 @@
               if (!this.$root.$mp.query.hasOwnProperty('inApp')) {
                 setTimeout(() => {
                   jumpTo('../index/index')
-                }, 1500)
+                }, 1000)
               }
             } catch (e) {
               modal('您尚未注册，是否前往注册？')
@@ -124,6 +134,10 @@
                 })
             }
           })
+      },
+      getFormId (key) {
+        this.formId = key
+        this.joinTaskGroup()
       }
     },
     onLoad () {
@@ -133,7 +147,23 @@
         this.info.share = true
         this.info.groupId = this.$root.$mp.query.groupId
       }
+      if (this.$root.$mp.query.hasOwnProperty('hasJoined')) {
+        this.fromShareAndHasJoined = true
+      }
       this.loadTaskList()
+    },
+    onShareAppMessage (options) {
+      if (this.hasJoined) {
+        return {
+          title: '一起来挑战吧',
+          path: `/pages/simpleTask/simpleTask?groupId=${this.info.groupId}&share=true&hasJoined=true`
+        }
+      } else {
+        return {
+          title: '一起来挑战吧',
+          path: `/pages/simpleTask/simpleTask?groupId=${this.info.groupId}&share=true`
+        }
+      }
     },
     onUnload () {
       this.info.share = false

@@ -53,6 +53,9 @@ const GetTaskVillage = () => {
 const GetScoreHistory = (ids) => {
   return ajax('/user/score/history', 'get_restful2', ids)
 }
+const SubmitForm = (data) => {
+  return ajax('/formId', 'post', data)
+}
 export {
   DownLoad,
   UpLoad,
@@ -71,5 +74,6 @@ export {
   JoinTaskGroup,
   GetOthersTaskInfo,
   GetTaskVillage,
-  GetScoreHistory
+  GetScoreHistory,
+  SubmitForm
 }

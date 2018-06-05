@@ -122,8 +122,16 @@
       if (this.$root.$mp.query.hasOwnProperty('share')) {
         this.share = true
         this.info.groupId = this.$root.$mp.query.groupId
+      } else if (this.$root.$mp.query.hasOwnProperty('groupId')) {
+        this.info.groupId = this.$root.$mp.query.groupId
       }
       this.loadTaskList()
+    },
+    onShareAppMessage (options) {
+      return {
+        title: '一起来挑战吧',
+        path: `/pages/simpleTask/simpleTask?groupId=${this.info.groupId}&share=true&hasJoined=true`
+      }
     },
     onUnload () {
       this.info.currentUser = getStorage('userId')

@@ -22,12 +22,15 @@
         <tcInput :info="info.public" @changeIsPublic="changeIsPublic"/>
       </div>
     </div>
-    <div class="tc-button" id="button" @click="createTask">
-      <img src="/static/images/button.png"/>
-      <div class="tc-button-info">
-        创建任务
-      </div>
+    <div style="padding-bottom: 15rpx;padding-top: 15rpx;">
+      <formButton @getFormId="getFormId" :buttonContent="buttonContent"/>
     </div>
+    <!--<div class="tc-button" id="button" @click="createTask">-->
+      <!--<img src="/static/images/button.png"/>-->
+      <!--<div class="tc-button-info">-->
+        <!--创建任务-->
+      <!--</div>-->
+    <!--</div>-->
     <Modal @shareTask="shareTask" :hidden="hidden"/>
   </div>
 </template>
@@ -38,9 +41,10 @@
   import tcInput from '../../components/input'
   import tcTextarea from '../../components/textarea'
   import tcButton from '../../components/button'
+  import formButton from '../../components/formButton'
   import {toast, jumpTo, showLoading, hideLoading, modal} from '../../utils/wxUtils'
   import {unix2cst, cst2unix} from '../../utils/utils'
-  import {CreateNewTask} from '../../api/API'
+  import {CreateNewTask, SubmitForm} from '../../api/API'
 
   export default {
     data () {
@@ -107,7 +111,9 @@
         taskInfo: {},
         hidden: true,
         groupId: 66366,
-        itemId: 1
+        itemId: 1,
+        formId: '',
+        buttonContent: '创建任务'
       }
     },
     components: {
@@ -115,7 +121,8 @@
       tcInput,
       tcTextarea,
       tcButton,
-      Modal
+      Modal,
+      formButton
     },
     methods: {
       changeTaskType (type) {
@@ -144,7 +151,7 @@
             title: this.info.taskName.value,
             startTime: cst2unix(this.info.startDate.value + 'T' + this.info.startTime.value + ':00'),
             endTime: cst2unix(this.info.endDate.value + 'T' + this.info.endTime.value + ':00'),
-            isPublic: !!this.info.isPublic,
+            isPublic: this.info.public.value === '1',
             maxPeople: this.info.players.data[this.info.players.value],
             items: this.info.taskList.map(item => {
               return {
@@ -171,8 +178,14 @@
         this.initTime()
       },
       submitTask () {
+        showLoading('提交中')
         CreateNewTask(this.taskInfo)
           .then(res => {
+            hideLoading()
+            SubmitForm({groupId: res.data.groupId, formId: this.formId})
+              .then(res => {
+                console.log(res)
+              })
             if (this.taskInfo.type === 0) {
               this.hidden = false
               this.groupId = res.data.groupId
@@ -191,7 +204,7 @@
       },
       createTask () {
         if (this.checkTaskName() && this.checkTaskInfo()) {
-          modal('是否立即提交？')
+          modal('创建新任务', '确认无误后，即可提交。')
             .then(res => {
               this.getTaskInfo().submitTask()
             })
@@ -205,6 +218,10 @@
           this.hidden = true
           jumpTo('../personalCenter/personalCenter')
         }
+      },
+      getFormId (key) {
+        this.formId = key
+        this.createTask()
       },
       initDate () {
         this.info.startDate.value = '请设置'
