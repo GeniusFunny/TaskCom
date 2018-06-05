@@ -2,7 +2,7 @@
 @import "../helpers/_variables";
 .tc-formButton {
   margin-top: 15rpx;
-    button {
+  button {
     @include config_width_height(600rpx, 88rpx);
     margin-bottom: 15rpx;
     box-shadow: 0 3px 5px 2px rgba(255, 197, 102, .30);

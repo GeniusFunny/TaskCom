@@ -1,6 +1,6 @@
 <template>
-  <form report-submit="true" @submit="submit" class="tc-formButton">
-    <button formType="submit">{{buttonContent || '创建任务'}}</button>
+  <form report-submit="true" @submit="submit" class="tc-formButton" :class="type? 'return' : ''">
+    <button formType="submit" :disabled="!active">{{buttonContent || '创建任务'}}</button>
   </form>
 </template>
 
@@ -10,6 +10,10 @@
       buttonContent: {
         type: String,
         default: '创建任务'
+      },
+      active: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {

@@ -22,8 +22,8 @@
         <tcInput :info="info.public" @changeIsPublic="changeIsPublic"/>
       </div>
     </div>
-    <div style="padding-bottom: 15rpx;padding-top: 15rpx;">
-      <formButton @getFormId="getFormId" :buttonContent="buttonContent"/>
+    <div style="padding-top: 18rpx; padding-bottom: 4rpx;">
+      <formButton @getFormId="getFormId" :buttonContent="buttonContent" :active="canClick"/>
     </div>
     <!--<div class="tc-button" id="button" @click="createTask">-->
       <!--<img src="/static/images/button.png"/>-->
@@ -113,7 +113,8 @@
         groupId: 66366,
         itemId: 1,
         formId: '',
-        buttonContent: '创建任务'
+        buttonContent: '创建任务',
+        canClick: true
       }
     },
     components: {
@@ -179,12 +180,17 @@
       },
       submitTask () {
         showLoading('提交中')
+        this.canClick = false
         CreateNewTask(this.taskInfo)
           .then(res => {
             hideLoading()
+            this.canClick = true
             SubmitForm({groupId: res.data.groupId, formId: this.formId})
               .then(res => {
                 console.log(res)
+              })
+              .catch(() => {
+                toast('消息通知失败', 'none')
               })
             if (this.taskInfo.type === 0) {
               this.hidden = false
@@ -198,7 +204,8 @@
             }
           })
           .catch(err => {
-            toast('提交任务失败，请设置时间', 'none')
+            toast('提交任务失败', 'none')
+            this.canClick = false
             console.error(err)
           })
       },

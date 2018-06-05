@@ -1,21 +1,35 @@
 <template>
-  <div class="task">
-    <infoItem :name="info.title.name" :value="info.title.value"/>
-    <infoItem :name="info.date.name" :value="info.date.value"/>
-    <infoItem :name="info.time.name" :value="info.time.value"/>
-    <taskList type="finished" :taskList="info.finishedTaskList"/>
-    <taskList type="unfinished" :taskList="info.unfinishedTaskList" @changeTaskState="subTaskClick"/>
-    <avatarList
-      v-if="info.isPublic"
-      :avatarList="info.avatarList"
-      @changeUserTaskInfo="changeCurrentUserTaskInfo"
-      :currentUser="info.currentUser"
-    />
+  <div>
+    <div class="task">
+      <infoItem :name="info.title.name" :value="info.title.value"/>
+      <infoItem :name="info.date.name" :value="info.date.value"/>
+      <infoItem :name="info.time.name" :value="info.time.value"/>
+      <taskList type="finished" :taskList="info.finishedTaskList"/>
+      <taskList type="unfinished" :taskList="info.unfinishedTaskList" @changeTaskState="subTaskClick"/>
+      <avatarList
+        v-if="info.isPublic"
+        :avatarList="info.avatarList"
+        @changeUserTaskInfo="changeCurrentUserTaskInfo"
+        :currentUser="info.currentUser"
+      />
+    </div>
+    <div style="height: 8vh;margin-top: -20rpx">
+      <button
+        v-if="!fromMessage"
+        @click="jumpToPersonalCenter"
+      >
+        返回个人中心
+      </button>
+      <div
+        v-if="fromMessage"
+        style="background-color: #ffc53d; height: 8vh;">
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import {showLoading, getStorage, hideLoading, modal, toast} from '../../utils/wxUtils'
+  import {showLoading, getStorage, hideLoading, modal, toast, jumpTo} from '../../utils/wxUtils'
   import {GetTaskInfo, FinishTaskItem, GetOthersTaskInfo} from '../../api/API'
   import {normalizeTimeHours} from '../../utils/utils'
   import infoItem from '../../components/infoitem'
@@ -44,7 +58,9 @@
           finishedTaskList: [],
           avatarList: [],
           currentUser: getStorage('userId') || 0
-        }
+        },
+        buttonContent: '返回个人中心',
+        fromMessage: false
       }
     },
     components: {
@@ -73,11 +89,17 @@
             hideLoading()
             this.loadTaskList()
           })
-          .catch(() => {
+          .catch((err) => {
             hideLoading()
-            setTimeout(() => {
-              toast('已经过了截止时间: )', 'none')
-            }, 1000)
+            if (err.data.code === 5 || err.data.code === 2) {
+              setTimeout(() => {
+                toast('已过截止时间: )', 'none')
+              }, 600)
+            } else {
+              setTimeout(() => {
+                toast('服务器崩溃: )', 'none')
+              }, 600)
+            }
           })
       },
       loadTaskList () {
@@ -115,6 +137,9 @@
             this.info.unfinishedTaskList = res.data.unfinished
             hideLoading()
           })
+      },
+      jumpToPersonalCenter () {
+        jumpTo('../personalCenter/personalCenter')
       }
     },
     onLoad () {
@@ -124,6 +149,9 @@
         this.info.groupId = this.$root.$mp.query.groupId
       } else if (this.$root.$mp.query.hasOwnProperty('groupId')) {
         this.info.groupId = this.$root.$mp.query.groupId
+      }
+      if (this.$root.$mp.query.hasOwnProperty('from')) {
+        this.fromMessage = true
       }
       this.loadTaskList()
     },
@@ -135,10 +163,20 @@
     },
     onUnload () {
       this.info.currentUser = getStorage('userId')
+      this.fromMessage = false
     }
   }
 </script>
 
 <style lang="scss">
   @import "../../common/styles/pages/task";
+  button {
+    @include config_width_height(600rpx, 88rpx);
+    margin-top: 40rpx;
+    margin-bottom: 20rpx;
+    box-shadow: 0 3px 5px 2px rgba(255, 197, 102, .30);
+    background: linear-gradient(45deg, $themeColor 30%, #fce01e 90%);
+    border-radius: 50rpx;
+    @include config_font(32rpx, $problemFontColor);
+  }
 </style>
