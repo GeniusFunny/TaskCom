@@ -22,15 +22,9 @@
         <tcInput :info="info.public" @changeIsPublic="changeIsPublic"/>
       </div>
     </div>
-    <div style="padding-top: 18rpx; padding-bottom: 4rpx;">
+    <div style="padding-top: 15rpx; padding-bottom: 15rpx;">
       <formButton @getFormId="getFormId" :buttonContent="buttonContent" :active="canClick"/>
     </div>
-    <!--<div class="tc-button" id="button" @click="createTask">-->
-      <!--<img src="/static/images/button.png"/>-->
-      <!--<div class="tc-button-info">-->
-        <!--创建任务-->
-      <!--</div>-->
-    <!--</div>-->
     <Modal @shareTask="shareTask" :hidden="hidden"/>
   </div>
 </template>
@@ -153,7 +147,7 @@
             startTime: cst2unix(this.info.startDate.value + 'T' + this.info.startTime.value + ':00'),
             endTime: cst2unix(this.info.endDate.value + 'T' + this.info.endTime.value + ':00'),
             isPublic: this.info.public.value === '1',
-            maxPeople: this.info.players.data[this.info.players.value],
+            maxPeople: 1,
             items: this.info.taskList.map(item => {
               return {
                 content: item.value

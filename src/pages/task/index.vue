@@ -1,6 +1,11 @@
 <template>
   <div>
-    <div class="task">
+    <div
+      class="task"
+      :class="[
+        !fromMessage? 'task-fullScreen': ''
+      ]"
+    >
       <infoItem :name="info.title.name" :value="info.title.value"/>
       <infoItem :name="info.date.name" :value="info.date.value"/>
       <infoItem :name="info.time.name" :value="info.time.value"/>
@@ -13,17 +18,12 @@
         :currentUser="info.currentUser"
       />
     </div>
-    <div style="height: 8vh;margin-top: -20rpx">
+    <div style="height: 102rpx;" v-if="fromMessage">
       <button
-        v-if="!fromMessage"
         @click="jumpToPersonalCenter"
       >
         返回个人中心
       </button>
-      <div
-        v-if="fromMessage"
-        style="background-color: #ffc53d; height: 8vh;">
-      </div>
     </div>
   </div>
 </template>
@@ -171,9 +171,9 @@
 <style lang="scss">
   @import "../../common/styles/pages/task";
   button {
+    margin-top: 15rpx;
     @include config_width_height(600rpx, 88rpx);
-    margin-top: 40rpx;
-    margin-bottom: 20rpx;
+    margin-bottom: 15rpx;
     box-shadow: 0 3px 5px 2px rgba(255, 197, 102, .30);
     background: linear-gradient(45deg, $themeColor 30%, #fce01e 90%);
     border-radius: 50rpx;

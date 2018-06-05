@@ -81,9 +81,9 @@
               if (this.info.avatarList.findIndex(item => item.userId === getStorage('userId')) !== -1) {
                 this.hasJoined = true
                 this.buttonContent = '已加入'
-              }
-              if ((this.fromShareAndHasJoined && this.hasJoined) || this.share) {
-                this.buttonContent = '返回个人中心'
+                if ((this.fromShareAndHasJoined && this.hasJoined) || this.info.share) {
+                  this.buttonContent = '返回个人中心'
+                }
               }
             }
           })
@@ -113,7 +113,7 @@
               })
               .catch((err) => {
                 console.log(err)
-                toast('消息通知失败', 'none')
+                toast('消息推送失败', 'none')
               })
             this.loadTaskList()
           })
@@ -136,7 +136,6 @@
             }
             if (!this.$root.$mp.query.hasOwnProperty('inApp')) {
               setTimeout(() => {
-                console.log(123)
                 jumpTo('../index/index')
               }, 1000)
             }
@@ -148,6 +147,7 @@
       }
     },
     onLoad () {
+      this.info.groupId = ''
       this.info.share = false
       this.info.groupId = getStorage('currentTaskId') || 0
       if (this.$root.$mp.query.hasOwnProperty('share')) {
