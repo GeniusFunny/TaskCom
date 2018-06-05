@@ -81,7 +81,7 @@
                 this.hasJoined = true
                 this.buttonContent = '已加入'
               }
-              if (this.fromShareAndHasJoined) {
+              if (this.fromShareAndHasJoined && this.hasJoined) {
                 this.buttonContent = '返回个人中心'
               }
             }
@@ -97,7 +97,7 @@
       joinTaskGroup () {
         if (this.buttonContent === '已加入') {
           return 0
-        } else if (this.fromShareAndHasJoined) {
+        } else if (this.buttonContent === '返回个人中心') {
           jumpTo('../personalCenter/personalCenter')
           return 0
         }
@@ -128,7 +128,7 @@
                 }, 1000)
               }
             } catch (e) {
-              modal('您尚未注册，是否前往注册？')
+              modal('提示', '您尚未注册，是否前往注册？')
                 .then(res => {
                   jumpTo('../index/index')
                 })
@@ -166,8 +166,12 @@
       }
     },
     onUnload () {
-      this.info.share = false
+      this.share = false
+      this.info.groupId = ''
+      this.info.formId = ''
       this.buttonContent = '加入'
+      this.hasJoined = false
+      this.fromShareAndHasJoined = false
     }
   }
 </script>

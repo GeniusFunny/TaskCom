@@ -117,7 +117,7 @@
           })
       }
     },
-    beforeMount () {
+    onLoad () {
       this.info.groupId = getStorage('currentTaskId') || 0
       if (this.$root.$mp.query.hasOwnProperty('share')) {
         this.share = true
