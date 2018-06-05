@@ -1,0 +1,11 @@
+@import "../helpers/_mixins";
+@import "../helpers/_variables";
+.tc-formButton {
+  button {
+    @include config_width_height(600rpx, 88rpx);
+    box-shadow: 0 3px 5px 2px rgba(255, 197, 102, .30);
+    background: linear-gradient(45deg, $themeColor 30%, #fce01e 90%);
+    border-radius: 50rpx;
+    @include config_font(32rpx, $problemFontColor);
+  }
+}

@@ -25,11 +25,10 @@
       &-tag {
         @include config_width_height(48rpx, 48rpx);
         margin-right: 28rpx;
-        margin-top: -10rpx;
+        margin-top: -5rpx;
       }
       &-value {
         @include config_font(28rpx, $problemFontColor);
-        line-height: 26rpx;
       }
     }
   }

@@ -23,7 +23,7 @@
         <div class="find-village-item-tag">
           <img :src="item.sponsorAvatar"/>
           <span>{{item.sponsorName}}</span>
-          <div style="position: absolute; right: 30rpx; margin-top: -32rpx">
+          <div style="position: absolute; right: 35rpx; margin-top: -32rpx">
             @{{item.sponsorCollage}}
           </div>
         </div>
@@ -109,10 +109,8 @@
       },
       touchEventStart (e) {
         this.touch.touchDot = e.pageX
-        console.log('滑动开始', e.pageX)
       },
       touchEventMove (e) {
-        console.log(this.touch.touchDot - e.pageX)
         if (Math.abs(this.touch.touchDot - e.pageX) > 120 && !this.touch.refresh) {
           showLoading('更新任务村ing')
           this.touch.refresh = true

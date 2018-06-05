@@ -4,5 +4,9 @@
 .task {
   background-color: $themeColor;
   padding: 30rpx;
-  min-height: 100vh;
+  min-height: 94vh;
+  &-fullScreen {
+    min-height: 100vh;
+    background-color: $themeColor;
+  }
 }
