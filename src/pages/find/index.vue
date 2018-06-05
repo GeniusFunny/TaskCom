@@ -140,16 +140,19 @@
     },
     onReachBottom () {
       if (this.info.type === 'rank') {
-        if (this.rankPage <= this.rankPageSum && this.rankPage < 10) {
+        if (this.rankPage <= this.rankPageSum && this.rankPage <= 10) {
           showLoading('加载更多伙伴')
           GetRank(this.rankPage)
             .then(res => {
-              setTimeout(() => {
-                hideLoading()
-              }, 700)
+              if (this.rankPage === 10 && res.data.rank.length === 10) {
+                res.data.rank.pop()
+              }
               this.rankPage++
               this.rankPageSum = res.data.pageSum
               this.rankList.rest = this.rankList.rest.concat(res.data.rank)
+              setTimeout(() => {
+                hideLoading()
+              }, 700)
             })
         }
       }
