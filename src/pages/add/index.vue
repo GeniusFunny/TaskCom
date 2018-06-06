@@ -179,7 +179,7 @@
           .then(res => {
             hideLoading()
             this.canClick = true
-            SubmitForm({groupId: res.data.groupId, formId: this.formId})
+            SubmitForm({groupId: res.data.groupId, formId: this.formId, type: 0})
               .then(res => {
                 console.log(res)
               })

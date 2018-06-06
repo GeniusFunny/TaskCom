@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import { GetHistory } from '../../api/API'
+  import { GetHistory, SubmitForm } from '../../api/API'
   import history from '../../components/history'
   import {normalizeTimeHours} from '../../utils/utils'
   import {showLoading, hideLoading, setStorage, jumpTo} from '../../utils/wxUtils'
@@ -52,7 +52,9 @@
           type: item.type === 1 ? 'daily' : 'multiPlayer'
         }))
       },
-      getTaskMoreInfo (key) {
+      getTaskMoreInfo (key, formId) {
+        console.log(formId)
+        SubmitForm({formId: formId, type: 1})
         setStorage('currentTaskId', parseInt(key))
         setStorage('state', 'history')
         jumpTo(`../simpleTask/simpleTask`)

@@ -1,17 +1,19 @@
 <template>
-  <div
-    :id="id"
-    class="tc-task"
-    :class="[
+  <form report-submit="true" @submit="submit" :id="id">
+    <button formType="submit">
+      <div
+        class="tc-task"
+        :class="[
       type === 'multiPlayer' ? 'tc-task-multiPlayer': ''
     ]"
-    @click="clickTask"
-  >
-    <div class="tc-task-info-1">
-      <div class="tc-task-info-1-name">{{taskName}}</div>
-      <div class="tc-task-info-1-date">开始时间：{{startTime}}</div>
-    </div>
-  </div>
+      >
+        <div class="tc-task-info-1">
+          <div class="tc-task-info-1-name">{{taskName}}</div>
+          <div class="tc-task-info-1-date">开始时间：{{startTime}}</div>
+        </div>
+      </div>
+    </button>
+  </form>
 </template>
 
 <script>
@@ -34,8 +36,8 @@
       }
     },
     methods: {
-      clickTask (e) {
-        this.$emit('task', e.currentTarget.id)
+      submit (e) {
+        this.$emit('task', e.currentTarget.id, e.target.formId)
       }
     }
   }
@@ -44,4 +46,15 @@
 <style lang="scss">
   @import "../common/styles/components/task";
   @import "../common/styles/components/history";
+  button {
+    position: static;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    text-align: left;
+  }
+  button:after {
+    content: none;
+  }
 </style>
