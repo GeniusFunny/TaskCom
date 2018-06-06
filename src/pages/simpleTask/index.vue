@@ -1,13 +1,18 @@
 <template>
   <div>
-    <div class="task" style="min-height: 87vh">
+    <div
+      class="task"
+      :class="[
+        !share? 'task-fullScreen': ''
+      ]"
+    >
       <infoItem :name="info.title.name" :value="info.title.value"/>
       <infoItem :name="info.date.name" :value="info.date.value"/>
       <infoItem :name="info.time.name" :value="info.time.value"/>
       <taskList :taskList="info.TaskList"/>
       <avatarList v-if="info.isPublic" :avatarList="info.avatarList"/>
     </div>
-    <div v-if="info.share !== undefined && info.share" class="tc-button">
+    <div v-if="share !== undefined && share" class="tc-button">
       <formButton :button-content="buttonContent" @getFormId="getFormId" :active="canClick"/>
     </div>
   </div>
@@ -45,6 +50,7 @@
         },
         hidden: true,
         share: false,
+        inApp: false,
         buttonContent: '加入',
         formId: '',
         hasJoined: false,
@@ -81,7 +87,7 @@
               if (this.info.avatarList.findIndex(item => item.userId === getStorage('userId')) !== -1) {
                 this.hasJoined = true
                 this.buttonContent = '已加入'
-                if ((this.fromShareAndHasJoined && this.hasJoined) || this.info.share) {
+                if ((this.fromShareAndHasJoined && this.hasJoined) || (this.share && !this.inApp)) {
                   this.buttonContent = '返回个人中心'
                 }
               }
@@ -134,7 +140,7 @@
                   jumpTo('../index/index')
                 })
             }
-            if (!this.$root.$mp.query.hasOwnProperty('inApp')) {
+            if (!this.inApp) {
               setTimeout(() => {
                 jumpTo('../index/index')
               }, 1000)
@@ -148,12 +154,15 @@
     },
     onLoad () {
       this.info.groupId = ''
-      this.info.share = false
+      this.share = false
       this.info.groupId = getStorage('currentTaskId') || 0
       if (this.$root.$mp.query.hasOwnProperty('share')) {
-        this.info.share = true
+        this.share = true
         this.hasClicked = false
         this.info.groupId = this.$root.$mp.query.groupId
+      }
+      if (this.$root.$mp.query.hasOwnProperty('inApp')) {
+        this.inApp = true
       }
       if (this.$root.$mp.query.hasOwnProperty('hasJoined')) {
         this.fromShareAndHasJoined = true
@@ -177,6 +186,7 @@
       this.share = false
       this.info.groupId = ''
       this.formId = ''
+      this.inApp = false
       this.buttonContent = '加入'
       this.hasJoined = false
       this.fromShareAndHasJoined = false
