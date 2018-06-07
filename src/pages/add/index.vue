@@ -88,7 +88,7 @@
             type: 'picker',
             value: 4,
             data: [
-              2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+              2, 3, 4, 5, 6, 8, 10, 20, 50, 99
             ]
           },
           taskList: [],
@@ -96,7 +96,7 @@
             id: 'isPublic',
             name: '是否公开',
             type: 'picker',
-            value: 1,
+            value: 0,
             data: [
               '否', '是'
             ]
@@ -107,7 +107,7 @@
         groupId: 66366,
         itemId: 1,
         formId: '',
-        buttonContent: '创建任务',
+        buttonContent: '新建任务',
         canClick: true
       }
     },
@@ -167,6 +167,7 @@
       clearTask () {
         let data = this.info
         this.taskInfo = {}
+        info.isPublic.value = 0
         data.taskName.value = ''
         data.taskList = []
         this.initDate()
