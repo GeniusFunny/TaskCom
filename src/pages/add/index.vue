@@ -88,7 +88,7 @@
             type: 'picker',
             value: 4,
             data: [
-              2, 3, 4, 5, 6, 8, 10, 20, 50, 99
+              2, 4, 6, 8, 10, 12, 20, 50, 99
             ]
           },
           taskList: [],
@@ -167,7 +167,7 @@
       clearTask () {
         let data = this.info
         this.taskInfo = {}
-        info.isPublic.value = 0
+        data.public.value = 0
         data.taskName.value = ''
         data.taskList = []
         this.initDate()
