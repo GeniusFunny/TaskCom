@@ -113,7 +113,7 @@
         JoinTaskGroup(this.info.groupId)
           .then(res => {
             this.canClick = true
-            SubmitForm({groupId: this.info.groupId, formId: this.formId})
+            SubmitForm({groupId: this.info.groupId, formId: this.formId, type: 0})
               .then(res => {
                 console.log(res)
               })

@@ -1,0 +1,11 @@
+<template name="input$7a359e8b">
+  <view class="_div data-v-55a9a87f tc-input">
+    <label class="_label data-v-55a9a87f">{{info.name}}</label>
+    <input wx:if="{{info.type === 'input'}}" value="{{info.value}}" placeholder="请输入" bindinput="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_input data-v-55a9a87f" />
+    <picker wx:if="{{info.type === 'picker'}}" value="{{info.value}}" range="{{info.data}}" id="{{info.id}}" bindchange="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_picker data-v-55a9a87f"> {{info.data[info.value]}} </picker>
+    <picker wx:if="{{info.type === 'date'}}" value="{{info.value}}" placeholder="请设置" mode="date" start="{{info.start}}" end="{{info.end}}" id="{{info.id}}" bindchange="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}"
+      class="_picker data-v-55a9a87f"> {{info.value}} </picker>
+    <picker wx:if="{{info.type === 'time'}}" value="{{info.value}}" placeholder="请设置" mode="time" start="{{info.start}}" end="{{info.end}}" id="{{info.id}}" bindchange="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}"
+      class="_picker data-v-55a9a87f"> {{info.value}} </picker>
+  </view>
+</template>

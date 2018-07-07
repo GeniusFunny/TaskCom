@@ -1,0 +1,191 @@
+
+@charset "UTF-8";
+.personalCenter {
+  min-height: 100vh;
+  background-color: #ffc53d;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+.personalCenter-menu-icon {
+  margin-bottom: 27rpx;
+  margin-top: 35rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+.personalCenter-task {
+  margin-top: 52rpx;
+  padding-bottom: 30rpx;
+}
+.personalCenter-task-tag {
+  font-size: 32rpx;
+  color: #997625;
+  margin-bottom: 25rpx;
+  margin-left: -8rpx;
+  line-height: 31rpx;
+  vertical-align: middle;
+}
+.personalCenter-task-tag ._img {
+  width: 50rpx;
+  height: 50rpx;
+  vertical-align: text-bottom;
+  margin-right: 5rpx;
+  margin-bottom: -3rpx;
+}
+@charset "UTF-8";
+.tc-card {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 160rpx;
+}
+.tc-card-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: solid 4rpx #4d3b12;
+}
+.tc-card-infoContainer {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.tc-card-nickname {
+  font-size: 36rpx;
+  color: #4d3b12;
+  line-height: 27rpx;
+  margin-left: 21rpx;
+  margin-bottom: 51rpx;
+}
+.tc-card-reputationGroup {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 481rpx;
+}
+.tc-card-reputationGroup-firstChild {
+  margin-left: 79rpx;
+  margin-right: 186rpx;
+}
+.tc-card-reputation {
+  text-align: center;
+}
+.tc-card-reputation-value {
+  font-size: 45rpx;
+  color: #4d3b12;
+  line-height: 40rpx;
+  margin-bottom: 18rpx;
+}
+.tc-card-reputation-name {
+  font-size: 28rpx;
+  color: #997625;
+  line-height: 26rpx;
+  font-weight: 200;
+}
+@charset "UTF-8";
+.tc-task {
+  width: 690rpx;
+  height: 176rpx;
+  display: flex;
+  flex-flow: row nowrap;
+  box-sizing: border-box;
+  padding-left: 21rpx;
+  margin-bottom: 30rpx;
+  border-radius: 6rpx;
+  border-left: 8rpx solid #B583FF;
+  background-color: white;
+}
+.tc-task-multiPlayer {
+  border-color: #83CAFF;
+}
+.tc-task-info-1 {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 551rpx;
+}
+.tc-task-info-1-name {
+  font-size: 32rpx;
+  color: #4d3b12;
+  margin-top: 31rpx;
+  margin-bottom: 30rpx;
+  line-height: 30rpx;
+}
+.tc-task-info-1-date,
+.tc-task-info-1-participator {
+  font-size: 24rpx;
+  color: #997625;
+  margin-bottom: 10rpx;
+  line-height: 23rpx;
+}
+.tc-task-info-2 {
+  font-size: 48rpx;
+  color: #4d3b12;
+  line-height: 47rpx;
+  margin-top: 65rpx;
+  margin-right: 31rpx;
+}
+._button {
+  position: static;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  text-align: left;
+}
+._button:after {
+  content: none;
+}
+@charset "UTF-8";
+.tc-sideBar-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: -100%;
+}
+.active {
+  left: 0;
+}
+.tc-sideBar {
+  width: 352rpx;
+  height: 1206rpx;
+  position: absolute;
+  left: -100%;
+  background-color: #ffffff;
+}
+.tc-sideBar-active {
+  left: 0;
+  transition: left 0.4s;
+}
+.tc-sideBar-info-img {
+  width: 144rpx;
+  height: 144rpx;
+  margin-top: 128rpx;
+  margin-left: 100rpx;
+  margin-right: 108rpx;
+  margin-bottom: 31rpx;
+  border-radius: 50%;
+}
+.tc-sideBar-info-name {
+  font-size: 32rpx;
+  color: #2e2e2e;
+  text-align: center;
+  margin-bottom: 100rpx;
+}
+.tc-sideBar-menu-item {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 58rpx;
+  margin-bottom: 21rpx;
+  margin-left: 20rpx;
+}
+.tc-sideBar-menu-item-name {
+  font-size: 28rpx;
+  color: #2e2e2e;
+  line-height: 26rpx;
+  padding-top: 15rpx;
+}
+.tc-sideBar-menu-item-tag {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 15rpx;
+}

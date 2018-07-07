@@ -1,0 +1,12 @@
+<template name="history$29751015">
+  <view id="{{id}}" class="_div data-v-0fe325ee tc-task {{[type === 'multiPlayer' ? 'tc-task-multiPlayer' : '']}}" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-0fe325ee tc-task-info-1">
+      <view class="_div data-v-0fe325ee tc-task-info-1-name">{{taskName}}</view>
+      <view class="_div data-v-0fe325ee tc-task-info-1-date">截止时间：{{deadLine}}</view>
+      <view class="_div data-v-0fe325ee tc-task-info-1-participator">完成人数：{{finishedPlayerNum}}</view>
+    </view>
+    <view class="_div data-v-0fe325ee tc-task-info-2">
+      <image class="_img data-v-0fe325ee history-img" src="{{hasFinished ? tagUrl.finished: tagUrl.unfinished}}"></image>
+    </view>
+  </view>
+</template>

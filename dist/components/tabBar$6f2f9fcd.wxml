@@ -1,0 +1,15 @@
+<template name="tabBar$6f2f9fcd">
+  <view class="_div data-v-023cd459 tc-tabBar">
+    <view class="_div data-v-023cd459 tc-tabBar-icon-left tc-tabBar-icon-active">
+      <image src="../../static/personalCenter.png" class="_img data-v-023cd459"></image>
+      <view class="_div data-v-023cd459"> 我的 </view>
+    </view>
+    <view class="_div data-v-023cd459 tc-tabBar-icon-center">
+      <image src="../../static/add.png" class="_img data-v-023cd459"></image>
+    </view>
+    <view class="_div data-v-023cd459 tc-tabBar-icon-right">
+      <image src="../../static/find.png" class="_img data-v-023cd459"></image>
+      <view class="_div data-v-023cd459"> 发现 </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,35 @@
+<import src="slots" />
+<template name="input$f9880328">
+  <view bindmouseenter="handleProxy" bindmouseleave="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}" class="_div data-v-d0435b40 {{[  type === 'textarea' ? 'el-textarea' : 'el-input',  inputSize ? 'el-input--' + inputSize : '',  [    inputDisabled ? 'is-disabled' : '',    $slots.prepend || $slots.append ? 'el-input-group' : '',    $slots.append ? 'el-input-group--append' : '',    $slots.prepend ? 'el-input-group--prepend' : '',    $slots.prefix || prefixIcon ? 'el-input--prefix' : '',    $slots.suffix || suffixIcon ? 'el-input--suffix' : ''  ]]}}">
+    <template name="prepend"></template>
+    <template name="prefix"></template>
+    <template name="suffix"></template>
+    <template name="append"></template>
+    <block wx:if="{{type !== 'textarea'}}">
+      <view class="_div data-v-d0435b40 el-input-group__prepend" wx:if="{{$slots.prepend}}">
+        <template data="{{...$root[$p], $root}}" is="{{$slotprepend || 'prepend'}}"></template>
+      </view>
+      <input tabindex="{{tabindex}}" wx:if="{{type !== 'textarea'}}" class="_input data-v-d0435b40 el-input__inner" type="{{type}}" disabled="{{inputDisabled}}" autocomplete="{{autoComplete}}" value="{{currentValue}}" ref="input" bindcompositionstart="handleProxy"
+        bindcompositionupdate="handleProxy" bindcompositionend="handleProxy" bindinput="handleProxy" bindfocus="handleProxy" bindblur="handleProxy" aria-label="{{label}}" data-eventid="{{'3'}}" data-comkey="{{$k}}" />
+      <label class="_span data-v-d0435b40 el-input__prefix" wx:if="{{$slots.prefix || prefixIcon}}" style=" {{prefixOffset}}">
+        <template data="{{...$root[$p], $root}}" is="{{$slotprefix || 'prefix'}}"></template>
+        <view class="_i data-v-d0435b40 el-input__icon {{prefixIcon}}" wx:if="{{prefixIcon}}"></view>
+      </label>
+      <label class="_span data-v-d0435b40 el-input__suffix" wx:if="{{$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon}}" style=" {{suffixOffset}}">
+        <label class="_span data-v-d0435b40 el-input__suffix-inner">
+          <block wx:if="{{!showClear}}">
+            <template data="{{...$root[$p], $root}}" is="{{$slotsuffix || 'suffix'}}"></template>
+            <view class="_i data-v-d0435b40 el-input__icon {{suffixIcon}}" wx:if="{{suffixIcon}}"></view>
+          </block>
+          <view wx:else class="_i data-v-d0435b40 el-input__icon el-icon-circle-close el-input__clear" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}"></view>
+        </label>
+        <view class="_i data-v-d0435b40 el-input__icon {{['el-input__validateIcon', validateIcon]}}" wx:if="{{validateState}}"></view>
+      </label>
+      <view class="_div data-v-d0435b40 el-input-group__append" wx:if="{{$slots.append}}">
+        <template data="{{...$root[$p], $root}}" is="{{$slotappend || 'append'}}"></template>
+      </view>
+    </block>
+    <textarea wx:else tabindex="{{tabindex}}" class="_textarea data-v-d0435b40 el-textarea__inner" value="{{currentValue}}" bindcompositionstart="handleProxy" bindcompositionupdate="handleProxy" bindcompositionend="handleProxy" bindinput="handleProxy"
+      ref="textarea" disabled="{{inputDisabled}}" bindfocus="handleProxy" bindblur="handleProxy" aria-label="{{label}}" data-eventid="{{'4'}}" data-comkey="{{$k}}" style=" {{textareaStyle}}" />
+  </view>
+</template>

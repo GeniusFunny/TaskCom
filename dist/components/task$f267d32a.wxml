@@ -1,0 +1,18 @@
+<import src="infoitem$cda6825c" />
+<import src="taskList$fa8ab658" />
+<import src="avatarList$4b8dfb30" />
+<template name="task$f267d32a">
+  <view class="_div data-v-7993545f">
+    <view class="_div data-v-7993545f task {{[!fromMessage ? 'task-fullScreen' : '']}}">
+      <template data="{{...$root[$kk+'0'], $root}}" is="infoitem$cda6825c"></template>
+      <template data="{{...$root[$kk+'1'], $root}}" is="infoitem$cda6825c"></template>
+      <template data="{{...$root[$kk+'2'], $root}}" is="infoitem$cda6825c"></template>
+      <template type="finished" data="{{...$root[$kk+'3'], $root}}" is="taskList$fa8ab658"></template>
+      <template type="unfinished" bindchangeTaskState="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'4'], $root}}" is="taskList$fa8ab658"></template>
+      <template wx:if="{{info.isPublic}}" bindchangeUserTaskInfo="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'6'], $root}}" is="avatarList$4b8dfb30"></template>
+    </view>
+    <view style="height: 102rpx;" wx:if="{{fromMessage}}" class="_div data-v-7993545f">
+      <button bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}" class="_button data-v-7993545f"> 返回个人中心 </button>
+    </view>
+  </view>
+</template>

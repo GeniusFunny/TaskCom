@@ -1,0 +1,21 @@
+<import src="sideBar$58fa2e8a" />
+<import src="card$23f58621" />
+<import src="task$0c00fe16" />
+<template name="personalCenter$bffdfc4a">
+  <view class="_div data-v-6e9a5ecf personalCenter">
+    <template bindchangeSideBar="handleProxy" bindclickMenuItem="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="sideBar$58fa2e8a"></template>
+    <view class="_div data-v-6e9a5ecf personalCenter-menu">
+      <image class="_img data-v-6e9a5ecf personalCenter-menu-icon" src="/static/images/menu.png" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}"></image>
+    </view>
+    <template bindgetMoreScoreInfo="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'1'], $root}}" is="card$23f58621"></template>
+    <view class="_div data-v-6e9a5ecf personalCenter-task">
+      <view class="_div data-v-6e9a5ecf personalCenter-task-tag">
+        <image src="/static/images/task.png" class="_img data-v-6e9a5ecf"></image>
+        <label class="_span data-v-6e9a5ecf">当前任务</label>
+      </view>
+      <view class="_div data-v-6e9a5ecf">
+        <template wx:key="task.id" bindtask="handleProxy" data-eventid="{{'3-'+index}}" data-comkey="{{$k}}" data="{{...$root[$kk+'2-'+index], $root}}" is="task$0c00fe16" wx:for="{{taskList}}" wx:for-index="index" wx:for-item="task"></template>
+      </view>
+    </view>
+  </view>
+</template>

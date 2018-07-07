@@ -21,7 +21,7 @@
 import card from '../../components/card'
 import task from '../../components/task'
 import sideBar from '../../components/sideBar'
-import {GetUserInfo, GetCurrentTask, GetScore} from '../../api/API'
+import {GetUserInfo, GetCurrentTask, GetScore, SubmitForm} from '../../api/API'
 import {setStorage, jumpTo, showLoading, hideLoading} from '../../utils/wxUtils'
 import {normalizeTimeHours} from '../../utils/utils'
 
@@ -84,8 +84,10 @@ export default {
           this.parseTaskList(res.data.groups)
         })
     },
-    getTaskMoreInfo (key) {
+    getTaskMoreInfo (key, formId) {
+      console.log(formId)
       setStorage('state', 'now')
+      SubmitForm({formId: formId, type: 1})
       setStorage('currentTaskId', parseInt(key))
       jumpTo('../task/task')
     },

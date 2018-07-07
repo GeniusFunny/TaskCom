@@ -1,0 +1,175 @@
+
+@charset "UTF-8";
+.find {
+  min-height: 100vh;
+  background-color: #ffc53d;
+  padding: 30rpx;
+  padding-top: 0;
+  border-radius: 6rpx;
+  box-sizing: border-box;
+}
+.find-restRank {
+  margin-top: 40rpx;
+  background-color: #ffffff;
+  padding-bottom: 40rpx;
+  border-radius: 6rpx;
+}
+.find-restRank-item {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 690rpx;
+  height: 100rpx;
+  box-sizing: border-box;
+  align-items: center;
+  padding-top: 17rpx;
+  padding-left: 40rpx;
+  padding-right: 34rpx;
+}
+.find-restRank-item-avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  margin-right: 19rpx;
+}
+.find-restRank-item-name {
+  font-size: 28rpx;
+  color: #33270c;
+}
+.find-restRank-item-position {
+  font-size: 32rpx;
+  color: #33270c;
+  margin-right: 50rpx;
+  min-width: 30rpx;
+}
+.find-restRank-item-score {
+  position: absolute;
+  right: 64rpx;
+  font-size: 32rpx;
+  color: #33270c;
+}
+.find-village {
+  margin-top: 13rpx;
+}
+.find-village-item {
+  margin-bottom: 15rpx;
+}
+.find-village-item-tag {
+  font-size: 24rpx;
+  color: #33270c;
+  margin-left: 30rpx;
+}
+.find-village-item-tag ._img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-bottom: -30rpx;
+  margin-right: 10rpx;
+}
+.find-village-item-content {
+  width: 690rpx;
+  height: 176rpx;
+  box-sizing: border-box;
+  border-radius: 6rpx;
+  padding-top: 45rpx;
+  padding-left: 31rpx;
+  padding-right: 31rpx;
+  background-color: #ffffff;
+}
+.find-village-item-content-title {
+  font-size: 32rpx;
+  color: #33270c;
+  line-height: 31rpx;
+  margin-bottom: 23rpx;
+}
+.find-village-item-content-time {
+  font-size: 24rpx;
+  color: #997625;
+  line-height: 19rpx;
+}
+.find-village-item-content-members-count {
+  width: 56rpx;
+  height: 56rpx;
+  margin-left: 10rpx;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: rgba(255, 192, 63, 0.2);
+  float: right;
+}
+.find-village-item-content-members-count ._div {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  color: #ffc53d;
+  padding-top: 19rpx;
+  line-height: 19rpx;
+}
+.find-village-item-content-members ._img {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  float: right;
+  margin-left: 10rpx;
+}
+@charset "UTF-8";
+.tc-tab {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+.tc-tab-item {
+  width: 192rpx;
+  height: 72rpx;
+  font-size: 32rpx;
+  color: #33270c;
+  border-width: 4rpx;
+  border-style: solid;
+  border-color: #ffc53d;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 36rpx;
+  line-height: 30rpx;
+  padding-top: 18rpx;
+}
+.tc-tab-item-active {
+  background-color: #ffd470;
+  border-color: #33270c;
+}
+@charset "UTF-8";
+.tc-rankItem-top3 {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 690rpx;
+  height: 176rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+  background-color: #ffffff;
+  border-radius: 6rpx;
+  padding-right: 34rpx;
+  padding-left: 34rpx;
+  align-items: center;
+}
+.tc-rankItem-top3-name {
+  width: 240rpx;
+  font-size: 32rpx;
+  color: #33270c;
+  margin-right: 10rpx;
+}
+.tc-rankItem-top3-score {
+  font-size: 48rpx;
+  color: #33270c;
+  position: absolute;
+  right: 64rpx;
+}
+.tc-rankItem-top3-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 15rpx;
+  border-radius: 50%;
+}
+.tc-rankItem-top3-tag {
+  width: 48rpx;
+  height: 54rpx;
+  margin-right: 28rpx;
+}

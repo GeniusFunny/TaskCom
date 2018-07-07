@@ -1,0 +1,12 @@
+<template name="index$8944527c">
+  <view class="_div data-v-217e574e index">
+    <image src="/static/images/cover.png" class="_img data-v-217e574e"></image>
+    <view style="z-index: 2000; position: absolute; bottom: -130rpx; right: 30rpx; color: #2e2e2e; font-size: 24rpx;" class="_div data-v-217e574e">  powered by 火锅底料小组 © 2018 </view>
+    <view class="_div data-v-217e574e">
+      <button open-type="getUserInfo" bindgetuserinfo="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_button data-v-217e574e">
+        <image src="/static/images/button.png" class="_img data-v-217e574e"></image>
+        <view class="_div data-v-217e574e">授权进入</view>
+      </button>
+    </view>
+  </view>
+</template>

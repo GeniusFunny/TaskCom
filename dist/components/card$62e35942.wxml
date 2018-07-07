@@ -1,0 +1,18 @@
+<template name="card$62e35942">
+  <view class="_div data-v-28373aeb tc-card">
+    <image class="_img data-v-28373aeb tc-card-avatar" src="{{avatar}}" background-size="cover"></image>
+    <view class="_div data-v-28373aeb tc-card-infoContainer">
+      <view class="_div data-v-28373aeb tc-card-nickname"> {{nickName}} </view>
+      <view class="_div data-v-28373aeb tc-card-reputationGroup">
+        <view class="_div data-v-28373aeb tc-card-reputation tc-card-reputationGroup-firstChild">
+          <view class="_div data-v-28373aeb tc-card-reputation-value" bindtap="handleProxy" id="1" data-eventid="{{'0'}}" data-comkey="{{$k}}">{{daily}}</view>
+          <view class="_div data-v-28373aeb tc-card-reputation-name">个人</view>
+        </view>
+        <view class="_div data-v-28373aeb tc-card-reputation">
+          <view class="_div data-v-28373aeb tc-card-reputation-value" bindtap="handleProxy" id="0" data-eventid="{{'1'}}" data-comkey="{{$k}}">{{contend}}</view>
+          <view class="_div data-v-28373aeb tc-card-reputation-name">多人</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

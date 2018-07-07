@@ -1,0 +1,11 @@
+<import src="history$29751015" />
+<template name="history$b2b775fc">
+  <view class="_div data-v-a992f2e4 history">
+    <view class="_div data-v-a992f2e4 history-task">
+      <view class="_div data-v-a992f2e4">
+        <view wx:if="{{taskList !== undefined && taskList.length === 0}}" style="color: #997625; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 28rpx;" class="_div data-v-a992f2e4">小主，这里是空的。</view>
+        <template wx:key="task.groupId" bindtask="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0-'+index], $root}}" is="history$29751015" wx:for="{{taskList}}" wx:for-index="index" wx:for-item="task"></template>
+      </view>
+    </view>
+  </view>
+</template>

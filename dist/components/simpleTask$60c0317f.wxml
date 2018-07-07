@@ -1,0 +1,21 @@
+<import src="infoitem$f7fe85e0" />
+<import src="simpleTaskList$0dde68a4" />
+<import src="avatarList$60066926" />
+<template name="simpleTask$60c0317f">
+  <view class="_div data-v-58b9f473">
+    <view class="_div data-v-58b9f473 task" style="min-height: 87vh">
+      <template data="{{...$root[$kk+'0'], $root}}" is="infoitem$f7fe85e0"></template>
+      <template data="{{...$root[$kk+'1'], $root}}" is="infoitem$f7fe85e0"></template>
+      <template data="{{...$root[$kk+'2'], $root}}" is="infoitem$f7fe85e0"></template>
+      <template data="{{...$root[$kk+'3'], $root}}" is="simpleTaskList$0dde68a4"></template>
+      <template wx:if="{{info.isPublic}}" data="{{...$root[$kk+'5'], $root}}" is="avatarList$60066926"></template>
+    </view>
+    <view wx:if="{{info.share !== undefined && info.share}}" class="_div data-v-58b9f473 tc-button" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">
+      <image src="/static/images/button.png" class="_img data-v-58b9f473"></image>
+      <view class="_div data-v-58b9f473 tc-button-info"> {{buttonContent || '加入'}} </view>
+    </view>
+    <view wx:if="{{!info.share}}" class="_div data-v-58b9f473 tc-button" bindtap="handleProxy" style="background-color: #ffc53d; min-height: 13vh;" data-eventid="{{'3'}}" data-comkey="{{$k}}">
+      <view class="_div data-v-58b9f473 tc-button-info"></view>
+    </view>
+  </view>
+</template>

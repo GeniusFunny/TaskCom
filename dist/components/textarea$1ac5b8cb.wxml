@@ -1,0 +1,7 @@
+<template name="textarea$1ac5b8cb">
+  <view class="_div data-v-7ac84657 tc-textarea">
+    <label class="_label data-v-7ac84657">任务{{index + 1}}</label>
+    <textarea value="{{info.value}}" placeholder="30字以内" maxlength="30" id="{{info.id}}" bindinput="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_textarea data-v-7ac84657" />
+    <image src="/static/images/delete.png" id="{{info.id}}" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_img data-v-7ac84657"></image>
+  </view>
+</template>

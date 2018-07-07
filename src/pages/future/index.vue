@@ -13,6 +13,7 @@
           :startTime="item.startTime"
           :type="item.type"
           @task="getTaskMoreInfo"
+          @submit="getFormId"
         />
       </div>
     </div>
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-  import { GetFutureTaskList } from '../../api/API'
+  import { GetFutureTaskList, SubmitForm } from '../../api/API'
   import future from '../../components/future'
   import {normalizeTimeHours} from '../../utils/utils'
   import {setStorage, jumpTo} from '../../utils/wxUtils'
@@ -52,6 +53,10 @@
         setStorage('currentTaskId', parseInt(key))
         setStorage('state', 'future')
         jumpTo(`../simpleTask/simpleTask`)
+      },
+      getFormId (formId) {
+        console.log(formId)
+        SubmitForm({formId: formId, type: 1})
       }
     },
     onPullDownRefresh () {

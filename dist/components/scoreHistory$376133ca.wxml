@@ -1,0 +1,7 @@
+<import src="scoreHistoryItem$dea711b8" />
+<template name="scoreHistory$376133ca">
+  <view class="_div data-v-17f609be scoreHistory">
+    <view wx:if="{{historyList !== undefined && historyList.length === 0 && hasLoaded}}" style="color: #997625; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 28rpx;" class="_div data-v-17f609be">小主，这里是空的。</view>
+    <template wx:key="index" data="{{...$root[$kk+'0-'+index], $root}}" is="scoreHistoryItem$dea711b8" wx:for="{{historyList}}" wx:for-index="index" wx:for-item="item"></template>
+  </view>
+</template>
