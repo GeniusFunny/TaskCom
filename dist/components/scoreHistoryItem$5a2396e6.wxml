@@ -1,0 +1,12 @@
+<template name="scoreHistoryItem$5a2396e6">
+  <view class="_div data-v-5eb5d872 tc-historyScore-item">
+    <view class="_div data-v-5eb5d872 tc-historyScore-item-tag">
+      <image src="{{info.sponsorAvatar}}" class="_img data-v-5eb5d872"></image>
+    </view>
+    <view class="_div data-v-5eb5d872 tc-historyScore-item-content">
+      <view class="_div data-v-5eb5d872 tc-historyScore-item-content-title">{{info.title}}</view>
+      <view class="_div data-v-5eb5d872 tc-historyScore-item-content-time">{{info.time}}</view>
+    </view>
+    <view class="_div data-v-5eb5d872 tc-historyScore-item-score"> +{{info.score}} </view>
+  </view>
+</template>

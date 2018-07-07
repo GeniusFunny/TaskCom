@@ -1,0 +1,36 @@
+<import src="tab$72f5cc14" />
+<import src="input$5c9677ee" />
+<import src="textarea$1ac5b8cb" />
+<import src="formButton$5f4fd332" />
+<import src="modal$25698528" />
+<template name="add$713d4111">
+  <view class="_div data-v-bb4716c6">
+    <view class="_div data-v-bb4716c6 add">
+      <template bindchangeTaskType="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="tab$72f5cc14"></template>
+      <view class="_div data-v-bb4716c6">
+        <template bindchangeTaskName="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'1'], $root}}" is="input$5c9677ee"></template>
+        <template wx:key="item.id" bindchangeTaskItemContent="handleProxy" binddeleteTaskItem="handleProxy" data-eventid="{{'2-'+index}}" data-comkey="{{$k}}" data="{{...$root[$kk+'2-'+index], $root}}" is="textarea$1ac5b8cb" wx:for="{{info.taskList}}"
+          wx:for-index="index" wx:for-item="item"></template>
+        <view class="_div data-v-bb4716c6 add-addTaskItem">
+          <image src="/static/images/addButton.png" bindtap="handleProxy" id="img" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_img data-v-bb4716c6"></image>
+        </view>
+        <view class="_div data-v-bb4716c6 add-addTaskItem-info"> 添加任务项，获得多倍积分, 完成后次日到账
+          <image class="_img data-v-bb4716c6 add-addTaskItem-info-tag" src="/static/images/jifen.png"></image>
+        </view>
+        <view class="_div data-v-bb4716c6 add-info-margin"></view>
+        <template bindchangeStartDate="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'3'], $root}}" is="input$5c9677ee"></template>
+        <template bindchangeEndDate="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'4'], $root}}" is="input$5c9677ee"></template>
+        <template bindchangeStartTime="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'5'], $root}}" is="input$5c9677ee"></template>
+        <template bindchangeEndTime="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'6'], $root}}" is="input$5c9677ee"></template>
+      </view>
+      <view wx:if="{{info.type === 'multiplayer'}}" class="_div data-v-bb4716c6">
+        <template bindchangePlayerNum="handleProxy" data-eventid="{{'10'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'9'], $root}}" is="input$5c9677ee"></template>
+        <template bindchangeIsPublic="handleProxy" data-eventid="{{'11'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'10'], $root}}" is="input$5c9677ee"></template>
+      </view>
+    </view>
+    <view style="padding-top: 15rpx; padding-bottom: 15rpx;" class="_div data-v-bb4716c6">
+      <template bindgetFormId="handleProxy" data-eventid="{{'12'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'11'], $root}}" is="formButton$5f4fd332"></template>
+    </view>
+    <template bindshareTask="handleProxy" data-eventid="{{'13'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'12'], $root}}" is="modal$25698528"></template>
+  </view>
+</template>

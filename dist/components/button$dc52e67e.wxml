@@ -1,0 +1,10 @@
+<import src="slots" />
+<template name="button$dc52e67e">
+  <view class="_div data-v-24e3c14d tc-button" id="button" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <template name="default"></template>
+    <image src="/static/images/button.png" class="_img data-v-24e3c14d"></image>
+    <view class="_div data-v-24e3c14d tc-button-info">
+      <template data="{{...$root[$p], $root}}" is="{{$slotdefault || 'default'}}"></template>
+    </view>
+  </view>
+</template>

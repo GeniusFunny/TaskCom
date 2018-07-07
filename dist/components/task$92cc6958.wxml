@@ -1,0 +1,10 @@
+<template name="task$92cc6958">
+  <view id="{{id}}" class="_div data-v-1042b2e0 tc-task {{[type === 'multiPlayer' ? 'tc-task-multiPlayer' : '']}}" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-1042b2e0 tc-task-info-1">
+      <view class="_div data-v-1042b2e0 tc-task-info-1-name">{{taskName}}</view>
+      <view class="_div data-v-1042b2e0 tc-task-info-1-date">截止时间：{{deadLine}}</view>
+      <view class="_div data-v-1042b2e0 tc-task-info-1-participator">完成人数：{{finishedPlayerNum}}</view>
+    </view>
+    <view class="_div data-v-1042b2e0 tc-task-info-2"> {{finishedTaskNum}}/{{taskNum}} </view>
+  </view>
+</template>

@@ -1,0 +1,8 @@
+<template name="future$c6fb7a5c">
+  <view id="{{id}}" class="_div data-v-2f8f775e tc-task {{[type === 'multiPlayer' ? 'tc-task-multiPlayer' : '']}}" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-2f8f775e tc-task-info-1">
+      <view class="_div data-v-2f8f775e tc-task-info-1-name">{{taskName}}</view>
+      <view class="_div data-v-2f8f775e tc-task-info-1-date">开始时间：{{startTime}}</view>
+    </view>
+  </view>
+</template>

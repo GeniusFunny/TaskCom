@@ -1,0 +1,12 @@
+<template name="future$34e7cd14">
+  <form report-submit="true" bindsubmit="handleProxy" id="{{id}}" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_form data-v-c9ef64c0">
+    <button formType="submit" class="_button data-v-c9ef64c0">
+      <view class="_div data-v-c9ef64c0 tc-task {{[type === 'multiPlayer' ? 'tc-task-multiPlayer' : '']}}">
+        <view class="_div data-v-c9ef64c0 tc-task-info-1">
+          <view class="_div data-v-c9ef64c0 tc-task-info-1-name">{{taskName}}</view>
+          <view class="_div data-v-c9ef64c0 tc-task-info-1-date">开始时间：{{startTime}}</view>
+        </view>
+      </view>
+    </button>
+  </form>
+</template>

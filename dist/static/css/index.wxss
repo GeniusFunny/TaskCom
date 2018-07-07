@@ -1,0 +1,36 @@
+
+@charset "UTF-8";
+.index {
+  position: fixed;
+}
+.index ._img {
+  height: 100vh;
+  width: 750rpx;
+}
+.index ._button {
+  margin-top: -250rpx;
+  background-color: transparent;
+  height: 80rpx;
+  padding: 0;
+}
+.index ._button ._div {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  font-size: 32rpx;
+  color: #33270c;
+  font-weight: 400;
+  z-index: 9999;
+}
+.index ._button ._img {
+  box-sizing: border-box;
+  border-radius: 60rpx;
+  background-color: #fff;
+  padding: 0;
+  width: 540rpx;
+  height: 80rpx;
+}
+.index ._button:after {
+  border: none;
+}

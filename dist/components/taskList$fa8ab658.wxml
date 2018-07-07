@@ -1,0 +1,13 @@
+<template name="taskList$fa8ab658">
+  <view class="_div data-v-3a859b40 tc-taskList">
+    <view class="_div data-v-3a859b40 tc-taskList-tag">
+      <image src="{{type === 'finished' ? '/static/images/finished_task.png': '/static/images/unfinished_task.png'}}" class="_img data-v-3a859b40"></image>
+    </view>
+    <view class="_div data-v-3a859b40 tc-taskList-body" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+      <view class="_div data-v-3a859b40 tc-taskList-body-item" wx:key="index" key="{{index}}" wx:for="{{taskList}}" wx:for-index="index" wx:for-item="item">
+        <image class="_img data-v-3a859b40 tc-taskList-body-item-tag" src="{{type === 'finished' ? '/static/images/ok.png': '/static/images/pending.png'}}" id="{{item.itemId}}"></image>
+        <view class="_div data-v-3a859b40 tc-taskList-body-item-value">{{item.content}}</view>
+      </view>
+    </view>
+  </view>
+</template>

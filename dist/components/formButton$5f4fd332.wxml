@@ -1,0 +1,5 @@
+<template name="formButton$5f4fd332">
+  <form report-submit="true" bindsubmit="handleProxy" class="_form data-v-39ed70f3 tc-formButton {{type ? 'return' : ''}}" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <button formType="submit" disabled="{{!active}}" class="_button data-v-39ed70f3">{{buttonContent || '创建任务'}}</button>
+  </form>
+</template>

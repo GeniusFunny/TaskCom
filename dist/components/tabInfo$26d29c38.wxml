@@ -1,0 +1,8 @@
+<import src="input$7a359e8b" />
+<template name="tabInfo$26d29c38">
+  <view class="_div data-v-899fe250">
+    <template data="{{...$root[$kk+'0'], $root, $slotdefault:'data-v-899fe250-default-0'}}" is="input$7a359e8b"></template>
+    <template data="{{...$root[$kk+'1'], $root, $slotdefault:'data-v-899fe250-default-1'}}" is="input$7a359e8b"></template>
+    <template data="{{...$root[$kk+'2'], $root, $slotdefault:'data-v-899fe250-default-2'}}" is="input$7a359e8b"></template>
+  </view>
+</template>
