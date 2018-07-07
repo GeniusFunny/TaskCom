@@ -1,0 +1,16 @@
+<template name="sideBar$58fa2e8a">
+  <view class="_div data-v-317279af tc-sideBar-container {{[hidden !== undefined && !hidden ? 'active' : '']}}" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-317279af tc-sideBar {{[hidden !== undefined && !hidden ? 'tc-sideBar-active' : '']}}">
+      <view class="_div data-v-317279af tc-sideBar-info">
+        <image class="_img data-v-317279af tc-sideBar-info-img" src="{{avatar}}"></image>
+        <view class="_div data-v-317279af tc-sideBar-info-name">{{nickName}}</view>
+      </view>
+      <view class="_div data-v-317279af tc-sideBar-menu-item" wx:key="item.id" key="{{item.id}}" id="{{item.id}}" bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" wx:for="{{menuList}}" wx:for-index="index" wx:for-item="item">
+        <view class="_div data-v-317279af">
+          <image class="_img data-v-317279af tc-sideBar-menu-item-tag" src="{{item.tag}}"></image>
+        </view>
+        <view class="_div data-v-317279af tc-sideBar-menu-item-name">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,13 @@
+<import src="infoitem$f7fe85e0" />
+<import src="taskList$6d8ea312" />
+<import src="avatarList$60066926" />
+<template name="task$2f4cf0ed">
+  <view class="_div data-v-0ac0fae1 task">
+    <template data="{{...$root[$kk+'0'], $root}}" is="infoitem$f7fe85e0"></template>
+    <template data="{{...$root[$kk+'1'], $root}}" is="infoitem$f7fe85e0"></template>
+    <template data="{{...$root[$kk+'2'], $root}}" is="infoitem$f7fe85e0"></template>
+    <template type="finished" data="{{...$root[$kk+'3'], $root}}" is="taskList$6d8ea312"></template>
+    <template type="unfinished" bindchangeTaskState="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'4'], $root}}" is="taskList$6d8ea312"></template>
+    <template wx:if="{{info.isPublic}}" bindchangeUserTaskInfo="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'6'], $root}}" is="avatarList$60066926"></template>
+  </view>
+</template>

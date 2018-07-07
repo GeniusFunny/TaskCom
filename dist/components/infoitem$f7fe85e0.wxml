@@ -1,0 +1,6 @@
+<template name="infoitem$f7fe85e0">
+  <view class="_div data-v-eeda02c8 tc-infoItem">
+    <view class="_div data-v-eeda02c8">{{name}}</view>
+    <view class="_div data-v-eeda02c8 tc-infoItem-value">{{value}}</view>
+  </view>
+</template>

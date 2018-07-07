@@ -1,0 +1,8 @@
+<template name="rankItem$e292aaa4">
+  <view class="_div data-v-d96e278c tc-rankItem-top3">
+    <image class="_img data-v-d96e278c tc-rankItem-top3-tag" src="{{tagList[position]}}"></image>
+    <image class="_img data-v-d96e278c tc-rankItem-top3-avatar" src="{{avatar}}"></image>
+    <view class="_div data-v-d96e278c tc-rankItem-top3-name">{{username}}</view>
+    <view class="_div data-v-d96e278c tc-rankItem-top3-score">{{score}}</view>
+  </view>
+</template>

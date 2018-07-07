@@ -1,0 +1,11 @@
+<template name="modal$d467d024">
+  <view class="_div data-v-714021e2 tc-modal" hidden="{{hidden === undefined || hidden}}" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-714021e2 tc-modal-body">
+      <view class="_div data-v-714021e2 tc-modal-body-content">创建成功！</view>
+      <view class="_div data-v-714021e2 tc-modal-body-options">
+        <button class="_button data-v-714021e2 tc-modal-body-options-item tc-modal-body-options-item-font" open-type="share" id="share">分享到微信</button>
+        <button class="_button data-v-714021e2 tc-modal-body-options-item tc-modal-body-options-item-font">关闭</button>
+      </view>
+    </view>
+  </view>
+</template>

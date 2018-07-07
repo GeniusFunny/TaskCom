@@ -1,0 +1,1 @@
+<import src="../../components/scoreHistory$7d99fb48" /><template is="scoreHistory$7d99fb48" data="{{ ...$root['0'], $root }}"/>

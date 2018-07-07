@@ -1,0 +1,38 @@
+<import src="tabFind$8d007522" />
+<import src="rankItem$e292aaa4" />
+<template name="find$108b0021">
+  <view class="_div data-v-2801ebd6 find">
+    <template bindchangeTab="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0'], $root}}" is="tabFind$8d007522"></template>
+    <view hidden="{{info.type !== undefined && info.type === 'village'}}" class="_div data-v-2801ebd6">
+      <template wx:key="index" data="{{...$root[$kk+'1-'+index], $root}}" is="rankItem$e292aaa4" wx:for="{{rankList.top3}}" wx:for-index="index" wx:for-item="item"></template>
+    </view>
+    <view hidden="{{info.type !== undefined && info.type === 'village'}}" class="_div data-v-2801ebd6 find-restRank">
+      <view class="_div data-v-2801ebd6 find-restRank-item" wx:key="index" key="{{index}}" wx:for="{{rankList.rest}}" wx:for-index="index" wx:for-item="item">
+        <view class="_div data-v-2801ebd6 find-restRank-item-position">{{index + 4}}</view>
+        <image class="_img data-v-2801ebd6 find-restRank-item-avatar" src="{{item.avatar}}"></image>
+        <view class="_div data-v-2801ebd6 find-restRank-item-name">{{item.username}}</view>
+        <view class="_div data-v-2801ebd6 find-restRank-item-score">{{item.peopleScore}}</view>
+      </view>
+    </view>
+    <view hidden="{{info.type !== 'village'}}" class="_div data-v-2801ebd6 find-village" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">
+      <view style="text-align: center; font-size: 18rpx; color: #997625;" class="_div data-v-2801ebd6">每次下拉都有不同的体验</view>
+      <view class="_div data-v-2801ebd6 find-village-item" wx:key="index" key="{{index}}" wx:for="{{villageTaskList}}" wx:for-index="index" wx:for-item="item">
+        <view class="_div data-v-2801ebd6 find-village-item-tag">
+          <image src="{{item.sponsorAvatar}}" class="_img data-v-2801ebd6"></image>
+          <label class="_span data-v-2801ebd6">{{item.sponsorName}}</label>
+          <view style="position: absolute; right: 30rpx; margin-top: -32rpx" class="_div data-v-2801ebd6"> @{{item.sponsorCollage}} </view>
+        </view>
+        <view class="_div data-v-2801ebd6 find-village-item-content" id="{{item.groupId}}">
+          <view class="_div data-v-2801ebd6 find-village-item-content-title" id="{{item.groupId}}"> {{item.title}} </view>
+          <view class="_div data-v-2801ebd6 find-village-item-content-time" id="{{item.groupId}}"> {{item.time}} </view>
+          <view class="_div data-v-2801ebd6 find-village-item-content-members">
+            <view wx:if="{{item.members.length > 3}}" class="_div data-v-2801ebd6 find-village-item-content-members-count">
+              <view class="_div data-v-2801ebd6"> +{{item.members.length - 3}} </view>
+            </view>
+            <image src="{{item2.avatar}}" wx:key="index2" key="{{index2}}" wx:if="{{index2 <= 2}}" wx:for="{{item.members}}" wx:for-index="index2" wx:for-item="item2" class="_img data-v-2801ebd6"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,118 @@
+
+@charset "UTF-8";
+.tc-infoItem {
+  width: 690rpx;
+  height: 128rpx;
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: 32rpx;
+  color: #33270c;
+  margin-bottom: 30rpx;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 6rpx;
+  background-color: #ffffff;
+  padding-left: 32rpx;
+}
+.tc-infoItem-value {
+  position: absolute;
+  right: 62rpx;
+}
+@charset "UTF-8";
+.tc-avatarList {
+  width: 690rpx;
+  height: 210rpx;
+  display: flex;
+  flex-flow: column nowrap;
+  border-radius: 6rpx;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  padding-top: 18rpx;
+}
+.tc-avatarList-title {
+  font-size: 28rpx;
+  color: #33270c;
+  margin-bottom: 31rpx;
+  padding-left: 30rpx;
+}
+.tc-avatarList-body {
+  overflow: scroll;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.tc-avatarList-body-item {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-left: 31rpx;
+}
+.tc-avatarList-body-item ._img {
+  box-sizing: border-box;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+}
+.tc-avatarList-body-item-name {
+  font-size: 23rpx;
+  color: #33270c;
+}
+.tc-avatarList-body-item-active {
+  border: 16rpx double #ffc53d;
+}
+@charset "UTF-8";
+.task {
+  background-color: #ffc53d;
+  padding: 30rpx;
+  min-height: 94vh;
+}
+.task-fullScreen {
+  min-height: 100vh;
+  background-color: #ffc53d;
+}
+._button {
+  margin-top: 15rpx;
+  width: 600rpx;
+  height: 88rpx;
+  margin-bottom: 15rpx;
+  box-shadow: 0 6rpx 10rpx 4rpx rgba(255, 197, 102, 0.3);
+  background: linear-gradient(45deg, #ffc53d 30%, #fce01e 90%);
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  color: #33270c;
+}
+@charset "UTF-8";
+.tc-taskList {
+  width: 690rpx;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 6rpx;
+  margin-bottom: 29rpx;
+}
+.tc-taskList-tag ._img {
+  width: 136rpx;
+  height: 49rpx;
+  margin-top: 8rpx;
+  margin-left: -8rpx;
+}
+.tc-taskList-body {
+  display: flex;
+  flex-flow: column nowrap;
+  padding-left: 36rpx;
+  padding-top: 35rpx;
+  padding-bottom: 29rpx;
+}
+.tc-taskList-body-item {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 25rpx;
+}
+.tc-taskList-body-item-tag {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 28rpx;
+  margin-top: -5rpx;
+}
+.tc-taskList-body-item-value {
+  font-size: 28rpx;
+  color: #33270c;
+}

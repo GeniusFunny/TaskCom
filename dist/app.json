@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/add/add",
+    "pages/counter/counter",
+    "pages/editInfo/editInfo",
+    "pages/find/find",
+    "pages/future/future",
+    "pages/history/history",
+    "pages/personalCenter/personalCenter",
+    "pages/scoreHistory/scoreHistory",
+    "pages/simpleTask/simpleTask",
+    "pages/task/task"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffc53d",
+    "navigationBarTitleText": "TaskCom",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#ffc53d"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4d4d4d",
+    "list": [
+      {
+        "pagePath": "pages/personalCenter/personalCenter",
+        "iconPath": "./static/images/me1.png",
+        "text": "我的",
+        "selectedIconPath": "./static/images/me2.png"
+      },
+      {
+        "pagePath": "pages/add/add",
+        "iconPath": "./static/images/add1.png",
+        "text": "新建任务",
+        "selectedIconPath": "./static/images/add2.png"
+      },
+      {
+        "pagePath": "pages/find/find",
+        "iconPath": "./static/images/find1.png",
+        "text": "发现",
+        "selectedIconPath": "./static/images/find2.png"
+      }
+    ]
+  }
+}

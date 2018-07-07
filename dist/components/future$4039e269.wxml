@@ -1,0 +1,12 @@
+<import src="future$34e7cd14" />
+<template name="future$4039e269">
+  <view class="_div data-v-c3ad1946 history">
+    <view class="_div data-v-c3ad1946 history-task">
+      <view class="_div data-v-c3ad1946">
+        <view wx:if="{{taskList !== undefined && taskList.length === 0}}" style="color: #997625; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 28rpx;" class="_div data-v-c3ad1946"> 小主，这里是空的。 </view>
+        <template wx:key="index" bindtask="handleProxy" bindsubmit="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" data="{{...$root[$kk+'0-'+index], $root}}" is="future$34e7cd14" wx:for="{{taskList}}" wx:for-index="index"
+          wx:for-item="item"></template>
+      </view>
+    </view>
+  </view>
+</template>

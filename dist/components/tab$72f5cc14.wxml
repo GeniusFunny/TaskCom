@@ -1,0 +1,6 @@
+<template name="tab$72f5cc14">
+  <view class="_div data-v-92c811f0 tc-tab" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-92c811f0 tc-tab-item {{[type === 'daily' ? 'tc-tab-item-active' : '']}}" id="daily">单人</view>
+    <view class="_div data-v-92c811f0 tc-tab-item {{[type === 'multiplayer' ? 'tc-tab-item-active' : '']}}" id="multiplayer">多人</view>
+  </view>
+</template>

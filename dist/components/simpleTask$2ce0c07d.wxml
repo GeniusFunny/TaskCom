@@ -1,0 +1,18 @@
+<import src="infoitem$cda6825c" />
+<import src="simpleTaskList$e282de34" />
+<import src="avatarList$4b8dfb30" />
+<import src="formButton$5f4fd332" />
+<template name="simpleTask$2ce0c07d">
+  <view class="_div data-v-1412911e">
+    <view class="_div data-v-1412911e task {{[!share ? 'task-fullScreen' : '']}}">
+      <template data="{{...$root[$kk+'0'], $root}}" is="infoitem$cda6825c"></template>
+      <template data="{{...$root[$kk+'1'], $root}}" is="infoitem$cda6825c"></template>
+      <template data="{{...$root[$kk+'2'], $root}}" is="infoitem$cda6825c"></template>
+      <template data="{{...$root[$kk+'3'], $root}}" is="simpleTaskList$e282de34"></template>
+      <template wx:if="{{info.isPublic}}" data="{{...$root[$kk+'5'], $root}}" is="avatarList$4b8dfb30"></template>
+    </view>
+    <view wx:if="{{share !== undefined && share}}" class="_div data-v-1412911e tc-button">
+      <template bindgetFormId="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" data="{{...$root[$kk+'7'], $root}}" is="formButton$5f4fd332"></template>
+    </view>
+  </view>
+</template>

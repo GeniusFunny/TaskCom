@@ -1,0 +1,13 @@
+<template name="simpleTaskList$0dde68a4">
+  <view class="_div data-v-3fe45130 tc-taskList">
+    <view class="_div data-v-3fe45130 tc-taskList-tag">
+      <image src="/static/images/taskList.png" class="_img data-v-3fe45130"></image>
+    </view>
+    <view class="_div data-v-3fe45130 tc-taskList-body">
+      <view class="_div data-v-3fe45130 tc-taskList-body-item" wx:key="index" key="{{index}}" wx:for="{{taskList}}" wx:for-index="index" wx:for-item="item">
+        <image class="_img data-v-3fe45130 tc-taskList-body-item-tag" src="/static/images/pending.png" id="{{item.itemId}}"></image>
+        <view class="_div data-v-3fe45130 tc-taskList-body-item-value">{{item.content}}</view>
+      </view>
+    </view>
+  </view>
+</template>

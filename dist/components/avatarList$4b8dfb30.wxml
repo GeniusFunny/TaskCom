@@ -1,0 +1,11 @@
+<template name="avatarList$4b8dfb30">
+  <view class="_div data-v-43ce5cf4 tc-avatarList" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-43ce5cf4 tc-avatarList-title">参与人员</view>
+    <view class="_div data-v-43ce5cf4 tc-avatarList-body">
+      <view class="_div data-v-43ce5cf4 tc-avatarList-body-item" wx:key="index" key="{{index}}" wx:for="{{avatarList}}" wx:for-index="index" wx:for-item="item">
+        <image src="{{item.avatar}}" id="{{item.userId}}" class="_img data-v-43ce5cf4 {{[currentUser === item.userId ? 'tc-avatarList-body-item-active' : '']}}"></image>
+        <view class="_div data-v-43ce5cf4 tc-avatarList-body-item-name">{{item.username}}</view>
+      </view>
+    </view>
+  </view>
+</template>

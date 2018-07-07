@@ -1,0 +1,6 @@
+<template name="tabFind$8d007522">
+  <view class="_div data-v-efcdbb3a tc-tab" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-efcdbb3a tc-tab-item {{[type === 'village' ? 'tc-tab-item-active' : '']}}" id="village">任务村</view>
+    <view class="_div data-v-efcdbb3a tc-tab-item {{[type === 'rank' ? 'tc-tab-item-active' : '']}}" id="rank">排行榜</view>
+  </view>
+</template>

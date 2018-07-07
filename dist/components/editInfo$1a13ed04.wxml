@@ -1,0 +1,49 @@
+<template name="editInfo$1a13ed04">
+  <view class="_div data-v-d975a51c editInfo">
+    <view class="_div data-v-d975a51c editInfo-container">
+      <view class="_div data-v-d975a51c editInfo-module editInfo-module-1">
+        <view class="_div data-v-d975a51c editInfo-avatarItem">
+          <view class="_div data-v-d975a51c editInfo-avatarItem-name"> 头像 </view>
+          <view class="_div data-v-d975a51c editInfo-avatarItem-avatar">
+            <image src="{{info.avatar}}" class="_img data-v-d975a51c"></image>
+          </view>
+        </view>
+        <view class="_div data-v-d975a51c editInfo-normalItem">
+          <view class="_div data-v-d975a51c"> 昵称 </view>
+          <input class="_input data-v-d975a51c editInfo-normalItem-value" type="text" placeholder="未设置" value="{{info.username}}" maxlength="14" bindinput="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" />
+        </view>
+        <view class="_div data-v-d975a51c editInfo-normalItem">
+          <view class="_div data-v-d975a51c"> 性别 </view>
+          <view class="_div data-v-d975a51c editInfo-normalItem-img">
+            <image src="{{images.man}}" bindtap="handleProxy" id="man" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_img data-v-d975a51c"></image>
+            <image src="{{images.woman}}" bindtap="handleProxy" id="woman" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_img data-v-d975a51c"></image>
+          </view>
+        </view>
+        <view class="_div data-v-d975a51c editInfo-normalItem">
+          <view class="_div data-v-d975a51c"> 出生年月 </view>
+          <picker mode="date" value="{{info.birthday}}" start="1990-01-01" end="2018-12-31" bindchange="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_picker data-v-d975a51c">
+            <view class="_div data-v-d975a51c editInfo-normalItem-value"> {{info.birthday}} </view>
+          </picker>
+        </view>
+        <view class="_div data-v-d975a51c editInfo-normalItem">
+          <view class="_div data-v-d975a51c"> 地区 </view>
+          <input class="_input data-v-d975a51c editInfo-normalItem-value" type="text" placeholder="未设置" value="{{info.location}}" bindinput="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}" />
+        </view>
+      </view>
+      <view class="_div data-v-d975a51c editInfo-module editInfo-module-2">
+        <view class="_div data-v-d975a51c editInfo-normalItem">
+          <view class="_div data-v-d975a51c"> 大学 </view>
+          <input class="_input data-v-d975a51c editInfo-normalItem-value" type="text" placeholder="未设置" value="{{info.collage}}" bindinput="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}" />
+        </view>
+        <view class="_div data-v-d975a51c editInfo-normalItem">
+          <view class="_div data-v-d975a51c"> 年级 </view>
+          <picker class="_picker data-v-d975a51c editInfo-normalItem-value" value="{{info.grade}}" range="{{infoOptions.gradeData}}" bindchange="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}"> {{infoOptions.gradeData[info.grade] || '未设置'}} </picker>
+        </view>
+      </view>
+    </view>
+    <view class="_div data-v-d975a51c editInfo-bottomButton" bindtap="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}">
+      <image src="/static/images/button.png" class="_img data-v-d975a51c"></image>
+      <view class="_div data-v-d975a51c editInfo-bottomButton-content">保存</view>
+    </view>
+  </view>
+</template>
